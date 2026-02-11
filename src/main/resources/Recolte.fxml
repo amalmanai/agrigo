@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RecolteController">
+    <children>
+        <VBox layoutX="20.0" layoutY="20.0" spacing="10.0" prefWidth="280.0">
+            <children>
+                <Label text="GESTION RÉCOLTE" style="-fx-font-weight: bold; -fx-font-size: 18px;" />
+                <TextField fx:id="nomProduitField" promptText="Nom du produit" />
+                <TextField fx:id="quantiteField" promptText="Quantité" />
+                <TextField fx:id="uniteField" promptText="Unité (kg, tonne...)" />
+                <DatePicker fx:id="datePicker" promptText="Date de récolte" prefWidth="280.0" />
+                <TextField fx:id="coutField" promptText="Coût de production" />
+                <FlowPane hgap="10.0" vgap="10.0">
+                    <children>
+                        <Button onAction="#ajouterRecolte" text="Ajouter" style="-fx-background-color: #2ecc71; -fx-text-fill: white;" />
+                        <Button onAction="#modifierRecolte" text="Modifier" style="-fx-background-color: #f39c12; -fx-text-fill: white;" />
+                        <Button onAction="#supprimerRecolte" text="Supprimer" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" />
+                    </children>
+                </FlowPane>
+            </children>
+        </VBox>
+        <TableView fx:id="recolteTable" layoutX="320.0" layoutY="20.0" prefHeight="450.0" prefWidth="410.0">
+            <columns>
+                <TableColumn fx:id="colNom" prefWidth="250.0" text="Produit" />
+                <TableColumn fx:id="colQte" prefWidth="158.0" text="Quantité" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
