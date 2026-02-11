@@ -9,7 +9,7 @@ public class MainTFX extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginUser.fxml"));
         Scene scene = new Scene(loader.load());
 
         stage.setTitle("Register User");

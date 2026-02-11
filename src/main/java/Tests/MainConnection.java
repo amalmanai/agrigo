@@ -1,8 +1,12 @@
 package Tests;
 
+import Entites.Tache;
 import Entites.User;
-import Services.ServiceUser;
+import Services.ServiceTache;
 import Utils.MyBD;
+
+import java.sql.Date;
+import java.sql.Time;
 
 public class MainConnection {
 
@@ -10,75 +14,67 @@ public class MainConnection {
 
         // 1️⃣ Test connexion DB
         MyBD myBD = MyBD.getInstance();
+        System.out.println("✅ Connexion DB réussie !");
 
-        // 2️⃣ Création Service
-        ServiceUser su = new ServiceUser();
+        // 2️⃣ Création ServiceTache
+        ServiceTache st = new ServiceTache();
 
-        // 3️⃣ Création Users (TEST INSERT)
-        User u1 = new User(
-                "Yahya",
-                "Amine",
-                "yahya@gmail.com",
-                "ADMIN",
-                22123456,
-                "1234",
-                "Tunis"
+        // 3️⃣ Création User (clé étrangère)
+        // ⚠️ Assure-toi qu'un user avec id=11 existe déjà dans ta table user
+        User user = new User(12);
+
+        // 4️⃣ Création Taches (TEST INSERT)
+        Tache t1 = new Tache(
+                "Préparer réunion",
+                "Préparer les slides pour la réunion",
+                "Travail",
+                user,
+                Date.valueOf("2026-02-12"),
+                Time.valueOf("09:00:00"),
+                Time.valueOf("11:00:00"),
+                "En cours",
+                "Apporter les documents"
         );
 
-        User u2 = new User(
-                "Ben",
-                "Ali",
-                "benali@gmail.com",
-                "USER",
-                99111222,
-                "abcd",
-                "Ariana"
+        Tache t2 = new Tache(
+                "Sport",
+                "Aller courir au parc",
+                "Personnel",
+                user,
+                Date.valueOf("2026-02-13"),
+                Time.valueOf("18:00:00"),
+                Time.valueOf("19:00:00"),
+                "Planifié",
+                "Ne pas oublier la bouteille d’eau"
         );
-User u3 = new User("amal",
-        "amal",
-        "amalamal@gmail.com",
-        "USER",
-        55668799,
-        "amal@1",
-        "Ariana"
-);
 
-        // 4️⃣ Ajouter users
-      //  su.ajouter(u1);
-        //su.ajouter(u2);
-            //su.ajouter(u3);
+        // 5️⃣ Ajouter taches (décommente pour tester)
+        // st.ajouter(t1);
+        // st.ajouter(t2);
 
-        // 5️⃣ Afficher tous les users
-        System.out.println("===== ALL USERS =====");
-        for (User u : su.getAll()) {
-            System.out.println(u);
+        // 6️⃣ Afficher toutes les taches
+        System.out.println("===== ALL TACHES =====");
+        for (Tache t : st.getAll()) {
+            System.out.println(t);
         }
 
-        // 6️⃣ Test AUTH
-        System.out.println("===== AUTH TEST =====");
-        User logged = su.authenticate("yahya@gmail.com", "1234");
-        if (logged != null) {
-            System.out.println("Login success : " + logged.getNom_user());
+        // 7️⃣ Test GET BY ID (ici ID=2)
+        System.out.println("===== GET BY ID (2) =====");
+        Tache t = st.getOneByID(2);
+        if (t != null) {
+            System.out.println("Tâche trouvée : " + t);
+
+            // 8️⃣ Test UPDATE sur la tâche ID=2
+            t.setStatus_tache("Terminée");
+            t.setRemarque_tache("Activité terminée avec succès");
+            st.modifier(t);
+            System.out.println("Tâche ID=2 mise à jour !");
         } else {
-            System.out.println("Login failed");
+            System.out.println("Aucune tâche avec ID=2");
         }
 
-        // 7️⃣ Test GET BY ID
-        System.out.println("===== GET BY ID =====");
-        User u = su.getOneByID(1);
-        if (u != null) {
-            System.out.println(u);
-        }
-
-        // 8️⃣ Test UPDATE
-        if (u != null) {
-            u.setAdresse_user("Sfax");
-            su.modifier(u);
-        }
-
-        // 9️⃣ Test DELETE (⚠️ change id)
-        su.supprimer(1);
-        su.supprimer(3);
-        su.supprimer(8);
+        // 9️⃣ Test DELETE (⚠️ change id selon ton besoin)
+        // st.supprimer(2);
+        // System.out.println("Tâche ID=2 supprimée !");
     }
 }

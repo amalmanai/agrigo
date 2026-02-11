@@ -29,8 +29,7 @@ public class ShowUserController {
     @FXML
     public void initialize() {
         // =================== COLUMNS ===================
-        TableColumn<User, Integer> colId = new TableColumn<>("ID");
-        colId.setCellValueFactory(new PropertyValueFactory<>("id_user"));
+
 
         TableColumn<User, String> colNom = new TableColumn<>("Nom");
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_user"));
@@ -86,7 +85,7 @@ public class ShowUserController {
 
         // =================== ADD COLUMNS TO TABLE ===================
         tableViewUserRegister.getColumns().addAll(
-                colId, colNom, colPrenom, colEmail, colRole, colTel, colAdresse, colAction
+                colNom, colPrenom, colEmail, colRole, colTel, colAdresse, colAction
         );
 
         // =================== LOAD DATA ===================

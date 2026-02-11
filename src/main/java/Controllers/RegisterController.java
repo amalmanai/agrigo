@@ -65,11 +65,10 @@ public class RegisterController implements Initializable {
 
             // =================== TELEPHONE VALIDATION ===================
             String tel = tfTelephone.getText().trim();
-            if (!tel.matches("\\d+")) { // only digits
+            if (!tel.matches("\\d+")) {
                 alert("⚠ Le numéro de téléphone doit contenir uniquement des chiffres !");
                 return;
             }
-
             int numTel = Integer.parseInt(tel);
 
             // =================== PASSWORD VALIDATION ===================
@@ -79,7 +78,6 @@ public class RegisterController implements Initializable {
                 alert("⚠ Les mots de passe ne correspondent pas !");
                 return;
             }
-
             if (password.length() < 6) {
                 alert("⚠ Le mot de passe doit contenir au moins 6 caractères !");
                 return;
@@ -101,24 +99,36 @@ public class RegisterController implements Initializable {
             alert("✅ Inscription réussie !");
             clear();
 
-            // =================== REDIRECT TO LOGIN ===================
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
-            Parent loginRoot = loader.load();
+            // =================== REDIRECT BASED ON ROLE ===================
+            String fxmlFile;
+            String title;
+
+            if ("Admin".equalsIgnoreCase(u.getRole_user())) {
+                fxmlFile = "/LoginUser.fxml";
+                title = "";
+            } else {
+                fxmlFile = "/LoginUser.fxml";
+                title = "";
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(loginRoot));
-            stage.setTitle("Login");
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
             stage.show();
 
         } catch (NumberFormatException e) {
             alert("⚠ Numéro de téléphone invalide !");
         } catch (IOException e) {
-            alert("⚠ Impossible de charger la page de connexion !");
+            alert("⚠ Impossible de charger la page !");
             e.printStackTrace();
         } catch (Exception e) {
             alert("⚠ Une erreur est survenue !");
             e.printStackTrace();
         }
     }
+
 
 
     @Override

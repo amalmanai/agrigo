@@ -2,7 +2,7 @@ package Controllers;
 
 import Entites.User;
 import Services.ServiceUser;
-import io.jsonwebtoken.io.IOException;
+import Utils.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +22,7 @@ public class LoginController {
     @FXML
     private PasswordField tfmotDePasselogin;
 
-    private ServiceUser serviceUser = new ServiceUser();
+    private final ServiceUser serviceUser = new ServiceUser();
 
     @FXML
     private void loginaction(ActionEvent event) {
@@ -50,31 +50,40 @@ public class LoginController {
             User user = serviceUser.authenticate(email, password);
 
             if (user != null) {
+                // Stocker l’utilisateur connecté dans la session
+                Session.setCurrentUser(user);
+
                 showAlert("✅ Connexion réussie ! Bienvenue " + user.getNom_user());
 
-                // =================== LOAD DASHBOARD ===================
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
+                // =================== LOAD DASHBOARD BASED ON ROLE ===================
+                String fxmlFile;
+                String title;
+
+                if ("Admin".equalsIgnoreCase(user.getRole_user())) {
+                    fxmlFile = "/MainGuiAdmin.fxml";
+                    title = "Admin Dashboard";
+                } else {
+                    fxmlFile = "/MainGui.fxml";
+                    title = "User Dashboard";
+                }
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
                 Parent dashboardRoot = loader.load();
 
-                // Get the current stage from the event
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(dashboardRoot));
-                stage.setTitle("Dashboard"); // Optional
+                stage.setTitle(title);
                 stage.show();
 
             } else {
                 showAlert("⚠ Email ou mot de passe incorrect !");
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("⚠ Impossible de charger le Dashboard !");
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("⚠ Une erreur est survenue lors de la connexion !");
         }
     }
-
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -84,32 +93,26 @@ public class LoginController {
         alert.showAndWait();
     }
 
-    public void pickImageAction(ActionEvent actionEvent) {
-    }
-
     public void handleLabelClick(ActionEvent actionEvent) {
         try {
-            // Load the FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/RegisterUser.fxml"));
             Parent root = loader.load();
 
-            // Get the current stage
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-
-            // Set the new scene
             stage.setScene(new Scene(root));
-            stage.setTitle("Register User"); // Optional: set title
+            stage.setTitle("Register User");
             stage.show();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Erreur");
             alert.setContentText("Impossible de charger la page RegisterUser.fxml");
             alert.showAndWait();
-        } catch (java.io.IOException e) {
-            throw new RuntimeException(e);
         }
+    }
+
+    public void pickImageAction(ActionEvent actionEvent) {
     }
 
     public void takePictureAction(ActionEvent actionEvent) {

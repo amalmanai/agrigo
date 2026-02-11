@@ -22,7 +22,7 @@ public class ServiceUser {
             ps.setString(2, user.getPrenom_user());
 
             if (!isValidEmail(user.getEmail_user())) {
-                throw new IllegalArgumentException("Invalid email address format add @");
+                throw new IllegalArgumentException("Invalid email address");
             }
             ps.setString(3, user.getEmail_user());
             ps.setString(4, user.getRole_user());
@@ -31,7 +31,7 @@ public class ServiceUser {
             ps.setString(7, user.getAdresse_user());
 
             ps.executeUpdate();
-            System.out.println("User successfully added !");
+            System.out.println("User added!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
