@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.SVGPath?>
+
+<StackPane fx:id="rootPane" prefHeight="860.0" prefWidth="1200.0"
+           xmlns="http://javafx.com/javafx/8"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.example.Controllers.MouvementController"
+           style="-fx-background-color: #0f1923;">
+
+    <!-- Fond décoratif -->
+    <Pane style="-fx-background-color: transparent;" mouseTransparent="true">
+        <children>
+            <Pane prefWidth="400" prefHeight="400"
+                  style="-fx-background-color: radial-gradient(center 50% 50%, radius 50%, rgba(34,197,94,0.08), transparent);"
+                  layoutX="-100" layoutY="-100"/>
+            <Pane prefWidth="300" prefHeight="300"
+                  style="-fx-background-color: radial-gradient(center 50% 50%, radius 50%, rgba(16,185,129,0.06), transparent);"
+                  layoutX="800" layoutY="500"/>
+        </children>
+    </Pane>
+
+    <VBox spacing="0" style="-fx-background-color: #111827;">
+
+        <!-- TOPBAR avec bouton retour -->
+        <HBox alignment="CENTER_LEFT" spacing="16"
+              style="-fx-background-color: #0a1628; -fx-padding: 0 24; -fx-min-height: 70; -fx-max-height: 70; -fx-border-color: rgba(34,197,94,0.15); -fx-border-width: 0 0 1 0;">
+
+            <Button onAction="#retourMenu" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                <graphic>
+                    <HBox alignment="CENTER" spacing="8">
+                        <SVGPath content="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+                                 style="-fx-fill: #22c55e; -fx-scale-x:1.2; -fx-scale-y:1.2;"/>
+                        <Label text="Retour au menu principal" style="-fx-text-fill: #22c55e; -fx-font-size: 14px; -fx-font-weight: 600;"/>
+                    </HBox>
+                </graphic>
+            </Button>
+
+            <Pane HBox.hgrow="ALWAYS"/>
+
+            <Label text="GESTION DES MOUVEMENTS DE STOCK"
+                   style="-fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: 800; -fx-letter-spacing: 2px;"/>
+
+            <Pane HBox.hgrow="ALWAYS"/>
+
+            <StackPane style="-fx-background-color: #22c55e; -fx-background-radius: 20; -fx-min-width: 40; -fx-min-height: 40;">
+                <Label text="MS" style="-fx-text-fill: #0a1628; -fx-font-size: 14px; -fx-font-weight: 700;"/>
+            </StackPane>
+        </HBox>
+
+        <!-- CONTENT -->
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                    style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+            <VBox spacing="24" style="-fx-padding: 24;">
+
+                <!-- STATS CARDS -->
+                <HBox spacing="16">
+                    <!-- Total Mouvements -->
+                    <VBox style="-fx-background-color: #0a1628; -fx-background-radius: 14; -fx-padding: 20; -fx-border-color: rgba(34,197,94,0.2); -fx-border-width: 1; -fx-border-radius: 14;"
+                          HBox.hgrow="ALWAYS" spacing="12">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <StackPane style="-fx-background-color: rgba(34,197,94,0.15); -fx-background-radius: 8; -fx-min-width:40; -fx-min-height:40;">
+                                <SVGPath content="M4 6h16v2H4V6zm2-4h12v2H6V2zm16 7v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2zm-2 0H4v10h16V9zM7 12h4v2H7v-2z"
+                                         style="-fx-fill: #22c55e; -fx-scale-x:0.8; -fx-scale-y:0.8;"/>
+                            </StackPane>
+                            <Label text="TOTAL MOUVEMENTS" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 700; -fx-letter-spacing: 1px;"/>
+                        </HBox>
+                        <Label fx:id="statsTotalMouvements" text="0" style="-fx-text-fill: #ffffff; -fx-font-size: 32px; -fx-font-weight: 800;"/>
+                    </VBox>
+
+                    <!-- Entrées -->
+                    <VBox style="-fx-background-color: #0a1628; -fx-background-radius: 14; -fx-padding: 20; -fx-border-color: rgba(34,197,94,0.2); -fx-border-width: 1; -fx-border-radius: 14;"
+                          HBox.hgrow="ALWAYS" spacing="12">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <StackPane style="-fx-background-color: rgba(34,197,94,0.15); -fx-background-radius: 8; -fx-min-width:40; -fx-min-height:40;">
+                                <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                                         style="-fx-fill: #22c55e; -fx-scale-x:0.8; -fx-scale-y:0.8;"/>
+                            </StackPane>
+                            <Label text="ENTRÉES" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 700; -fx-letter-spacing: 1px;"/>
+                        </HBox>
+                        <Label fx:id="statsEntrees" text="0" style="-fx-text-fill: #22c55e; -fx-font-size: 32px; -fx-font-weight: 800;"/>
+                    </VBox>
+
+                    <!-- Sorties -->
+                    <VBox style="-fx-background-color: #0a1628; -fx-background-radius: 14; -fx-padding: 20; -fx-border-color: rgba(34,197,94,0.2); -fx-border-width: 1; -fx-border-radius: 14;"
+                          HBox.hgrow="ALWAYS" spacing="12">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <StackPane style="-fx-background-color: rgba(239,68,68,0.15); -fx-background-radius: 8; -fx-min-width:40; -fx-min-height:40;">
+                                <SVGPath content="M5 11h14v2H5z"
+                                         style="-fx-fill: #ef4444; -fx-scale-x:0.8; -fx-scale-y:0.8;"/>
+                            </StackPane>
+                            <Label text="SORTIES" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 700; -fx-letter-spacing: 1px;"/>
+                        </HBox>
+                        <Label fx:id="statsSorties" text="0" style="-fx-text-fill: #ef4444; -fx-font-size: 32px; -fx-font-weight: 800;"/>
+                    </VBox>
+
+                    <!-- Produits concernés -->
+                    <VBox style="-fx-background-color: #0a1628; -fx-background-radius: 14; -fx-padding: 20; -fx-border-color: rgba(34,197,94,0.2); -fx-border-width: 1; -fx-border-radius: 14;"
+                          HBox.hgrow="ALWAYS" spacing="12">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <StackPane style="-fx-background-color: rgba(168,85,247,0.15); -fx-background-radius: 8; -fx-min-width:40; -fx-min-height:40;">
+                                <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                                         style="-fx-fill: #a855f7; -fx-scale-x:0.8; -fx-scale-y:0.8;"/>
+                            </StackPane>
+                            <Label text="PRODUITS" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 700; -fx-letter-spacing: 1px;"/>
+                        </HBox>
+                        <Label fx:id="statsProduitsConcernes" text="0" style="-fx-text-fill: #a855f7; -fx-font-size: 32px; -fx-font-weight: 800;"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Contenu principal : Tableau et Formulaire -->
+                <HBox spacing="20">
+
+                    <!-- COLONNE GAUCHE : Tableau des mouvements -->
+                    <VBox spacing="14" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                            <VBox spacing="2">
+                                <Label text="Historique des mouvements"
+                                       style="-fx-text-fill: #ffffff; -fx-font-size: 18px; -fx-font-weight: 700;"/>
+                                <Label text="Cliquez sur une ligne pour modifier ou supprimer"
+                                       style="-fx-text-fill: rgba(255,255,255,0.3); -fx-font-size: 11px;"/>
+                            </VBox>
+                        </HBox>
+
+                        <TableView fx:id="tableMouvements" VBox.vgrow="ALWAYS"
+                                   style="-fx-background-color: transparent; -fx-min-height: 550;">
+                            <columns>
+                                <TableColumn fx:id="colMvtId" prefWidth="60" text="ID"/>
+                                <TableColumn fx:id="colMvtType" prefWidth="100" text="TYPE"/>
+                                <TableColumn fx:id="colMvtProduit" prefWidth="150" text="PRODUIT"/>
+                                <TableColumn fx:id="colMvtQuantite" prefWidth="80" text="QUANTITÉ"/>
+                                <TableColumn fx:id="colMvtDate" prefWidth="150" text="DATE"/>
+                                <TableColumn fx:id="colMvtMotif" prefWidth="200" text="MOTIF"/>
+                                <TableColumn fx:id="colMvtActions" prefWidth="150" text="ACTIONS"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+
+                    <!-- COLONNE DROITE : Formulaire -->
+                    <VBox spacing="16" prefWidth="350" minWidth="320" maxWidth="350"
+                          style="-fx-background-color: #0a1628; -fx-background-radius: 14; -fx-padding: 24; -fx-border-color: rgba(34,197,94,0.2); -fx-border-width: 1; -fx-border-radius: 14;">
+
+                        <!-- En-tête formulaire -->
+                        <VBox spacing="4">
+                            <Label fx:id="formTitleLabel" text="Nouveau mouvement"
+                                   style="-fx-text-fill: #ffffff; -fx-font-size: 18px; -fx-font-weight: 700;"/>
+                            <Label fx:id="messageLabel" text="" wrapText="true"
+                                   style="-fx-text-fill: #22c55e; -fx-font-size: 11px;"/>
+                        </VBox>
+
+                        <Separator style="-fx-background-color: rgba(255,255,255,0.08);"/>
+
+                        <!-- Champs du formulaire -->
+                        <VBox spacing="15">
+                            <!-- Type de mouvement -->
+                            <VBox spacing="5">
+                                <Label text="Type de mouvement *"
+                                       style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                                <ComboBox fx:id="typeMouvementCombo" prefHeight="40"
+                                          style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 5;"/>
+                            </VBox>
+
+                            <!-- Produit -->
+                            <VBox spacing="5">
+                                <Label text="Produit *"
+                                       style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                                <ComboBox fx:id="produitCombo" prefHeight="40"
+                                          style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 5;"/>
+                            </VBox>
+
+                            <!-- Quantité -->
+                            <VBox spacing="5">
+                                <Label text="Quantité *"
+                                       style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                                <TextField fx:id="quantiteField" promptText="Ex: 50"
+                                           style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 10 12;"/>
+                            </VBox>
+
+                            <!-- Motif -->
+                            <VBox spacing="5">
+                                <Label text="Motif *"
+                                       style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                                <TextField fx:id="motifField" promptText="Ex: Réception fournisseur, Vente..."
+                                           style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 10 12;"/>
+                            </VBox>
+                        </VBox>
+
+                        <Separator style="-fx-background-color: rgba(255,255,255,0.08);"/>
+
+                        <!-- Boutons d'action -->
+                        <VBox spacing="8">
+                            <Button fx:id="btnAjouter" onAction="#ajouterMouvement"
+                                    text="＋  Ajouter le mouvement"
+                                    maxWidth="Infinity" prefHeight="44"
+                                    style="-fx-background-color: #22c55e; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: 700; -fx-font-size: 14px; -fx-cursor: hand;"/>
+
+                            <HBox spacing="8">
+                                <Button fx:id="btnModifier" onAction="#modifierMouvement"
+                                        text="✎  Modifier"
+                                        HBox.hgrow="ALWAYS" prefHeight="40"
+                                        disable="true"
+                                        style="-fx-background-color: #f59e0b; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: 700; -fx-cursor: hand;"/>
+
+                                <Button fx:id="btnSupprimer" onAction="#supprimerMouvementAction"
+                                        text="🗑  Supprimer"
+                                        HBox.hgrow="ALWAYS" prefHeight="40"
+                                        disable="true"
+                                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: 700; -fx-cursor: hand;"/>
+                            </HBox>
+
+                            <Button fx:id="btnAnnuler" onAction="#annulerFormulaire"
+                                    text="✕  Annuler"
+                                    maxWidth="Infinity" prefHeight="40"
+                                    style="-fx-background-color: #6b7280; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: 700; -fx-cursor: hand;"/>
+                        </VBox>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </VBox>
+</StackPane>

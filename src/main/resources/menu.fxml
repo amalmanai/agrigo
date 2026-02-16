@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.SVGPath?>
+<?import java.lang.String?>
+
+<StackPane fx:id="rootPane" prefHeight="860.0" prefWidth="1200.0"
+           xmlns="http://javafx.com/javafx/8"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.example.Controllers.MenuController"
+           style="-fx-background-color: #0f1923;">
+
+    <!-- Fond décoratif -->
+    <Pane style="-fx-background-color: transparent;" mouseTransparent="true">
+        <children>
+            <Pane prefWidth="400" prefHeight="400"
+                  style="-fx-background-color: radial-gradient(center 50% 50%, radius 50%, rgba(34,197,94,0.08), transparent);"
+                  layoutX="-100" layoutY="-100"/>
+            <Pane prefWidth="300" prefHeight="300"
+                  style="-fx-background-color: radial-gradient(center 50% 50%, radius 50%, rgba(16,185,129,0.06), transparent);"
+                  layoutX="800" layoutY="500"/>
+        </children>
+    </Pane>
+
+    <HBox spacing="0">
+
+        <!-- ===== SIDEBAR ===== -->
+        <VBox prefWidth="220.0" minWidth="220.0" maxWidth="220.0"
+              style="-fx-background-color: #0a1628; -fx-border-color: rgba(34,197,94,0.15); -fx-border-width: 0 1 0 0;">
+
+            <!-- Logo -->
+            <VBox alignment="CENTER" spacing="4"
+                  style="-fx-padding: 28 20 24 20; -fx-border-color: rgba(255,255,255,0.05); -fx-border-width: 0 0 1 0;">
+                <ImageView fitHeight="48.0" fitWidth="140.0" preserveRatio="true">
+                    <image><Image url="@image/logo.png" /></image>
+                </ImageView>
+                <Label text="AGRI·GO" style="-fx-text-fill: #22c55e; -fx-font-size: 13px; -fx-font-weight: 700; -fx-letter-spacing: 3px;"/>
+                <Label text="Gestion Agricole" style="-fx-text-fill: rgba(255,255,255,0.35); -fx-font-size: 10px;"/>
+            </VBox>
+
+            <!-- Nav -->
+            <VBox spacing="4" style="-fx-padding: 20 12 20 12;" VBox.vgrow="ALWAYS">
+                <Label text="MENU" style="-fx-text-fill: rgba(255,255,255,0.25); -fx-font-size: 9px; -fx-font-weight: 700; -fx-letter-spacing: 2px; -fx-padding: 0 0 8 8;"/>
+
+                <Button fx:id="btnNavDashboard" onAction="#showDashboard" maxWidth="Infinity" prefHeight="42" styleClass="nav-btn">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <SVGPath content="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
+                                     style="-fx-fill: rgba(255,255,255,0.5); -fx-scale-x:0.75; -fx-scale-y:0.75;"/>
+                            <Label text="Dashboard" style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: rgba(255,255,255,0.5);"/>
+                        </HBox>
+                    </graphic>
+                    <styleClass>
+                        <String fx:value="nav-btn"/>
+                        <String fx:value="nav-btn-active"/>
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="btnNavCultures" onAction="#showCultures" maxWidth="Infinity" prefHeight="42" styleClass="nav-btn">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <ImageView fitWidth="16" fitHeight="16" preserveRatio="true">
+                                <image><Image url="@image/cultures_icon.png"/></image>
+                            </ImageView>
+                            <Label text="Cultures" style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: rgba(255,255,255,0.5);"/>
+                        </HBox>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="btnNavParcelles" onAction="#showParcelles" maxWidth="Infinity" prefHeight="42" styleClass="nav-btn">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <ImageView fitWidth="16" fitHeight="16" preserveRatio="true">
+                                <image><Image url="@image/parcelles_icon.png"/></image>
+                            </ImageView>
+                            <Label text="Parcelles" style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: rgba(255,255,255,0.5);"/>
+                        </HBox>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="btnNavStock" onAction="#showStock" maxWidth="Infinity" prefHeight="42" styleClass="nav-btn">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <SVGPath content="M4 6h16v2H4V6zm2-4h12v2H6V2zm16 7v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2zm-2 0H4v10h16V9zM7 12h4v2H7v-2z"
+                                     style="-fx-fill: rgba(255,255,255,0.5); -fx-scale-x:0.75; -fx-scale-y:0.75;"/>
+                            <Label text="Stock" style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: rgba(255,255,255,0.5);"/>
+                        </HBox>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="btnNavMouvements" onAction="#showMouvements" maxWidth="Infinity" prefHeight="42" styleClass="nav-btn">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <SVGPath content="M4 6h16v2H4V6zm2-4h12v2H6V2zm16 7v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2zm-2 0H4v10h16V9zM7 12h4v2H7v-2z"
+                                     style="-fx-fill: rgba(255,255,255,0.5); -fx-scale-x:0.75; -fx-scale-y:0.75;"/>
+                            <Label text="Mouvements" style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: rgba(255,255,255,0.5);"/>
+                        </HBox>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="btnNavUsers" onAction="#showUsers" maxWidth="Infinity" prefHeight="42" styleClass="nav-btn">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <SVGPath content="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                                     style="-fx-fill: rgba(255,255,255,0.5); -fx-scale-x:0.75; -fx-scale-y:0.75;"/>
+                            <Label text="Utilisateurs" style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: rgba(255,255,255,0.5);"/>
+                        </HBox>
+                    </graphic>
+                </Button>
+            </VBox>
+
+            <!-- Footer -->
+            <VBox style="-fx-padding: 16 20; -fx-border-color: rgba(255,255,255,0.05); -fx-border-width: 1 0 0 0;">
+                <Label text="v1.0.0 · © 2024" style="-fx-text-fill: rgba(255,255,255,0.2); -fx-font-size: 10px;"/>
+            </VBox>
+        </VBox>
+
+        <!-- ===== MAIN AREA ===== -->
+        <VBox HBox.hgrow="ALWAYS" style="-fx-background-color: #111827;">
+
+            <!-- TOPBAR -->
+            <HBox alignment="CENTER_LEFT" spacing="16"
+                  style="-fx-background-color: #0a1628; -fx-padding: 0 24; -fx-min-height: 64; -fx-max-height: 64; -fx-border-color: rgba(34,197,94,0.15); -fx-border-width: 0 0 1 0;">
+                <VBox spacing="1">
+                    <Label text="Tableau de bord" style="-fx-text-fill: #ffffff; -fx-font-size: 18px; -fx-font-weight: 700;"/>
+                    <Label text="Gestion agricole intelligente" style="-fx-text-fill: rgba(255,255,255,0.35); -fx-font-size: 11px;"/>
+                </VBox>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <!-- Recherche -->
+                <HBox alignment="CENTER_LEFT" spacing="8"
+                      style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-padding: 8 14; -fx-border-color: rgba(255,255,255,0.08); -fx-border-width: 1; -fx-border-radius: 8;">
+                    <SVGPath content="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                             style="-fx-fill: rgba(255,255,255,0.3); -fx-scale-x:0.8; -fx-scale-y:0.8;"/>
+                    <TextField fx:id="searchField" promptText="Rechercher un produit..."
+                               prefWidth="220"
+                               style="-fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-prompt-text-fill: rgba(255,255,255,0.25); -fx-border-color: transparent; -fx-font-size: 13px;"/>
+                </HBox>
+                <!-- Theme -->
+                <Button fx:id="btnThemeToggle" onAction="#toggleTheme"
+                        style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-padding: 8 12; -fx-border-color: rgba(255,255,255,0.08); -fx-border-width: 1; -fx-border-radius: 8; -fx-cursor: hand;">
+                    <graphic><Label fx:id="themeIconLabel" text="☾" style="-fx-text-fill: #22c55e; -fx-font-size: 15px;"/></graphic>
+                </Button>
+                <!-- Avatar -->
+                <StackPane style="-fx-background-color: #22c55e; -fx-background-radius: 20; -fx-min-width: 36; -fx-min-height: 36; -fx-max-width: 36; -fx-max-height: 36;">
+                    <Label text="AM" style="-fx-text-fill: #0a1628; -fx-font-size: 12px; -fx-font-weight: 700;"/>
+                </StackPane>
+            </HBox>
+
+            <!-- CONTENT -->
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                        style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+                <VBox spacing="24" style="-fx-padding: 24;">
+
+                    <!-- STATS CARDS -->
+                    <HBox spacing="16">
+                        <!-- Cultures -->
+                        <VBox style="-fx-background-color: #0a1628; -fx-background-radius: 14; -fx-padding: 20; -fx-border-color: rgba(34,197,94,0.2); -fx-border-width: 1; -fx-border-radius: 14;" HBox.hgrow="ALWAYS" spacing="12">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <StackPane style="-fx-background-color: rgba(34,197,94,0.15); -fx-background-radius: 8; -fx-min-width:36; -fx-min-height:36;">
+                                    <ImageView fitWidth="18" fitHeight="18" preserveRatio="true">
+                                        <image><Image url="@image/cultures_actives_icon.png"/></image>
+                                    </ImageView>
+                                </StackPane>
+                                <Label text="CULTURES ACTIVES" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 10px; -fx-font-weight: 700; -fx-letter-spacing: 1px;"/>
+                            </HBox>
+                            <Label fx:id="statsCulturesActives" text="24" style="-fx-text-fill: #ffffff; -fx-font-size: 30px; -fx-font-weight: 800;"/>
+                            <Label text="↑ +3 cette semaine" style="-fx-text-fill: #22c55e; -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                        </VBox>
+                        <!-- Parcelles -->
+                        <VBox style="-fx-background-color: #0a1628; -fx-background-radius: 14; -fx-padding: 20; -fx-border-color: rgba(34,197,94,0.2); -fx-border-width: 1; -fx-border-radius: 14;" HBox.hgrow="ALWAYS" spacing="12">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <StackPane style="-fx-background-color: rgba(59,130,246,0.15); -fx-background-radius: 8; -fx-min-width:36; -fx-min-height:36;">
+                                    <ImageView fitWidth="18" fitHeight="18" preserveRatio="true">
+                                        <image><Image url="@image/parcelles_supervisees_icon.png"/></image>
+                                    </ImageView>
+                                </StackPane>
+                                <Label text="PARCELLES" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 10px; -fx-font-weight: 700; -fx-letter-spacing: 1px;"/>
+                            </HBox>
+                            <Label fx:id="statsParcelles" text="12" style="-fx-text-fill: #ffffff; -fx-font-size: 30px; -fx-font-weight: 800;"/>
+                            <Label text="→ Superficie: 45 ha" style="-fx-text-fill: #3b82f6; -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                        </VBox>
+                        <!-- Rendement -->
+                        <VBox style="-fx-background-color: #0a1628; -fx-background-radius: 14; -fx-padding: 20; -fx-border-color: rgba(34,197,94,0.2); -fx-border-width: 1; -fx-border-radius: 14;" HBox.hgrow="ALWAYS" spacing="12">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <StackPane style="-fx-background-color: rgba(245,158,11,0.15); -fx-background-radius: 8; -fx-min-width:36; -fx-min-height:36;">
+                                    <ImageView fitWidth="18" fitHeight="18" preserveRatio="true">
+                                        <image><Image url="@image/rendement_moyen_icon.png"/></image>
+                                    </ImageView>
+                                </StackPane>
+                                <Label text="RENDEMENT" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 10px; -fx-font-weight: 700; -fx-letter-spacing: 1px;"/>
+                            </HBox>
+                            <Label fx:id="statsRendement" text="3.2 t/ha" style="-fx-text-fill: #ffffff; -fx-font-size: 30px; -fx-font-weight: 800;"/>
+                            <Label text="↑ +8% vs mois dernier" style="-fx-text-fill: #f59e0b; -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                        </VBox>
+                        <!-- Stock -->
+                        <VBox style="-fx-background-color: #0a1628; -fx-background-radius: 14; -fx-padding: 20; -fx-border-color: rgba(34,197,94,0.2); -fx-border-width: 1; -fx-border-radius: 14;" HBox.hgrow="ALWAYS" spacing="12">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <StackPane style="-fx-background-color: rgba(168,85,247,0.15); -fx-background-radius: 8; -fx-min-width:36; -fx-min-height:36;">
+                                    <SVGPath content="M4 6h16v2H4V6zm2-4h12v2H6V2zm16 7v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2zm-2 0H4v10h16V9zM7 12h4v2H7v-2z"
+                                             style="-fx-fill: #a855f7; -fx-scale-x:0.75; -fx-scale-y:0.75;"/>
+                                </StackPane>
+                                <Label text="STOCK TOTAL" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 10px; -fx-font-weight: 700; -fx-letter-spacing: 1px;"/>
+                            </HBox>
+                            <Label fx:id="statsStock" text="0" style="-fx-text-fill: #ffffff; -fx-font-size: 30px; -fx-font-weight: 800;"/>
+                            <Label text="↑ Produits en stock" style="-fx-text-fill: #a855f7; -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- TABS -->
+                    <TabPane fx:id="mainTabs" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                        <tabs>
+
+                            <!-- Tab Cultures -->
+                            <Tab fx:id="tabCultures" closable="false" text="Cultures">
+                                <content>
+                                    <VBox spacing="16" style="-fx-padding: 24;">
+                                        <HBox alignment="CENTER_LEFT">
+                                            <Label text="Gestion des cultures" style="-fx-text-fill: #ffffff; -fx-font-size: 18px; -fx-font-weight: 700;"/>
+                                            <Pane HBox.hgrow="ALWAYS"/>
+                                            <Button onAction="#ajouterCulture"
+                                                    style="-fx-background-color: #22c55e; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: 700; -fx-padding: 8 16; -fx-cursor: hand;">
+                                                <graphic>
+                                                    <HBox alignment="CENTER" spacing="6">
+                                                        <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" style="-fx-fill: #ffffff; -fx-scale-x:0.7; -fx-scale-y:0.7;"/>
+                                                        <Label text="Nouvelle culture" style="-fx-text-fill: #ffffff; -fx-font-weight: 600;"/>
+                                                    </HBox>
+                                                </graphic>
+                                            </Button>
+                                        </HBox>
+                                        <TableView fx:id="tableCultures" prefHeight="480"
+                                                   style="-fx-background-color: transparent;">
+                                            <columns>
+                                                <TableColumn fx:id="colId" prefWidth="60" text="ID"/>
+                                                <TableColumn fx:id="colNom" prefWidth="200" text="NOM"/>
+                                                <TableColumn fx:id="colType" prefWidth="150" text="TYPE"/>
+                                                <TableColumn fx:id="colDate" prefWidth="150" text="DATE PLANTATION"/>
+                                                <TableColumn fx:id="colParcelle" prefWidth="120" text="PARCELLE"/>
+                                                <TableColumn fx:id="colStatut" prefWidth="120" text="STATUT"/>
+                                                <TableColumn fx:id="colActions" prefWidth="120" text="ACTIONS"/>
+                                            </columns>
+                                        </TableView>
+                                    </VBox>
+                                </content>
+                            </Tab>
+
+                            <!-- Tab Parcelles -->
+                            <Tab fx:id="tabParcelles" closable="false" text="Parcelles">
+                                <content>
+                                    <VBox spacing="16" style="-fx-padding: 24;">
+                                        <HBox alignment="CENTER_LEFT">
+                                            <Label text="Gestion des parcelles" style="-fx-text-fill: #ffffff; -fx-font-size: 18px; -fx-font-weight: 700;"/>
+                                            <Pane HBox.hgrow="ALWAYS"/>
+                                            <Button onAction="#ajouterParcelle"
+                                                    style="-fx-background-color: #22c55e; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: 700; -fx-padding: 8 16; -fx-cursor: hand;">
+                                                <graphic>
+                                                    <HBox alignment="CENTER" spacing="6">
+                                                        <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" style="-fx-fill: #ffffff; -fx-scale-x:0.7; -fx-scale-y:0.7;"/>
+                                                        <Label text="Nouvelle parcelle" style="-fx-text-fill: #ffffff; -fx-font-weight: 600;"/>
+                                                    </HBox>
+                                                </graphic>
+                                            </Button>
+                                        </HBox>
+                                        <TableView fx:id="tableParcelles" prefHeight="480"
+                                                   style="-fx-background-color: transparent;">
+                                            <columns>
+                                                <TableColumn fx:id="colPId" prefWidth="60" text="ID"/>
+                                                <TableColumn fx:id="colPNom" prefWidth="200" text="NOM"/>
+                                                <TableColumn fx:id="colPSuperficie" prefWidth="130" text="SUPERFICIE (ha)"/>
+                                                <TableColumn fx:id="colPLocalisation" prefWidth="200" text="LOCALISATION"/>
+                                                <TableColumn fx:id="colPTypeSol" prefWidth="150" text="TYPE SOL"/>
+                                                <TableColumn fx:id="colPActions" prefWidth="120" text="ACTIONS"/>
+                                            </columns>
+                                        </TableView>
+                                    </VBox>
+                                </content>
+                            </Tab>
+
+                            <!-- Tab Stock -->
+                            <Tab fx:id="tabStock" closable="false" text="Stock">
+                                <content>
+                                    <HBox spacing="20" style="-fx-padding: 24;">
+
+                                        <!-- Tableau -->
+                                        <VBox spacing="14" HBox.hgrow="ALWAYS">
+                                            <HBox alignment="CENTER_LEFT" spacing="12">
+                                                <VBox spacing="2">
+                                                    <Label text="Inventaire des produits" style="-fx-text-fill: #ffffff; -fx-font-size: 18px; -fx-font-weight: 700;"/>
+                                                    <Label text="Cliquez sur une ligne pour modifier ou supprimer"
+                                                           style="-fx-text-fill: rgba(255,255,255,0.3); -fx-font-size: 11px;"/>
+                                                </VBox>
+                                            </HBox>
+
+                                            <TableView fx:id="tableStock" VBox.vgrow="ALWAYS"
+                                                       style="-fx-background-color: transparent; -fx-min-height: 500;">
+                                                <columns>
+                                                    <TableColumn fx:id="colStockId" prefWidth="45" text="ID"/>
+                                                    <TableColumn fx:id="colStockNom" prefWidth="130" text="PRODUIT"/>
+                                                    <TableColumn fx:id="colStockCategorie" prefWidth="100" text="CATÉGORIE"/>
+                                                    <TableColumn fx:id="colStockQuantite" prefWidth="65" text="QTÉ"/>
+                                                    <TableColumn fx:id="colStockUnite" prefWidth="60" text="UNITÉ"/>
+                                                    <TableColumn fx:id="colStockSeuil" prefWidth="60" text="SEUIL"/>
+                                                    <TableColumn fx:id="colStockDate" prefWidth="95" text="EXPIRATION"/>
+                                                    <TableColumn fx:id="colStockPrix" prefWidth="70" text="PRIX"/>
+                                                    <TableColumn fx:id="colStockActions" prefWidth="150" text="ACTIONS"/>
+                                                </columns>
+                                            </TableView>
+                                        </VBox>
+
+                                        <!-- Formulaire -->
+                                        <VBox spacing="16" prefWidth="300" minWidth="280" maxWidth="320"
+                                              style="-fx-background-color: #0a1628; -fx-background-radius: 14; -fx-padding: 24; -fx-border-color: rgba(34,197,94,0.2); -fx-border-width: 1; -fx-border-radius: 14;">
+
+                                            <VBox spacing="4">
+                                                <Label fx:id="formTitleLabel" text="Nouveau produit"
+                                                       style="-fx-text-fill: #ffffff; -fx-font-size: 16px; -fx-font-weight: 700;"/>
+                                                <Label fx:id="messageLabel" text="" wrapText="true"
+                                                       style="-fx-text-fill: #22c55e; -fx-font-size: 11px;"/>
+                                            </VBox>
+
+                                            <Separator style="-fx-background-color: rgba(255,255,255,0.08);"/>
+
+                                            <VBox spacing="12">
+                                                <VBox spacing="5">
+                                                    <Label text="Nom du produit *" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                                                    <TextField fx:id="nomField" promptText="Ex: Blé, Tomates..."
+                                                               style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 10 12;"/>
+                                                </VBox>
+                                                <VBox spacing="5">
+                                                    <Label text="Catégorie *" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                                                    <TextField fx:id="categorieField" promptText="Ex: Céréales, Légumes..."
+                                                               style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 10 12;"/>
+                                                </VBox>
+                                                <HBox spacing="10">
+                                                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                                        <Label text="Quantité *" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                                                        <TextField fx:id="quantiteField" promptText="100"
+                                                                   style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 10 12;"/>
+                                                    </VBox>
+                                                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                                        <Label text="Unité *" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                                                        <TextField fx:id="uniteField" promptText="kg, L..."
+                                                                   style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 10 12;"/>
+                                                    </VBox>
+                                                </HBox>
+                                                <HBox spacing="10">
+                                                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                                        <Label text="Seuil alerte *" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                                                        <TextField fx:id="seuilField" promptText="10"
+                                                                   style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 10 12;"/>
+                                                    </VBox>
+                                                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                                        <Label text="Prix (DT) *" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                                                        <TextField fx:id="prixField" promptText="2.50"
+                                                                   style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 10 12;"/>
+                                                    </VBox>
+                                                </HBox>
+                                                <VBox spacing="5">
+                                                    <Label text="Date d'expiration" style="-fx-text-fill: rgba(255,255,255,0.45); -fx-font-size: 11px; -fx-font-weight: 600;"/>
+                                                    <DatePicker fx:id="datePicker" promptText="JJ/MM/AAAA"
+                                                                style="-fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 5;"
+                                                                maxWidth="Infinity"/>
+                                                </VBox>
+                                            </VBox>
+
+                                            <Separator style="-fx-background-color: rgba(255,255,255,0.08);"/>
+
+                                            <VBox spacing="8">
+                                                <Button fx:id="btnAjouter" onAction="#ajouterProduit"
+                                                        text="＋  Ajouter le produit"
+                                                        maxWidth="Infinity" prefHeight="40"
+                                                        style="-fx-background-color: #22c55e; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: 700; -fx-cursor: hand;"/>
+                                                <HBox spacing="8">
+                                                    <Button fx:id="btnModifier" onAction="#modifierProduit"
+                                                            text="✎  Modifier"
+                                                            HBox.hgrow="ALWAYS" prefHeight="38"
+                                                            disable="true"
+                                                            style="-fx-background-color: #f59e0b; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: 700; -fx-cursor: hand;"/>
+                                                    <Button fx:id="btnSupprimer" onAction="#supprimerProduitAction"
+                                                            text="🗑  Supprimer"
+                                                            HBox.hgrow="ALWAYS" prefHeight="38"
+                                                            disable="true"
+                                                            style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: 700; -fx-cursor: hand;"/>
+                                                </HBox>
+                                                <Button fx:id="btnAnnuler" onAction="#annulerFormulaire"
+                                                        text="✕  Annuler"
+                                                        maxWidth="Infinity" prefHeight="38"
+                                                        style="-fx-background-color: #6b7280; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: 700; -fx-cursor: hand;"/>
+                                            </VBox>
+                                        </VBox>
+                                    </HBox>
+                                </content>
+                            </Tab>
+
+                            <!-- Tab Utilisateurs -->
+                            <Tab fx:id="tabUsers" closable="false" text="Utilisateurs">
+                                <content>
+                                    <VBox spacing="16" style="-fx-padding: 24;">
+                                        <HBox alignment="CENTER_LEFT">
+                                            <Label text="Gestion des utilisateurs" style="-fx-text-fill: #ffffff; -fx-font-size: 18px; -fx-font-weight: 700;"/>
+                                            <Pane HBox.hgrow="ALWAYS"/>
+                                            <Button onAction="#ajouterUtilisateur"
+                                                    style="-fx-background-color: #22c55e; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: 700; -fx-padding: 8 16; -fx-cursor: hand;">
+                                                <graphic>
+                                                    <HBox alignment="CENTER" spacing="6">
+                                                        <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" style="-fx-fill: #ffffff; -fx-scale-x:0.7; -fx-scale-y:0.7;"/>
+                                                        <Label text="Ajouter" style="-fx-text-fill: #ffffff; -fx-font-weight: 600;"/>
+                                                    </HBox>
+                                                </graphic>
+                                            </Button>
+                                        </HBox>
+                                        <TableView fx:id="tableUsers" prefHeight="480"
+                                                   style="-fx-background-color: transparent;">
+                                            <columns>
+                                                <TableColumn fx:id="colUId" prefWidth="60" text="ID"/>
+                                                <TableColumn fx:id="colUNom" prefWidth="150" text="NOM"/>
+                                                <TableColumn fx:id="colUPrenom" prefWidth="150" text="PRÉNOM"/>
+                                                <TableColumn fx:id="colUEmail" prefWidth="200" text="EMAIL"/>
+                                                <TableColumn fx:id="colURole" prefWidth="120" text="RÔLE"/>
+                                                <TableColumn fx:id="colUActions" prefWidth="120" text="ACTIONS"/>
+                                            </columns>
+                                        </TableView>
+                                    </VBox>
+                                </content>
+                            </Tab>
+                        </tabs>
+                    </TabPane>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </HBox>
+</StackPane>
