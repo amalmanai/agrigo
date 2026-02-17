@@ -2,6 +2,7 @@ package Utils;
 import java.sql.*;
 public class MyBD {
    private Connection conn;
+   // Connexion maintenant pointée vers la base agri_go_db
    final private String URL="jdbc:mysql://localhost:3306/agri_go_db";
    final private String USER="root";
    final private String PASS="";

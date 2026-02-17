@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Controlles.TableauBordController"
+      spacing="24" style="-fx-padding: 24;">
+   <Label text="Tableau de bord" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+   <Label text="Suivi et pilotage des opérations d'irrigation" style="-fx-text-fill: #666;" />
+
+   <GridPane hgap="16" vgap="16">
+      <VBox styleClass="card" prefWidth="200" prefHeight="100" GridPane.columnIndex="0" GridPane.rowIndex="0">
+         <padding><Insets top="16" right="16" bottom="16" left="16" /></padding>
+         <Label text="SYSTÈMES ACTIFS" style="-fx-font-size: 12px; -fx-text-fill: #666;" />
+         <Label fx:id="lblSystemesActifs" text="0" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+      </VBox>
+      <VBox styleClass="card" prefWidth="200" prefHeight="100" GridPane.columnIndex="1" GridPane.rowIndex="0">
+         <padding><Insets top="16" right="16" bottom="16" left="16" /></padding>
+         <Label text="ENTRÉES HISTORIQUE" style="-fx-font-size: 12px; -fx-text-fill: #666;" />
+         <Label fx:id="lblHistorique" text="0" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+      </VBox>
+   </GridPane>
+</VBox>

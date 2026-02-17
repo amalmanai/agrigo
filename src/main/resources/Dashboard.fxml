@@ -1,17 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShowUserController">
-   <children>
-      <TableView fx:id="tableViewUserRegister" layoutY="53.0" prefHeight="371.0" prefWidth="600.0" stylesheets="@css/style.css" />
-      <Button fx:id="logoutshow" layoutX="541.0" layoutY="5.0" mnemonicParsing="false" onAction="#logoutshow" prefHeight="29.0" prefWidth="50.0" stylesheets="@css/style.css" text="-&gt;">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-   </children>
-</AnchorPane>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Controlles.DashboardController" spacing="24" styleClass="dashboard-root">
+   <padding><Insets top="24" right="24" bottom="24" left="24" /></padding>
+
+   <!-- Header: titre + sous-titre + recherche -->
+   <HBox alignment="CENTER_LEFT" spacing="16">
+      <VBox spacing="2">
+         <Label text="Dashboard" styleClass="dashboard-title" />
+         <Label text="Suivi et pilotage des opérations d'irrigation..." styleClass="dashboard-subtitle" />
+      </VBox>
+      <HBox HBox.hgrow="ALWAYS" />
+      <TextField fx:id="searchField" promptText="Rechercher..." styleClass="search-bar" prefWidth="260" />
+   </HBox>
+
+   <!-- 3 cartes KPI -->
+   <HBox spacing="20">
+      <VBox fx:id="cardIrrigations" styleClass="card-metric" HBox.hgrow="ALWAYS">
+         <padding><Insets top="20" right="20" bottom="20" left="20" /></padding>
+         <HBox spacing="8" alignment="CENTER_LEFT">
+            <Label text="📊" style="-fx-font-size: 24px;" />
+            <Label text="IRRIGATIONS CE MOIS" styleClass="card-metric-label" />
+         </HBox>
+         <Label fx:id="labelIrrigations" text="0" styleClass="card-metric-value" />
+         <Label fx:id="labelIrrigationsTrend" text="—" styleClass="card-metric-trend" />
+      </VBox>
+      <VBox fx:id="cardVolume" styleClass="card-metric" HBox.hgrow="ALWAYS">
+         <padding><Insets top="20" right="20" bottom="20" left="20" /></padding>
+         <HBox spacing="8" alignment="CENTER_LEFT">
+            <Label text="💧" style="-fx-font-size: 24px;" />
+            <Label text="VOLUME EAU TOTAL (L)" styleClass="card-metric-label" />
+         </HBox>
+         <Label fx:id="labelVolume" text="0" styleClass="card-metric-value" />
+         <Label fx:id="labelVolumeStatus" text="Stable" styleClass="card-metric-trend" />
+      </VBox>
+      <VBox fx:id="cardSystemes" styleClass="card-metric" HBox.hgrow="ALWAYS">
+         <padding><Insets top="20" right="20" bottom="20" left="20" /></padding>
+         <HBox spacing="8" alignment="CENTER_LEFT">
+            <Label text="🌱" style="-fx-font-size: 24px;" />
+            <Label text="SYSTÈMES ACTIFS" styleClass="card-metric-label" />
+         </HBox>
+         <Label fx:id="labelSystemes" text="0" styleClass="card-metric-value" />
+         <Label fx:id="labelSystemesDetail" text="—" styleClass="card-metric-trend" />
+      </VBox>
+   </HBox>
+
+   <!-- Onglets (visuels seulement, le tableau affiche l'historique) -->
+   <HBox spacing="0" styleClass="tabs-bar">
+      <Button text="Historique" styleClass="tab-button active" onAction="#onTabHistorique" />
+      <Button fx:id="tabSystemes" text="Systèmes" styleClass="tab-button" onAction="#onTabSystemes" />
+   </HBox>
+
+   <!-- Section Gestion + bouton Ajouter -->
+   <HBox alignment="CENTER_LEFT" spacing="16">
+      <Label text="Gestion de l'historique d'irrigation" styleClass="section-title" />
+      <HBox HBox.hgrow="ALWAYS" />
+      <Button fx:id="btnAjouter" text="+ Ajouter une irrigation" styleClass="btn-add" onAction="#handleAdd" />
+   </HBox>
+
+   <!-- Tableau avec colonnes + ACTIONS -->
+   <VBox styleClass="card" VBox.vgrow="ALWAYS">
+      <padding><Insets top="16" right="16" bottom="16" left="16" /></padding>
+      <TableView fx:id="tvHistorique" VBox.vgrow="ALWAYS" styleClass="dashboard-table">
+         <columns>
+            <TableColumn fx:id="colDate" text="DATE" prefWidth="140" />
+            <TableColumn fx:id="colSysteme" text="SYSTÈME" prefWidth="100" />
+            <TableColumn fx:id="colDuree" text="DURÉE (min)" prefWidth="90" />
+            <TableColumn fx:id="colVolume" text="VOLUME (L)" prefWidth="90" />
+            <TableColumn fx:id="colHumidite" text="HUMIDITÉ %" prefWidth="100" />
+            <TableColumn fx:id="colType" text="TYPE" prefWidth="100" />
+            <TableColumn fx:id="colActions" text="ACTIONS" prefWidth="100" />
+         </columns>
+      </TableView>
+   </VBox>
+</VBox>
