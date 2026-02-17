@@ -52,7 +52,7 @@ public class RegisterController implements Initializable {
                     tfAddresse.getText().isEmpty() ||
                     tfroleeee.getValue() == null) {
 
-                alert("⚠ Tous les champs sont obligatoires !");
+                alert("⚠ Tous les champs sont obligatoires a remplir !");
                 return;
             }
 
