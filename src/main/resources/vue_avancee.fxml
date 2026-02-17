@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Controlles.VueAvanceeController" spacing="20" style="-fx-padding: 24;">
+   <Label text="historique_irrigation" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+   <HBox spacing="16" alignment="CENTER_LEFT">
+      <Label text="Filtrer:" />
+      <ComboBox fx:id="comboSysteme" prefWidth="220" promptText="Tous" onAction="#onFilterChange" />
+      <Button fx:id="btnAjouter" text="+ Ajouter" styleClass="btn-primary" onAction="#handleAdd" />
+      <Button fx:id="btnModifier" text="Modifier" styleClass="btn-secondary" onAction="#handleUpdate" />
+      <Button fx:id="btnSupprimer" text="Supprimer" styleClass="btn-danger" onAction="#handleDelete" />
+   </HBox>
+
+   <VBox styleClass="card" VBox.vgrow="ALWAYS">
+      <padding><Insets top="16" right="16" bottom="16" left="16" /></padding>
+      <TableView fx:id="tvHistorique" VBox.vgrow="ALWAYS">
+         <columns>
+            <TableColumn fx:id="colId" text="id" prefWidth="50" />
+            <TableColumn fx:id="colIdSysteme" text="id_systeme" prefWidth="80" />
+            <TableColumn fx:id="colDate" text="date_irrigation" prefWidth="160" />
+            <TableColumn fx:id="colDuree" text="duree_minutes" prefWidth="100" />
+            <TableColumn fx:id="colVolume" text="volume_eau" prefWidth="100" />
+            <TableColumn fx:id="colHumidite" text="humidite_avant" prefWidth="110" />
+            <TableColumn fx:id="colType" text="type_declenchement" prefWidth="130" />
+         </columns>
+      </TableView>
+   </VBox>
+</VBox>

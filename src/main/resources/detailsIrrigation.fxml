@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<StackPane prefHeight="520.0" prefWidth="500.0" styleClass="app-root form-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlles.DetailsIrrigationController">
+    <VBox maxWidth="460.0" styleClass="detail-card" spacing="20.0">
+        <!-- Header Section -->
+        <VBox spacing="8.0" styleClass="detail-header">
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <SVGPath content="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+                         styleClass="detail-icon" />
+                <Label text="Détails de l'irrigation" styleClass="detail-title" />
+            </HBox>
+            <Separator styleClass="header-separator" />
+        </VBox>
+
+        <!-- Fields Section -->
+        <VBox spacing="18.0" styleClass="form-section">
+            <VBox spacing="8.0" styleClass="field-group">
+                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                    <SVGPath content="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"
+                             styleClass="field-icon" />
+                    <Label text="Date" styleClass="form-label" />
+                </HBox>
+                <TextField fx:id="resDate" editable="false" prefHeight="42.0"
+                           styleClass="form-field readonly-field" promptText="Date irrigation">
+                    <padding><Insets left="14.0" right="14.0" /></padding>
+                </TextField>
+            </VBox>
+            <VBox spacing="8.0" styleClass="field-group">
+                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                    <SVGPath content="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+                             styleClass="field-icon" />
+                    <Label text="Système" styleClass="form-label" />
+                </HBox>
+                <TextField fx:id="resSysteme" editable="false" prefHeight="42.0"
+                           styleClass="form-field readonly-field" promptText="ID Système">
+                    <padding><Insets left="14.0" right="14.0" /></padding>
+                </TextField>
+            </VBox>
+            <VBox spacing="8.0" styleClass="field-group">
+                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                    <SVGPath content="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2z"
+                             styleClass="field-icon" />
+                    <Label text="Durée (min)" styleClass="form-label" />
+                </HBox>
+                <TextField fx:id="resDuree" editable="false" prefHeight="42.0"
+                           styleClass="form-field readonly-field" promptText="Durée">
+                    <padding><Insets left="14.0" right="14.0" /></padding>
+                </TextField>
+            </VBox>
+            <VBox spacing="8.0" styleClass="field-group">
+                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                    <SVGPath content="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"
+                             styleClass="field-icon" />
+                    <Label text="Volume (L)" styleClass="form-label" />
+                </HBox>
+                <TextField fx:id="resVolume" editable="false" prefHeight="42.0"
+                           styleClass="form-field readonly-field" promptText="Volume eau">
+                    <padding><Insets left="14.0" right="14.0" /></padding>
+                </TextField>
+            </VBox>
+            <VBox spacing="8.0" styleClass="field-group">
+                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                    <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
+                             styleClass="field-icon" />
+                    <Label text="Humidité avant (%)" styleClass="form-label" />
+                </HBox>
+                <TextField fx:id="resHumidite" editable="false" prefHeight="42.0"
+                           styleClass="form-field readonly-field" promptText="Humidité">
+                    <padding><Insets left="14.0" right="14.0" /></padding>
+                </TextField>
+            </VBox>
+            <VBox spacing="8.0" styleClass="field-group">
+                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                    <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
+                             styleClass="field-icon" />
+                    <Label text="Type" styleClass="form-label" />
+                </HBox>
+                <TextField fx:id="resType" editable="false" prefHeight="42.0"
+                           styleClass="form-field readonly-field" promptText="Type déclenchement">
+                    <padding><Insets left="14.0" right="14.0" /></padding>
+                </TextField>
+            </VBox>
+        </VBox>
+
+        <Region VBox.vgrow="ALWAYS" minHeight="10.0" />
+        <HBox alignment="CENTER" spacing="8.0" styleClass="info-footer">
+            <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                     styleClass="info-icon" />
+            <Label text="Mode consultation uniquement" styleClass="muted-text" />
+            <padding><Insets top="8.0" bottom="4.0" /></padding>
+        </HBox>
+        <padding>
+            <Insets top="24.0" bottom="24.0" left="24.0" right="24.0" />
+        </padding>
+    </VBox>
+</StackPane>

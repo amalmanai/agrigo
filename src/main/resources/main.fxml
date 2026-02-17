@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controlles.MainController" prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@styles/main.css">
+
+   <left>
+      <VBox fx:id="sidebar" prefWidth="240.0" styleClass="sidebar" spacing="0">
+         <padding>
+            <Insets top="28" right="0" bottom="24" left="24" />
+         </padding>
+         <Label text="AGRI GO" styleClass="sidebar-logo" />
+         <Label text="Irrigation" styleClass="sidebar-app-name" />
+         <Label text="Management Suite" styleClass="sidebar-subtitle" />
+         <VBox spacing="2" style="-fx-padding: 32 0 24 0;">
+            <Label text="NAVIGATION" styleClass="sidebar-nav-label" />
+            <Button fx:id="btnDashboard" text="  Tableau de bord" styleClass="nav-item" onAction="#showDashboard" />
+            <Button fx:id="btnHistorique" text="  Historique irrigation" styleClass="nav-item" onAction="#showHistoriqueIrrigation" />
+            <Button fx:id="btnSystemes" text="  Systèmes d'irrigation" styleClass="nav-item" onAction="#showSystemeIrrigation" />
+         </VBox>
+         <VBox VBox.vgrow="ALWAYS" />
+         <Separator style="-fx-background-color: rgba(255,255,255,0.25);" />
+         <VBox spacing="4" style="-fx-padding: 12 0 0 0;">
+            <Label text="Version 1.0.0" styleClass="sidebar-footer" />
+            <Label text="© 2024 Irrigation MS" styleClass="sidebar-footer" />
+         </VBox>
+      </VBox>
+   </left>
+
+   <center>
+      <StackPane fx:id="contentArea" styleClass="content-area" />
+   </center>
+
+</BorderPane>

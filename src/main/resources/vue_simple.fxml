@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Controlles.VueSimpleController" spacing="20" style="-fx-padding: 24;">
+   <Label text="systeme_irrigation" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+   <HBox spacing="16" alignment="CENTER_LEFT">
+      <Button fx:id="btnAjouter" text="+ Ajouter" styleClass="btn-primary" onAction="#handleAdd" />
+      <Button fx:id="btnModifier" text="Modifier" styleClass="btn-secondary" onAction="#handleUpdate" />
+      <Button fx:id="btnSupprimer" text="Supprimer" styleClass="btn-danger" onAction="#handleDelete" />
+   </HBox>
+
+   <VBox styleClass="card" VBox.vgrow="ALWAYS">
+      <padding><Insets top="16" right="16" bottom="16" left="16" /></padding>
+      <TableView fx:id="tvSystemes" VBox.vgrow="ALWAYS">
+         <columns>
+            <TableColumn fx:id="colId" text="id_systeme" prefWidth="80" />
+            <TableColumn fx:id="colIdParcelle" text="id_parcelle" prefWidth="80" />
+            <TableColumn fx:id="colNom" text="nom_systeme" prefWidth="200" />
+            <TableColumn fx:id="colSeuil" text="seuil_humidite" prefWidth="100" />
+            <TableColumn fx:id="colMode" text="mode" prefWidth="100" />
+            <TableColumn fx:id="colStatut" text="statut" prefWidth="100" />
+            <TableColumn fx:id="colDateCreation" text="date_creation" prefWidth="150" />
+         </columns>
+      </TableView>
+   </VBox>
+</VBox>

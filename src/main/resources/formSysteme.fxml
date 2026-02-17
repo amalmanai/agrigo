@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<StackPane prefHeight="640.0" prefWidth="500.0" styleClass="app-root form-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlles.FormSystemeController">
+    <children>
+        <VBox maxWidth="460.0" styleClass="form-card" spacing="20.0">
+            <children>
+                <!-- Header Section -->
+                <VBox spacing="8.0" styleClass="form-header">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <children>
+                                <SVGPath content="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+                                         styleClass="form-header-icon"
+                                         style="-fx-fill: #2d7a4f;" />
+                                <VBox spacing="2.0">
+                                    <children>
+                                        <Label fx:id="lblTitle" text="Nouveau système d'irrigation" styleClass="form-title" />
+                                        <Label text="Renseignez les détails du système" styleClass="form-subtitle" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <Separator styleClass="form-separator">
+                            <VBox.margin>
+                                <Insets top="6.0" />
+                            </VBox.margin>
+                        </Separator>
+                    </children>
+                </VBox>
+
+                <!-- Form Fields Section -->
+                <VBox spacing="16.0" styleClass="form-fields">
+                    <children>
+                        <!-- ID Parcelle -->
+                        <VBox spacing="8.0" styleClass="field-group">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                    <children>
+                                        <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5z"
+                                                 styleClass="field-icon"
+                                                 style="-fx-fill: #2d7a4f; -fx-scale-x: 0.7; -fx-scale-y: 0.7;" />
+                                        <Label text="ID Parcelle" styleClass="form-label" />
+                                        <Label text="*" styleClass="required-indicator" style="-fx-text-fill: #dc3545;" />
+                                    </children>
+                                </HBox>
+                                <TextField fx:id="tfIdParcelle" prefHeight="40.0" promptText="Ex: 1, 2, 3..." styleClass="form-field">
+                                    <padding>
+                                        <Insets left="12.0" right="12.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                        </VBox>
+
+                        <!-- Nom système -->
+                        <VBox spacing="8.0" styleClass="field-group">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                    <children>
+                                        <SVGPath content="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                                                 styleClass="field-icon"
+                                                 style="-fx-fill: #2d7a4f; -fx-scale-x: 0.7; -fx-scale-y: 0.7;" />
+                                        <Label text="Nom du système" styleClass="form-label" />
+                                        <Label text="*" styleClass="required-indicator" style="-fx-text-fill: #dc3545;" />
+                                    </children>
+                                </HBox>
+                                <TextField fx:id="tfNom" prefHeight="40.0" promptText="Ex: Zone Nord, Secteur A..." styleClass="form-field">
+                                    <padding>
+                                        <Insets left="12.0" right="12.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                        </VBox>
+
+                        <!-- Seuil humidité -->
+                        <VBox spacing="8.0" styleClass="field-group">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                    <children>
+                                        <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                                                 styleClass="field-icon"
+                                                 style="-fx-fill: #2d7a4f; -fx-scale-x: 0.7; -fx-scale-y: 0.7;" />
+                                        <Label text="Seuil humidité (%)" styleClass="form-label" />
+                                        <Label text="*" styleClass="required-indicator" style="-fx-text-fill: #dc3545;" />
+                                    </children>
+                                </HBox>
+                                <TextField fx:id="tfSeuil" prefHeight="40.0" promptText="Ex: 25, 30, 40..." styleClass="form-field">
+                                    <padding>
+                                        <Insets left="12.0" right="12.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                        </VBox>
+
+                        <!-- Mode -->
+                        <VBox spacing="8.0" styleClass="field-group">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                    <children>
+                                        <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
+                                                 styleClass="field-icon"
+                                                 style="-fx-fill: #2d7a4f; -fx-scale-x: 0.7; -fx-scale-y: 0.7;" />
+                                        <Label text="Mode" styleClass="form-label" />
+                                        <Label text="*" styleClass="required-indicator" style="-fx-text-fill: #dc3545;" />
+                                    </children>
+                                </HBox>
+                                <ComboBox fx:id="cbMode" prefHeight="40.0" maxWidth="Infinity" promptText="AUTO ou MANUEL" styleClass="form-field" />
+                            </children>
+                        </VBox>
+
+                        <!-- Statut -->
+                        <VBox spacing="8.0" styleClass="field-group">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                    <children>
+                                        <SVGPath content="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"
+                                                 styleClass="field-icon"
+                                                 style="-fx-fill: #2d7a4f; -fx-scale-x: 0.7; -fx-scale-y: 0.7;" />
+                                        <Label text="Statut" styleClass="form-label" />
+                                        <Label text="*" styleClass="required-indicator" style="-fx-text-fill: #dc3545;" />
+                                    </children>
+                                </HBox>
+                                <ComboBox fx:id="cbStatut" prefHeight="40.0" maxWidth="Infinity" promptText="ACTIF ou INACTIF" styleClass="form-field" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <!-- Footer -->
+                <VBox spacing="12.0">
+                    <children>
+                        <Separator styleClass="form-separator" />
+                        <HBox alignment="CENTER_LEFT" spacing="8.0" styleClass="form-info">
+                            <children>
+                                <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                                         styleClass="info-icon" style="-fx-fill: #6c757d; -fx-scale-x: 0.6; -fx-scale-y: 0.6;" />
+                                <Label text="Les champs marqués d'un * sont obligatoires" styleClass="form-help-text" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Button fx:id="btnEnregistrer" mnemonicParsing="false" onAction="#enregistrer"
+                                    prefHeight="42.0" prefWidth="160.0" styleClass="primary-button">
+                                <graphic>
+                                    <HBox alignment="CENTER" spacing="8.0">
+                                        <SVGPath content="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                                 styleClass="button-icon" style="-fx-fill: #ffffff; -fx-scale-x: 0.8; -fx-scale-y: 0.8;" />
+                                        <Label text="Enregistrer" styleClass="button-label" style="-fx-text-fill: #ffffff;" />
+                                    </HBox>
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets top="24.0" bottom="24.0" left="24.0" right="24.0" />
+            </padding>
+        </VBox>
+    </children>
+</StackPane>
