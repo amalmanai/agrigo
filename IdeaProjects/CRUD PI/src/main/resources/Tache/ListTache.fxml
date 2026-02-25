@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="720.0"
+            style="-fx-background-color: #FFFFFF;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controllers.ListeTacheController">
+   <children>
+      <Button fx:id="btnRetour" layoutX="10.0" layoutY="8.0" mnemonicParsing="false" onAction="#retourAccueil" prefHeight="32.0" prefWidth="90.0" style="-fx-background-color: transparent; -fx-cursor: hand; -fx-border-color: #228B22; -fx-border-radius: 5; -fx-text-fill: #228B22;" text="← Retour" />
+      <Label layoutX="110.0" layoutY="12.0" text="Gestion des tâches" textFill="#228B22">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelMeteo" layoutX="20.0" layoutY="38.0" prefWidth="340.0" wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #1976D2;" />
+      <Label fx:id="labelCitation" layoutX="380.0" layoutY="38.0" prefWidth="320.0" wrapText="true" style="-fx-font-size: 11px; -fx-font-style: italic; -fx-text-fill: #555;" />
+      <TextField fx:id="fieldRechercheTache" layoutX="20.0" layoutY="58.0" prefHeight="28.0" prefWidth="220.0" promptText="Rechercher par titre..." />
+      <ComboBox fx:id="comboFiltreStatut" layoutX="250.0" layoutY="58.0" prefHeight="28.0" prefWidth="150.0" promptText="Tous les statuts" />
+      <Button fx:id="btnRafraichirTache" layoutX="410.0" layoutY="58.0" mnemonicParsing="false" onAction="#rafraichir" text="Rafraîchir" />
+      <TableView fx:id="ListTache" layoutX="20.0" layoutY="92.0" prefHeight="298.0" prefWidth="680.0" />
+      <Label fx:id="labelAucuneTache" layoutX="20.0" layoutY="220.0" text="Aucune tâche. Cliquez sur « Ajouter tâche » pour en créer une." textFill="#999" visible="false" wrapText="true">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button layoutX="20.0" layoutY="400.0" mnemonicParsing="false" onAction="#Ajouter_Tache" text="Ajouter tâche" />
+      <Button fx:id="btnExportPdf" layoutX="160.0" layoutY="400.0" mnemonicParsing="false" onAction="#exportPdf" text="Exporter en PDF" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegisterController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #228B22;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="WHITE" layoutX="114.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue !">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="500.0" prefWidth="425.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="FORESTGREEN" layoutX="135.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S'inscrire">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/user.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="tfNom" layoutX="120.0" layoutY="51.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
+            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/mail.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="tfprenom" layoutX="120.0" layoutY="91.0" promptText="prenom" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
+            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/padlock.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/padlock.png" />
+               </image>
+            </ImageView>
+            <PasswordField fx:id="pfConfirmMotDePasse" layoutX="119.0" layoutY="215.0" promptText="confirmer mot de passe" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
+            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/telephone.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="tfemail" layoutX="120.0" layoutY="134.0" promptText="email" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="tfTelephone" layoutX="119.0" layoutY="250.0" promptText="telephone" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
+            <ComboBox fx:id="tfroleeee" layoutX="71.0" layoutY="338.0" onAction="#tfroleeee" prefHeight="37.0" prefWidth="248.0" promptText="Role" style="-fx-border-color: #228B22;" styleClass="combo-box" stylesheets="@css/style.css" />
+            <Label fx:id="labelEmailApi" layoutX="120.0" layoutY="385.0" prefWidth="200.0" wrapText="true" style="-fx-font-size: 11px; -fx-text-fill: #666;" />
+            <Label fx:id="labelPasswordApi" layoutX="120.0" layoutY="400.0" prefWidth="200.0" wrapText="true" style="-fx-font-size: 11px; -fx-text-fill: #666;" />
+            <Button layoutX="135.0" layoutY="415.0" mnemonicParsing="false" onAction="#registerAction" styleClass="button-style" stylesheets="@css/style.css" text="Inscrire" textFill="WHITE" />
+            <Hyperlink layoutX="99.0" layoutY="462.0" onAction="#handleLabelClick" text="Déjà un compte ? Se connecter" textFill="#003668" />
+            <TextField fx:id="tfAddresse" layoutX="119.0" layoutY="292.0" promptText="Addresse" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
+            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/location.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/user.png" />
+               </image>
+            </ImageView>
+            <PasswordField fx:id="tfmotDePasse" layoutX="120.0" layoutY="173.0" promptText="mot de passe" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

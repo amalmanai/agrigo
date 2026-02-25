@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
+    <left>
+        <AnchorPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #228B22;" BorderPane.alignment="CENTER">
+            <children>
+                <Text fill="WHITE" layoutX="80.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue !">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Text>
+                <Text fill="rgba(255,255,255,0.9)" layoutX="60.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AgriGo - Gestion agricole" wrappingWidth="230.0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
+    </left>
+    <right>
+        <AnchorPane prefHeight="500.0" prefWidth="425.0" BorderPane.alignment="CENTER">
+            <children>
+                <Text fill="FORESTGREEN" layoutX="140.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" wrappingWidth="79.57953643798828">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Text>
+                <ImageView fitHeight="39.0" fitWidth="31.0" layoutX="73.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@assets/mail.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="44.0" fitWidth="33.0" layoutX="70.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@assets/padlock.png" />
+                    </image>
+                </ImageView>
+                <TextField fx:id="tfemaillogin" layoutX="118.0" layoutY="167.0" prefHeight="39.0" prefWidth="171.0" promptText="email" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
+                <Button layoutX="132.0" layoutY="290.0" mnemonicParsing="false" onAction="#loginaction" styleClass="button-style" stylesheets="@css/style.css" text="Connexion" textFill="WHITE" />
+                <Hyperlink layoutX="96.0" layoutY="330.0" onAction="#handleResetPassword" text="Mot de passe oublié ?" textFill="#003668" />
+                <Hyperlink layoutX="96.0" layoutY="360.0" onAction="#handleLabelClick" text="Pas encore de compte ? S'inscrire" textFill="#003668" />
+                <PasswordField fx:id="tfmotDePasselogin"
+                               layoutX="117.0" layoutY="222.0"
+                               prefWidth="173.0"
+                               promptText="mot de passe"
+                               style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
+
+                <!-- Champ texte pour afficher le mot de passe (caché par défaut) -->
+                <TextField fx:id="tfmotDePasseloginVisible"
+                           layoutX="117.0" layoutY="222.0"
+                           prefWidth="173.0"
+                           promptText="mot de passe"
+                           style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;"
+                           visible="false" managed="false" />
+
+                <!-- Bouton pour voir / cacher le mot de passe -->
+                <Button fx:id="btnTogglePassword"
+                        layoutX="295.0" layoutY="222.0"
+                        prefWidth="50.0"
+                        text="👁"
+                        onAction="#togglePasswordVisibility"
+                        style="-fx-background-color: transparent; -fx-text-fill: #228B22;" />
+                <Label fx:id="labelApiStatus" layoutX="73.0" layoutY="320.0" prefWidth="220.0" wrapText="true" style="-fx-font-size: 11px; -fx-text-fill: #666;" />
+            </children>
+        </AnchorPane>
+    </right>
+</BorderPane>
