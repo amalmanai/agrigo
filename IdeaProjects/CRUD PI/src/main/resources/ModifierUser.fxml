@@ -2,82 +2,403 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ModifierUserController">
-   <left>
-      <AnchorPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #228B22;" BorderPane.alignment="CENTER">
-         <children>
-            <Text fill="WHITE" layoutX="114.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue !">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
-   </left>
-   <right>
-      <AnchorPane prefHeight="500.0" prefWidth="425.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text fill="FORESTGREEN" layoutX="135.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/user.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="tfNomModif" layoutX="120.0" layoutY="51.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/mail.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="tfprenomModif" layoutX="120.0" layoutY="91.0" promptText="prenom" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/padlock.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/padlock.png" />
-               </image>
-            </ImageView>
-            <PasswordField fx:id="pfConfirmMotDePasseModif" layoutX="119.0" layoutY="215.0" promptText="confirmer mot de passe" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/telephone.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="tfemailModif" layoutX="120.0" layoutY="134.0" promptText="email" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="tfTelephoneModif" layoutX="119.0" layoutY="250.0" promptText="telephone" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <ComboBox fx:id="tfroleeeeModif" layoutX="71.0" layoutY="338.0" onAction="#tfroleeeeModif" prefHeight="37.0" prefWidth="248.0" promptText="Role" style="-fx-border-color: #228B22;" styleClass="combo-box" stylesheets="@css/style.css" />
-            <Button fx:id="pickImageButton" layoutX="91.0" layoutY="359.0" mnemonicParsing="false" onAction="#pickImageAction" styleClass="transparent" stylesheets="@css/style.css" />
-            <Button layoutX="140.0" layoutY="413.0" mnemonicParsing="false" onAction="#ModifAction" styleClass="button-style" stylesheets="@css/style.css" text="Modifier" textFill="WHITE" />
-            <Button fx:id="takePictureButton" layoutX="204.0" layoutY="359.0" mnemonicParsing="false" onAction="#takePictureAction" styleClass="transparent" stylesheets="@css/style.css" />
-            <TextField fx:id="tfAddresseModif" layoutX="119.0" layoutY="292.0" promptText="Addresse" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/location.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/user.png" />
-               </image>
-            </ImageView>
-            <PasswordField fx:id="tfmotDePasseModif" layoutX="120.0" layoutY="173.0" promptText="mot de passe" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-         </children>
-      </AnchorPane>
-   </right>
+<BorderPane
+        maxHeight="-Infinity" maxWidth="-Infinity"
+        minHeight="-Infinity" minWidth="-Infinity"
+        prefHeight="620.0" prefWidth="820.0"
+        stylesheets="@css/style.css"
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="Controllers.ModifierUserController">
+    <left>
+        <AnchorPane prefWidth="340.0" prefHeight="620.0"
+                    style="-fx-background-color: #1a5c1a;"
+                    BorderPane.alignment="CENTER">
+            <children>
+                <Rectangle x="0" y="0" width="4" height="620" fill="#5dbf5d"/>
+
+                <Circle centerX="310" centerY="60" radius="90"
+                        fill="transparent" stroke="rgba(255,255,255,0.06)" strokeWidth="35"/>
+                <Circle centerX="30" centerY="560" radius="70"
+                        fill="transparent" stroke="rgba(255,255,255,0.06)" strokeWidth="35"/>
+                <Circle centerX="295" centerY="450" radius="30"
+                        fill="transparent" stroke="rgba(93,191,93,0.15)" strokeWidth="15"/>
+
+                <VBox layoutX="48" layoutY="210" spacing="0">
+                    <children>
+                        <Label text="🌾"
+                               style="-fx-font-size: 48px; -fx-padding: 0 0 14 0;"/>
+                        <Label text="AgriGo"
+                               style="-fx-font-size: 34px;
+                                      -fx-font-weight: bold;
+                                      -fx-text-fill: white;
+                                      -fx-padding: 0 0 8 0;"/>
+                        <Rectangle width="48" height="3"
+                                   fill="#5dbf5d" arcWidth="3" arcHeight="3"/>
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+                        <Label text="Mettez à jour votre profil&#10;en toute sécurité."
+                               wrapText="true"
+                               style="-fx-font-size: 13px;
+                                      -fx-text-fill: rgba(255,255,255,0.65);
+                                      -fx-line-spacing: 3;"/>
+                    </children>
+                </VBox>
+
+                <Label layoutX="48" layoutY="596"
+                       text="© 2026 AgriGo · Tous droits réservés"
+                       style="-fx-font-size: 10px;
+                              -fx-text-fill: rgba(255,255,255,0.28);"/>
+            </children>
+        </AnchorPane>
+    </left>
+    <right>
+        <AnchorPane prefWidth="480.0" prefHeight="620.0"
+                    style="-fx-background-color: #f7f9f4;"
+                    BorderPane.alignment="CENTER">
+            <children>
+                <VBox layoutX="64" layoutY="42" spacing="0" prefWidth="352">
+                    <children>
+                        <Label text="PROFIL"
+                               style="-fx-font-size: 10px;
+                                      -fx-font-weight: bold;
+                                      -fx-text-fill: #5dbf5d;
+                                      -fx-padding: 0 0 8 0;"/>
+                        <Label text="Modifier utilisateur"
+                               style="-fx-font-size: 27px;
+                                      -fx-font-weight: bold;
+                                      -fx-text-fill: #1a3318;
+                                      -fx-padding: 0 0 4 0;"/>
+                        <Label text="Mettez à jour les informations du compte"
+                               style="-fx-font-size: 12px;
+                                      -fx-text-fill: #7a9475;
+                                      -fx-padding: 0 0 16 0;"/>
+
+                        <!-- Photo de profil -->
+                        <HBox spacing="12" alignment="CENTER_LEFT"
+                              style="-fx-background-color: white;
+                                     -fx-border-color: #c8dcc5;
+                                     -fx-border-width: 1.5;
+                                     -fx-border-radius: 12;
+                                     -fx-background-radius: 12;
+                                     -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.04),6,0,0,1);
+                                     -fx-padding: 10 12 10 12;">
+                            <children>
+                                <StackPane prefWidth="64" prefHeight="64">
+                                    <children>
+                                        <Circle radius="32" fill="rgba(93,191,93,0.12)"/>
+                                        <ImageView fx:id="profileImageView"
+                                                   fitHeight="64" fitWidth="64"
+                                                   pickOnBounds="true" preserveRatio="true">
+                                            <clip>
+                                                <Circle radius="32" centerX="32" centerY="32"/>
+                                            </clip>
+                                            <image>
+                                                <Image url="@assets/user.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Circle radius="32" fill="transparent" stroke="#c8dcc5" strokeWidth="1.5"/>
+                                    </children>
+                                </StackPane>
+
+                                <VBox spacing="6" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label text="Photo de profil"
+                                               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #1a3318;"/>
+                                        <HBox spacing="8">
+                                            <children>
+                                                <Button fx:id="pickImageButton"
+                                                        text="📁 Importer"
+                                                        mnemonicParsing="false"
+                                                        onAction="#pickImageAction"
+                                                        styleClass="btn-icon" />
+                                                <Button fx:id="takePictureButton"
+                                                        text="📷 Webcam"
+                                                        mnemonicParsing="false"
+                                                        onAction="#takePictureAction"
+                                                        styleClass="btn-icon" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <Label style="-fx-padding: 0 0 14 0;"/>
+
+                        <!-- Nom + Prénom -->
+                        <HBox spacing="12">
+                            <children>
+                                <VBox spacing="0" prefWidth="170">
+                                    <children>
+                                        <Label text="NOM"
+                                               style="-fx-font-size: 10px; -fx-font-weight: bold;
+                                                      -fx-text-fill: #3a5c38; -fx-padding: 0 0 5 0;"/>
+                                        <HBox spacing="8" prefHeight="42"
+                                              style="-fx-background-color: white;
+                                                     -fx-border-color: #c8dcc5;
+                                                     -fx-border-width: 1.5;
+                                                     -fx-border-radius: 10;
+                                                     -fx-background-radius: 10;
+                                                     -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.04),6,0,0,1);
+                                                     -fx-padding: 0 10 0 12;
+                                                     -fx-alignment: CENTER_LEFT;">
+                                            <children>
+                                                <Label text="👤" style="-fx-font-size: 13px; -fx-text-fill: #5dbf5d;"/>
+                                                <TextField fx:id="tfNomModif"
+                                                           promptText="Nom"
+                                                           prefWidth="120"
+                                                           style="-fx-background-color: transparent;
+                                                                  -fx-border-color: transparent;
+                                                                  -fx-font-size: 13px;
+                                                                  -fx-text-fill: #2d3d2b;
+                                                                  -fx-prompt-text-fill: #b0c4ae;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="0" prefWidth="170">
+                                    <children>
+                                        <Label text="PRÉNOM"
+                                               style="-fx-font-size: 10px; -fx-font-weight: bold;
+                                                      -fx-text-fill: #3a5c38; -fx-padding: 0 0 5 0;"/>
+                                        <HBox spacing="8" prefHeight="42"
+                                              style="-fx-background-color: white;
+                                                     -fx-border-color: #c8dcc5;
+                                                     -fx-border-width: 1.5;
+                                                     -fx-border-radius: 10;
+                                                     -fx-background-radius: 10;
+                                                     -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.04),6,0,0,1);
+                                                     -fx-padding: 0 10 0 12;
+                                                     -fx-alignment: CENTER_LEFT;">
+                                            <children>
+                                                <Label text="👤" style="-fx-font-size: 13px; -fx-text-fill: #5dbf5d;"/>
+                                                <TextField fx:id="tfprenomModif"
+                                                           promptText="Prénom"
+                                                           prefWidth="120"
+                                                           style="-fx-background-color: transparent;
+                                                                  -fx-border-color: transparent;
+                                                                  -fx-font-size: 13px;
+                                                                  -fx-text-fill: #2d3d2b;
+                                                                  -fx-prompt-text-fill: #b0c4ae;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+
+                        <!-- Email -->
+                        <Label text="ADRESSE E-MAIL"
+                               style="-fx-font-size: 10px; -fx-font-weight: bold;
+                                      -fx-text-fill: #3a5c38; -fx-padding: 0 0 5 0;"/>
+                        <HBox spacing="10" prefHeight="42"
+                              style="-fx-background-color: white;
+                                     -fx-border-color: #c8dcc5;
+                                     -fx-border-width: 1.5;
+                                     -fx-border-radius: 10;
+                                     -fx-background-radius: 10;
+                                     -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.04),6,0,0,1);
+                                     -fx-padding: 0 14 0 14;
+                                     -fx-alignment: CENTER_LEFT;">
+                            <children>
+                                <Label text="✉" style="-fx-font-size: 14px; -fx-text-fill: #5dbf5d;"/>
+                                <TextField fx:id="tfemailModif"
+                                           promptText="votre@email.com"
+                                           prefWidth="310"
+                                           style="-fx-background-color: transparent;
+                                                  -fx-border-color: transparent;
+                                                  -fx-font-size: 13px;
+                                                  -fx-text-fill: #2d3d2b;
+                                                  -fx-prompt-text-fill: #b0c4ae;"/>
+                            </children>
+                        </HBox>
+
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+
+                        <!-- MDP + Confirmation -->
+                        <HBox spacing="12">
+                            <children>
+                                <VBox spacing="0" prefWidth="170">
+                                    <children>
+                                        <Label text="MOT DE PASSE"
+                                               style="-fx-font-size: 10px; -fx-font-weight: bold;
+                                                      -fx-text-fill: #3a5c38; -fx-padding: 0 0 5 0;"/>
+                                        <HBox spacing="8" prefHeight="42"
+                                              style="-fx-background-color: white;
+                                                     -fx-border-color: #c8dcc5;
+                                                     -fx-border-width: 1.5;
+                                                     -fx-border-radius: 10;
+                                                     -fx-background-radius: 10;
+                                                     -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.04),6,0,0,1);
+                                                     -fx-padding: 0 10 0 12;
+                                                     -fx-alignment: CENTER_LEFT;">
+                                            <children>
+                                                <Label text="🔒" style="-fx-font-size: 13px; -fx-text-fill: #5dbf5d;"/>
+                                                <PasswordField fx:id="tfmotDePasseModif"
+                                                               promptText="••••••••"
+                                                               prefWidth="115"
+                                                               style="-fx-background-color: transparent;
+                                                                      -fx-border-color: transparent;
+                                                                      -fx-font-size: 13px;
+                                                                      -fx-text-fill: #2d3d2b;
+                                                                      -fx-prompt-text-fill: #b0c4ae;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="0" prefWidth="170">
+                                    <children>
+                                        <Label text="CONFIRMER"
+                                               style="-fx-font-size: 10px; -fx-font-weight: bold;
+                                                      -fx-text-fill: #3a5c38; -fx-padding: 0 0 5 0;"/>
+                                        <HBox spacing="8" prefHeight="42"
+                                              style="-fx-background-color: white;
+                                                     -fx-border-color: #c8dcc5;
+                                                     -fx-border-width: 1.5;
+                                                     -fx-border-radius: 10;
+                                                     -fx-background-radius: 10;
+                                                     -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.04),6,0,0,1);
+                                                     -fx-padding: 0 10 0 12;
+                                                     -fx-alignment: CENTER_LEFT;">
+                                            <children>
+                                                <Label text="🔒" style="-fx-font-size: 13px; -fx-text-fill: #5dbf5d;"/>
+                                                <PasswordField fx:id="pfConfirmMotDePasseModif"
+                                                               promptText="••••••••"
+                                                               prefWidth="115"
+                                                               style="-fx-background-color: transparent;
+                                                                      -fx-border-color: transparent;
+                                                                      -fx-font-size: 13px;
+                                                                      -fx-text-fill: #2d3d2b;
+                                                                      -fx-prompt-text-fill: #b0c4ae;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+
+                        <!-- Téléphone + Adresse -->
+                        <HBox spacing="12">
+                            <children>
+                                <VBox spacing="0" prefWidth="170">
+                                    <children>
+                                        <Label text="TÉLÉPHONE"
+                                               style="-fx-font-size: 10px; -fx-font-weight: bold;
+                                                      -fx-text-fill: #3a5c38; -fx-padding: 0 0 5 0;"/>
+                                        <HBox spacing="8" prefHeight="42"
+                                              style="-fx-background-color: white;
+                                                     -fx-border-color: #c8dcc5;
+                                                     -fx-border-width: 1.5;
+                                                     -fx-border-radius: 10;
+                                                     -fx-background-radius: 10;
+                                                     -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.04),6,0,0,1);
+                                                     -fx-padding: 0 10 0 12;
+                                                     -fx-alignment: CENTER_LEFT;">
+                                            <children>
+                                                <Label text="📞" style="-fx-font-size: 13px; -fx-text-fill: #5dbf5d;"/>
+                                                <TextField fx:id="tfTelephoneModif"
+                                                           promptText="+216 XX XXX XXX"
+                                                           prefWidth="110"
+                                                           style="-fx-background-color: transparent;
+                                                                  -fx-border-color: transparent;
+                                                                  -fx-font-size: 12px;
+                                                                  -fx-text-fill: #2d3d2b;
+                                                                  -fx-prompt-text-fill: #b0c4ae;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="0" prefWidth="170">
+                                    <children>
+                                        <Label text="ADRESSE"
+                                               style="-fx-font-size: 10px; -fx-font-weight: bold;
+                                                      -fx-text-fill: #3a5c38; -fx-padding: 0 0 5 0;"/>
+                                        <HBox spacing="8" prefHeight="42"
+                                              style="-fx-background-color: white;
+                                                     -fx-border-color: #c8dcc5;
+                                                     -fx-border-width: 1.5;
+                                                     -fx-border-radius: 10;
+                                                     -fx-background-radius: 10;
+                                                     -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.04),6,0,0,1);
+                                                     -fx-padding: 0 10 0 12;
+                                                     -fx-alignment: CENTER_LEFT;">
+                                            <children>
+                                                <Label text="📍" style="-fx-font-size: 13px; -fx-text-fill: #5dbf5d;"/>
+                                                <TextField fx:id="tfAddresseModif"
+                                                           promptText="Votre adresse"
+                                                           prefWidth="115"
+                                                           style="-fx-background-color: transparent;
+                                                                  -fx-border-color: transparent;
+                                                                  -fx-font-size: 12px;
+                                                                  -fx-text-fill: #2d3d2b;
+                                                                  -fx-prompt-text-fill: #b0c4ae;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+
+                        <!-- Rôle -->
+                        <Label text="RÔLE"
+                               style="-fx-font-size: 10px; -fx-font-weight: bold;
+                                      -fx-text-fill: #3a5c38; -fx-padding: 0 0 5 0;"/>
+                        <ComboBox fx:id="tfroleeeeModif"
+                                  prefWidth="352" prefHeight="42"
+                                  promptText="Sélectionnez le rôle"
+                                  onAction="#tfroleeeeModif"
+                                  style="-fx-background-color: white;
+                                         -fx-border-color: #c8dcc5;
+                                         -fx-border-width: 1.5;
+                                         -fx-border-radius: 10;
+                                         -fx-background-radius: 10;
+                                         -fx-font-size: 13px;
+                                         -fx-text-fill: #2d3d2b;
+                                         -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.04),6,0,0,1);"/>
+
+                        <Label style="-fx-padding: 0 0 16 0;"/>
+
+                        <Button text="Enregistrer les modifications"
+                                prefWidth="352" prefHeight="44"
+                                mnemonicParsing="false"
+                                onAction="#ModifAction"
+                                style="-fx-background-color: #228B22;
+                                       -fx-text-fill: white;
+                                       -fx-font-size: 14px;
+                                       -fx-font-weight: bold;
+                                       -fx-background-radius: 10;
+                                       -fx-cursor: hand;
+                                       -fx-effect: dropshadow(gaussian,rgba(34,139,34,0.32),14,0,0,4);"/>
+
+                        <Separator style="-fx-padding: 16 0 0 0; -fx-opacity: 0;"/>
+                        <Region VBox.vgrow="ALWAYS"/>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </right>
 </BorderPane>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controllers.ChatbotController"
+            prefWidth="420.0" prefHeight="520.0"
+            style="-fx-background-color: #f7f9f4;">
+
+    <!-- Stylesheet chargée dynamiquement depuis le contrôleur -->
+
+    <top>
+        <HBox spacing="8"
+              style="-fx-background-color: white;
+                     -fx-padding: 12 16 12 16;
+                     -fx-border-color: #e5e7eb;
+                     -fx-border-width: 0 0 1 0;">
+            <children>
+                <Label text="💬"
+                       style="-fx-font-size: 20px;"/>
+                <VBox spacing="2">
+                    <children>
+                        <Label text="Assistant AGRIGO"
+                               style="-fx-font-size: 15px;
+                                      -fx-font-weight: bold;
+                                      -fx-text-fill: #1a3318;"/>
+                        <Label text="Posez vos questions sur les tâches, parcelles, irrigation, etc."
+                               wrapText="true"
+                               style="-fx-font-size: 11px;
+                                      -fx-text-fill: #6b7280;"/>
+                    </children>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fx:id="scrollPane"
+                    hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                    fitToWidth="true"
+                    style="-fx-background-color: transparent; -fx-padding: 8 12 8 12;">
+            <content>
+                <VBox fx:id="messagesContainer"
+                      spacing="8"
+                      style="-fx-background-color: transparent;"
+                      prefWidth="380.0">
+                    <children>
+                        <Label text="Bonjour 👋, je suis l’assistant AGRIGO.\nExpliquez-moi simplement votre question (ex : irrigation, tâches, récoltes, erreurs sur la plateforme) et je vous guiderai étape par étape."
+                               wrapText="true"
+                               style="-fx-background-color: white;
+                                      -fx-background-radius: 10;
+                                      -fx-padding: 10 12 10 12;
+                                      -fx-text-fill: #1f2933;
+                                      -fx-font-size: 12px;
+                                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 6, 0, 0, 1);"/>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <VBox spacing="6"
+              style="-fx-padding: 8 12 12 12;
+                     -fx-background-color: #f7f9f4;
+                     -fx-border-color: #e5e7eb;
+                     -fx-border-width: 1 0 0 0;">
+            <children>
+                <TextArea fx:id="inputField"
+                          promptText="Décrivez votre question ou problème…"
+                          prefRowCount="2"
+                          wrapText="true"
+                          style="-fx-font-size: 12px;
+                                 -fx-background-radius: 8;
+                                 -fx-border-radius: 8;
+                                 -fx-border-color: #d1d5db;
+                                 -fx-text-fill: #111827;"/>
+                <HBox alignment="CENTER_RIGHT" spacing="8">
+                    <children>
+                        <Label text="Réponses automatisées simples. Pour les cas complexes, contactez le support."
+                               wrapText="true"
+                               style="-fx-font-size: 9px; -fx-text-fill: #9ca3af;"
+                               HBox.hgrow="ALWAYS"/>
+                        <Button text="Envoyer"
+                                onAction="#handleSend"
+                                prefHeight="30"
+                                style="-fx-background-color: #228B22;
+                                       -fx-background-radius: 8;
+                                       -fx-text-fill: white;
+                                       -fx-font-size: 12px;
+                                       -fx-font-weight: 600;
+                                       -fx-cursor: hand;
+                                       -fx-padding: 4 14 4 14;"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </bottom>
+
+</BorderPane>

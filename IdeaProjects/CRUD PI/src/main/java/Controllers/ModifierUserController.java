@@ -5,12 +5,18 @@ import Services.ServiceUser;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class ModifierUserController {
 
@@ -22,10 +28,12 @@ public class ModifierUserController {
     @FXML private TextField tfTelephoneModif;
     @FXML private TextField tfAddresseModif;
     @FXML private ComboBox<String> tfroleeeeModif;
+    @FXML private ImageView profileImageView;
 
     private User user; // user to modify
-    private ServiceUser serviceUser = new ServiceUser();
+    private final ServiceUser serviceUser = new ServiceUser();
     private boolean selfEdit; // true = l'utilisateur modifie son propre profil (on désactive le rôle)
+    private File selectedImageFile; // nouvelle photo choisie (non encore copiée)
 
     public void setUser(User user) {
         this.user = user;
@@ -60,6 +68,14 @@ public class ModifierUserController {
             tfAddresseModif.setText(user.getAdresse_user());
             tfroleeeeModif.setValue(user.getRole_user());
             if (selfEdit) tfroleeeeModif.setDisable(true);
+
+            // Charger la photo de profil existante si elle est définie
+            if (profileImageView != null && user.getPhotoPath() != null && !user.getPhotoPath().isEmpty()) {
+                File photoFile = new File(user.getPhotoPath());
+                if (photoFile.exists()) {
+                    profileImageView.setImage(new Image(photoFile.toURI().toString(), false));
+                }
+            }
         }
     }
 
@@ -106,6 +122,33 @@ public class ModifierUserController {
         user.setAdresse_user(tfAddresseModif.getText());
         user.setRole_user(tfroleeeeModif.getValue());
 
+        // Gérer la photo de profil : si une nouvelle a été choisie, la copier et enregistrer le chemin
+        if (selectedImageFile != null) {
+            try {
+                Path photosDir = Paths.get("user-photos");
+                if (!Files.exists(photosDir)) {
+                    Files.createDirectories(photosDir);
+                }
+
+                String originalName = selectedImageFile.getName();
+                String extension = "";
+                int dotIndex = originalName.lastIndexOf('.');
+                if (dotIndex >= 0) {
+                    extension = originalName.substring(dotIndex);
+                }
+
+                String fileName = "user-" + user.getId_user() + extension;
+                Path target = photosDir.resolve(fileName);
+
+                Files.copy(selectedImageFile.toPath(), target, StandardCopyOption.REPLACE_EXISTING);
+
+                user.setPhotoPath(target.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+                alert("Erreur lors de la sauvegarde de la photo de profil.");
+            }
+        }
+
         // Save in DB
         serviceUser.modifier(user);
 
@@ -124,12 +167,35 @@ public class ModifierUserController {
         stage.close();
     }
 
+    @FXML
     public void pickImageAction(ActionEvent actionEvent) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Choisir une photo de profil");
+        chooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        Stage stage = (Stage) tfNomModif.getScene().getWindow();
+        File file = chooser.showOpenDialog(stage);
+        if (file == null) {
+            return;
+        }
+
+        Image image = new Image(file.toURI().toString(), false);
+        if (profileImageView != null) {
+            profileImageView.setImage(image);
+        }
+        // mémoriser la nouvelle image pour la persistance en base
+        selectedImageFile = file;
     }
 
+    @FXML
     public void tfroleeeeModif(ActionEvent actionEvent) {
     }
 
+    @FXML
     public void takePictureAction(ActionEvent actionEvent) {
+        alert("La capture via webcam n'est pas encore activée dans cette version.");
     }
 }
+

@@ -3,109 +3,320 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StatsDashboardController">
-   <children>
-      <Button fx:id="btnRetour" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#retour" prefHeight="28.0" prefWidth="85.0" style="-fx-background-color: transparent; -fx-cursor: hand; -fx-border-color: #228B22; -fx-border-radius: 5; -fx-text-fill: #228B22;" text="← Retour" />
-      <Label layoutX="120.0" layoutY="20.0" text="Tableau de bord - Statistiques" textFill="#228B22">
-         <font>
-            <Font name="System Bold" size="22.0" />
-         </font>
-      </Label>
-      <Label fx:id="labelDerniereMaj" layoutX="24.0" layoutY="48.0" text="Dernière mise à jour : --" style="-fx-font-size: 12px; -fx-text-fill: #666;" />
-      <GridPane layoutX="20.0" layoutY="70.0" prefHeight="200.0" prefWidth="660.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <AnchorPane style="-fx-background-color: #E8F5E9; -fx-background-radius: 10;" GridPane.columnIndex="0" GridPane.rowIndex="0">
-               <padding>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </padding>
-               <children>
-                  <Label fx:id="labelTotalUsers" layoutX="14.0" layoutY="14.0" text="0" textFill="#228B22" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="14.0" layoutY="65.0" text="Utilisateurs" textFill="#1B5E20">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane style="-fx-background-color: #E3F2FD; -fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="0">
-               <padding>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </padding>
-               <children>
-                  <Label fx:id="labelTotalTaches" layoutX="14.0" layoutY="14.0" text="0" textFill="#1976D2" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="14.0" layoutY="65.0" text="Tâches" textFill="#0D47A1">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane style="-fx-background-color: #FFF3E0; -fx-background-radius: 10;" GridPane.columnIndex="0" GridPane.rowIndex="1">
-               <padding>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </padding>
-               <children>
-                  <Label fx:id="labelTachesEnCours" layoutX="14.0" layoutY="14.0" text="0" textFill="#E65100" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="14.0" layoutY="65.0" text="Tâches en cours" textFill="#BF360C">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane style="-fx-background-color: #E8EAF6; -fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <padding>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </padding>
-               <children>
-                  <Label fx:id="labelTachesTerminees" layoutX="14.0" layoutY="14.0" text="0" textFill="#3F51B5" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="14.0" layoutY="65.0" text="Tâches terminées" textFill="#1A237E">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </children>
-      </GridPane>
-      <!-- Graphique: pourcentage de tâches par type d'utilisateur (rôle) -->
-      <PieChart fx:id="pieTachesParRole"
-                layoutX="20.0" layoutY="290.0"
-                prefHeight="150.0" prefWidth="660.0"
-                labelsVisible="true"
-                legendVisible="true" />
+<AnchorPane
+        prefHeight="720.0" prefWidth="1200.0"
+        style="-fx-background-color: #f0f4f0;"
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="Controllers.StatsDashboardController">
 
-      <Button fx:id="btnRetour" layoutX="20.0" layoutY="370.0" mnemonicParsing="false" onAction="#retour" styleClass="button-style" stylesheets="@css/style.css" text="Retour" textFill="WHITE" />
-   </children>
+    <children>
+
+        <!-- ══════════════════════════════════════════
+             TOPBAR
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="0.0" layoutY="0.0"
+              prefWidth="1200.0" prefHeight="68.0"
+              alignment="CENTER_LEFT"
+              style="-fx-background-color: white;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+            <padding><Insets top="0" left="24" right="24" bottom="0"/></padding>
+
+            <!-- Bouton retour -->
+            <Button fx:id="btnRetour"
+                    mnemonicParsing="false" onAction="#retour"
+                    prefHeight="36.0" prefWidth="110.0"
+                    text="← Retour"
+                    style="-fx-background-color: #f0f4f0;
+                           -fx-background-radius: 10;
+                           -fx-text-fill: #228B22;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: 600;
+                           -fx-cursor: hand;
+                           -fx-border-color: #228B22;
+                           -fx-border-radius: 10;
+                           -fx-border-width: 1.5;" />
+
+            <!-- Titre -->
+            <VBox alignment="CENTER_LEFT" spacing="2">
+                <HBox.margin><Insets left="20"/></HBox.margin>
+                <Label text="Tableau de bord — Statistiques"
+                       style="-fx-font-size: 19px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #1a1a1a;" />
+                <Label fx:id="labelDerniereMaj"
+                       text="Dernière mise à jour : --"
+                       style="-fx-font-size: 11.5px; -fx-text-fill: #9ca3af;" />
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Badge live -->
+            <HBox alignment="CENTER" spacing="6"
+                  style="-fx-background-color: #ecfdf5;
+                         -fx-background-radius: 20;
+                         -fx-border-color: #6ee7b7;
+                         -fx-border-radius: 20;
+                         -fx-border-width: 1;">
+                <padding><Insets top="6" left="14" right="14" bottom="6"/></padding>
+                <Pane prefWidth="8" prefHeight="8"
+                      style="-fx-background-color: #16a34a; -fx-background-radius: 4;" />
+                <Label text="En direct"
+                       style="-fx-font-size: 12px; -fx-font-weight: 600; -fx-text-fill: #16a34a;" />
+            </HBox>
+        </HBox>
+
+        <!-- ══════════════════════════════════════════
+             CARTES KPI (rangée haute)
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="24.0" layoutY="88.0"
+              spacing="18" prefWidth="1152.0">
+
+            <!-- Carte Utilisateurs -->
+            <VBox alignment="TOP_LEFT" spacing="10"
+                  prefWidth="264.0" prefHeight="120.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="20" left="22" right="22" bottom="20"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <StackPane prefWidth="40" prefHeight="40"
+                               style="-fx-background-color: #ecfdf5; -fx-background-radius: 10;">
+                        <Label text="👥" style="-fx-font-size: 18px;" />
+                    </StackPane>
+                    <Label text="Utilisateurs"
+                           style="-fx-font-size: 13px; -fx-text-fill: #6b7280;" />
+                </HBox>
+                <Label fx:id="labelTotalUsers" text="0"
+                       style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #228B22;" />
+                <HBox alignment="CENTER_LEFT" spacing="4">
+                    <Label text="▲"
+                           style="-fx-font-size: 11px; -fx-text-fill: #16a34a;" />
+                    <Label text="actifs sur la plateforme"
+                           style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+                </HBox>
+            </VBox>
+
+            <!-- Carte Total Tâches -->
+            <VBox alignment="TOP_LEFT" spacing="10"
+                  prefWidth="264.0" prefHeight="120.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="20" left="22" right="22" bottom="20"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <StackPane prefWidth="40" prefHeight="40"
+                               style="-fx-background-color: #eff6ff; -fx-background-radius: 10;">
+                        <Label text="📋" style="-fx-font-size: 18px;" />
+                    </StackPane>
+                    <Label text="Total Tâches"
+                           style="-fx-font-size: 13px; -fx-text-fill: #6b7280;" />
+                </HBox>
+                <Label fx:id="labelTotalTaches" text="0"
+                       style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #1976D2;" />
+                <HBox alignment="CENTER_LEFT" spacing="4">
+                    <Label text="▲"
+                           style="-fx-font-size: 11px; -fx-text-fill: #1976D2;" />
+                    <Label text="toutes catégories"
+                           style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+                </HBox>
+            </VBox>
+
+            <!-- Carte Tâches en cours -->
+            <VBox alignment="TOP_LEFT" spacing="10"
+                  prefWidth="264.0" prefHeight="120.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="20" left="22" right="22" bottom="20"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <StackPane prefWidth="40" prefHeight="40"
+                               style="-fx-background-color: #fff7ed; -fx-background-radius: 10;">
+                        <Label text="⏳" style="-fx-font-size: 18px;" />
+                    </StackPane>
+                    <Label text="En cours"
+                           style="-fx-font-size: 13px; -fx-text-fill: #6b7280;" />
+                </HBox>
+                <Label fx:id="labelTachesEnCours" text="0"
+                       style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #d97706;" />
+                <HBox alignment="CENTER_LEFT" spacing="4">
+                    <Label text="⚠"
+                           style="-fx-font-size: 11px; -fx-text-fill: #d97706;" />
+                    <Label text="nécessitent attention"
+                           style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+                </HBox>
+            </VBox>
+
+            <!-- Carte Tâches terminées -->
+            <VBox alignment="TOP_LEFT" spacing="10"
+                  prefWidth="264.0" prefHeight="120.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="20" left="22" right="22" bottom="20"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <StackPane prefWidth="40" prefHeight="40"
+                               style="-fx-background-color: #f3e8ff; -fx-background-radius: 10;">
+                        <Label text="✅" style="-fx-font-size: 18px;" />
+                    </StackPane>
+                    <Label text="Terminées"
+                           style="-fx-font-size: 13px; -fx-text-fill: #6b7280;" />
+                </HBox>
+                <Label fx:id="labelTachesTerminees" text="0"
+                       style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #7c3aed;" />
+                <HBox alignment="CENTER_LEFT" spacing="4">
+                    <Label text="✓"
+                           style="-fx-font-size: 11px; -fx-text-fill: #7c3aed;" />
+                    <Label text="tâches complétées"
+                           style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+                </HBox>
+            </VBox>
+
+        </HBox>
+
+        <!-- ══════════════════════════════════════════
+             RANGÉE GRAPHIQUES
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="24.0" layoutY="240.0"
+              spacing="18" prefWidth="1152.0" prefHeight="410.0">
+
+            <!-- PieChart — Tâches par rôle -->
+            <VBox spacing="0"
+                  prefWidth="530.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+
+                <!-- En-tête carte -->
+                <HBox alignment="CENTER_LEFT" spacing="10" prefHeight="54.0">
+                    <padding><Insets top="0" left="22" right="22" bottom="0"/></padding>
+                    <StackPane prefWidth="32" prefHeight="32"
+                               style="-fx-background-color: #ecfdf5; -fx-background-radius: 8;">
+                        <Label text="🥧" style="-fx-font-size: 15px;" />
+                    </StackPane>
+                    <VBox spacing="2">
+                        <Label text="Répartition par rôle"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a;" />
+                        <Label text="Tâches assignées par type d'utilisateur"
+                               style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+                    </VBox>
+                </HBox>
+
+                <!-- Séparateur -->
+                <Pane prefHeight="1.0" prefWidth="530.0"
+                      style="-fx-background-color: #f3f4f6;" />
+
+                <!-- Graphique -->
+                <PieChart fx:id="pieTachesParRole"
+                          prefHeight="340.0" prefWidth="530.0"
+                          labelsVisible="true"
+                          legendVisible="true"
+                          style="-fx-background-color: transparent;" />
+            </VBox>
+
+            <!-- BarChart — Tâches par statut -->
+            <VBox spacing="0"
+                  prefWidth="604.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+
+                <!-- En-tête carte -->
+                <HBox alignment="CENTER_LEFT" spacing="10" prefHeight="54.0">
+                    <padding><Insets top="0" left="22" right="22" bottom="0"/></padding>
+                    <StackPane prefWidth="32" prefHeight="32"
+                               style="-fx-background-color: #eff6ff; -fx-background-radius: 8;">
+                        <Label text="📊" style="-fx-font-size: 15px;" />
+                    </StackPane>
+                    <VBox spacing="2">
+                        <Label text="Tâches par statut"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a;" />
+                        <Label text="Distribution selon l'état d'avancement"
+                               style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+                    </VBox>
+
+                    <Region HBox.hgrow="ALWAYS" />
+
+                    <!-- Légende colorée -->
+                    <HBox alignment="CENTER" spacing="14">
+                        <HBox alignment="CENTER" spacing="5">
+                            <Pane prefWidth="10" prefHeight="10"
+                                  style="-fx-background-color: #228B22; -fx-background-radius: 3;" />
+                            <Label text="Terminé" style="-fx-font-size: 11px; -fx-text-fill: #228B22;" />
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="5">
+                            <Pane prefWidth="10" prefHeight="10"
+                                  style="-fx-background-color: #d97706; -fx-background-radius: 3;" />
+                            <Label text="En cours" style="-fx-font-size: 11px; -fx-text-fill: #6b7280;" />
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="5">
+                            <Pane prefWidth="10" prefHeight="10"
+                                  style="-fx-background-color: #9ca3af; -fx-background-radius: 3;" />
+                            <Label text="En attente" style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+                        </HBox>
+                    </HBox>
+                </HBox>
+
+                <!-- Séparateur -->
+                <Pane prefHeight="1.0" prefWidth="604.0"
+                      style="-fx-background-color: #f3f4f6;" />
+
+                <!-- BarChart -->
+                <BarChart fx:id="barTachesParStatut"
+                          prefHeight="340.0" prefWidth="604.0"
+                          legendVisible="false"
+                          style="-fx-background-color: transparent;">
+                    <xAxis>
+                        <CategoryAxis label="Statut" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Nombre de tâches" />
+                    </yAxis>
+                </BarChart>
+            </VBox>
+
+        </HBox>
+
+        <!-- ══════════════════════════════════════════
+             PIED DE PAGE
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="0.0" layoutY="668.0"
+              prefWidth="1200.0" prefHeight="52.0"
+              alignment="CENTER_LEFT"
+              style="-fx-background-color: white;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 6, 0, -2, 0);">
+            <padding><Insets top="0" left="24" right="24" bottom="0"/></padding>
+
+            <Label text="AgriGo  •  Tableau de bord Statistiques"
+                   style="-fx-font-size: 12px; -fx-text-fill: #9ca3af;" />
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <Button mnemonicParsing="false" onAction="#retour"
+                    prefHeight="34.0" prefWidth="110.0"
+                    text="← Retour"
+                    style="-fx-background-color: #228B22;
+                           -fx-background-radius: 10;
+                           -fx-text-fill: white;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: 600;
+                           -fx-cursor: hand;
+                           -fx-effect: dropshadow(gaussian, rgba(34,139,34,0.30), 8, 0, 0, 3);" />
+        </HBox>
+
+    </children>
 </AnchorPane>

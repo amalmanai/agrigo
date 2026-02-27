@@ -6,20 +6,23 @@ import Entites.Tache;
 import Entites.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.event.ActionEvent;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,6 +37,7 @@ public class StatsDashboardController {
     @FXML private Label labelTachesTerminees;
     @FXML private Label labelDerniereMaj;
     @FXML private PieChart pieTachesParRole;
+    @FXML private BarChart<String, Number> barTachesParStatut;
 
     private final ServiceUser serviceUser = new ServiceUser();
     private final ServiceTache serviceTache = new ServiceTache();
@@ -54,6 +58,7 @@ public class StatsDashboardController {
         }
 
         buildPieChartTachesParRole(all);
+        buildBarChartTachesParStatut(all);
     }
 
     private void buildPieChartTachesParRole(Set<Tache> allTaches) {
@@ -91,6 +96,43 @@ public class StatsDashboardController {
         }
 
         pieTachesParRole.setData(data);
+    }
+
+    private void buildBarChartTachesParStatut(Set<Tache> allTaches) {
+        if (barTachesParStatut == null) return;
+
+        barTachesParStatut.getData().clear();
+
+        if (allTaches == null || allTaches.isEmpty()) {
+            return;
+        }
+
+        int enCours = 0;
+        int termine = 0;
+        int enAttente = 0;
+
+        for (Tache t : allTaches) {
+            String status = t.getStatus_tache();
+            if (status == null) {
+                enAttente++;
+                continue;
+            }
+            String s = status.toLowerCase(Locale.ROOT);
+            if (s.contains("cours")) {
+                enCours++;
+            } else if (s.contains("termin")) {
+                termine++;
+            } else {
+                enAttente++;
+            }
+        }
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.getData().add(new XYChart.Data<>("En attente", enAttente));
+        series.getData().add(new XYChart.Data<>("En cours", enCours));
+        series.getData().add(new XYChart.Data<>("Terminé", termine));
+
+        barTachesParStatut.getData().add(series);
     }
 
     @FXML

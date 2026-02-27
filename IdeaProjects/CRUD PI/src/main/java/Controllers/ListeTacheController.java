@@ -145,13 +145,20 @@ public class ListeTacheController {
 
         // API 1 (Tâche) : Météo pour aujourd'hui
         TacheApiService.getWeatherForDate(LocalDate.now()).thenAccept(w -> Platform.runLater(() -> {
-            if (labelMeteo != null) labelMeteo.setText("Météo (aujourd'hui) : " + w.getSummary());
+            if (labelMeteo != null && w != null) {
+                labelMeteo.setText("Météo (aujourd'hui) : " + w.getSummary());
+            }
         }));
 
-        // API 2 (Tâche) : Citation aléatoire
+        // API 2 (Tâche) : Citation aléatoire (avec texte de secours si l'API ne répond pas)
         TacheApiService.getRandomQuote().thenAccept(q -> Platform.runLater(() -> {
-            if (labelCitation != null && q.content != null)
-                labelCitation.setText("« " + q.content + " » — " + (q.author != null ? q.author : ""));
+            if (labelCitation == null) return;
+            if (q != null && q.content != null && !q.content.isEmpty()) {
+                String auteur = (q.author != null && !q.author.isEmpty()) ? " — " + q.author : "";
+                labelCitation.setText("« " + q.content + " »" + auteur);
+            } else {
+                labelCitation.setText("💡 Astuce AGRIGO : notez vos tâches dès qu’elles sont décidées pour garder une trace claire des travaux au champ.");
+            }
         }));
     }
 

@@ -10,72 +10,313 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: #256317;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainGuiController">
-   <left>
-      <VBox fx:id="MainLeftSidebar" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="597.0" prefWidth="308.0" style="-fx-background-radius: 10;" translateX="0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/logoooooooooo.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="totache" mnemonicParsing="false" onAction="#totache" prefHeight="60.0" prefWidth="280.0" styleClass="button-menu" stylesheets="@css/style.css" text="Gestion Tâche">
-               <font>
-                  <Font name="Arial Bold" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
+<BorderPane
+        maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+        prefHeight="720.0" prefWidth="1200.0"
+        style="-fx-background-color: #f0f4f0;"
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="Controllers.MainGuiController">
+
+    <!-- ══════════════════════════════════════════
+         SIDEBAR GAUCHE
+    ══════════════════════════════════════════ -->
+    <left>
+        <VBox fx:id="MainLeftSidebar"
+              alignment="TOP_CENTER"
+              prefWidth="240.0"
+              maxHeight="1.7976931348623157E308"
+              style="-fx-background-color: linear-gradient(to bottom, #1a5c1a, #228B22);
+                     -fx-background-radius: 0 20 20 0;"
+              BorderPane.alignment="CENTER">
+            <padding><Insets top="32" left="18" right="18" bottom="32"/></padding>
+
+            <!-- Logo + Brand -->
+            <VBox alignment="CENTER" spacing="4">
+                <ImageView fitHeight="80.0" fitWidth="110.0"
+                           pickOnBounds="true" preserveRatio="true">
+                    <image><Image url="@assets/logoo.png" /></image>
+                </ImageView>
+                <Label text="AgriGo"
+                       style="-fx-text-fill: white;
+                              -fx-font-size: 22px;
+                              -fx-font-weight: bold;" />
+                <Label text="Espace Utilisateur"
+                       style="-fx-text-fill: rgba(255,255,255,0.50);
+                              -fx-font-size: 11px;" />
+            </VBox>
+
+            <!-- Séparateur -->
+            <Pane prefHeight="1.0" maxWidth="1.7976931348623157E308"
+                  style="-fx-background-color: rgba(255,255,255,0.15);">
+                <VBox.margin><Insets top="24" bottom="24"/></VBox.margin>
+            </Pane>
+
+            <!-- Label section -->
+            <Label text="NAVIGATION"
+                   style="-fx-text-fill: rgba(255,255,255,0.38);
+                          -fx-font-size: 10px;
+                          -fx-font-weight: bold;
+                          -fx-padding: 0 0 10 8;" />
+
+            <!-- Bouton Gestion Tâche -->
+            <Button fx:id="totache"
+                    mnemonicParsing="false" onAction="#totache"
+                    prefHeight="52.0" prefWidth="204.0"
+                    text="📋  Gestion Tâches"
+                    style="-fx-background-color: rgba(255,255,255,0.14);
+                           -fx-background-radius: 12;
+                           -fx-text-fill: white;
+                           -fx-font-size: 14px;
+                           -fx-font-weight: 500;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 0 0 0 18;
+                           -fx-cursor: hand;
+                           -fx-border-color: rgba(255,255,255,0.20);
+                           -fx-border-radius: 12;
+                           -fx-border-width: 1;">
+                <VBox.margin><Insets top="6" bottom="6"/></VBox.margin>
             </Button>
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="20.0" left="20.0" right="10.0" top="20.0" />
-         </BorderPane.margin></VBox>
-   </left>
-   <center>
-      <BorderPane fx:id="SecondBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="571.0" prefWidth="845.0" style="-fx-background-color: white; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
-         </BorderPane.margin>
-         <center>
-            <BorderPane fx:id="MainAnchorPaneBaladity" BorderPane.alignment="CENTER">
-               <center>
-                  <Label alignment="CENTER" prefHeight="108.0" prefWidth="391.0" text="Bienvenue" textAlignment="CENTER" textFill="#256317" textOverrun="CENTER_WORD_ELLIPSIS" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="55.0" />
-                     </font>
-                  </Label>
-               </center>
-               <bottom>
-                  <Label prefHeight="126.0" prefWidth="226.0" textAlignment="CENTER" BorderPane.alignment="CENTER" />
-               </bottom>
-               <right>
-                  <HBox alignment="CENTER_RIGHT" spacing="12.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <MenuButton fx:id="btnProfil" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="">
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@assets/user.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <items>
-                              <MenuItem mnemonicParsing="false" onAction="#openMesTaches" text="Mes tâches" />
-                              <MenuItem mnemonicParsing="false" onAction="#openMonProfil" text="Mon profil" />
-                           </items>
-                        </MenuButton>
-                        <Button fx:id="logoutuser" mnemonicParsing="false" onAction="#logoutuser" prefHeight="28.0" prefWidth="104.0" style="-fx-background-radius: 10;" text="Déconnexion">
-                           <font>
-                              <Font name="Arial Bold" size="14.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-               </right></BorderPane>
-         </center></BorderPane>
-   </center>
+
+            <!-- Spacer -->
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- Séparateur bas -->
+            <Pane prefHeight="1.0" maxWidth="1.7976931348623157E308"
+                  style="-fx-background-color: rgba(255,255,255,0.15);">
+                <VBox.margin><Insets bottom="14"/></VBox.margin>
+            </Pane>
+
+            <!-- Version -->
+            <Label text="AgriGo v2.0  •  Utilisateur"
+                   alignment="CENTER" maxWidth="1.7976931348623157E308"
+                   style="-fx-text-fill: rgba(255,255,255,0.28);
+                          -fx-font-size: 10.5px;" />
+        </VBox>
+    </left>
+
+    <!-- ══════════════════════════════════════════
+         ZONE CENTRALE
+    ══════════════════════════════════════════ -->
+    <center>
+        <BorderPane fx:id="SecondBorderPane"
+                    maxHeight="1.7976931348623157E308"
+                    maxWidth="1.7976931348623157E308"
+                    style="-fx-background-color: transparent;"
+                    BorderPane.alignment="CENTER">
+            <padding><Insets top="24" left="24" right="24" bottom="24"/></padding>
+
+            <!-- ── TOPBAR ── -->
+            <top>
+                <HBox alignment="CENTER_LEFT" spacing="0"
+                      prefHeight="64.0"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 16;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 3);">
+                    <padding><Insets top="0" left="24" right="16" bottom="0"/></padding>
+
+                    <!-- Titre -->
+                    <VBox alignment="CENTER_LEFT" spacing="2">
+                        <Label text="Tableau de bord"
+                               style="-fx-font-size: 18px;
+                                      -fx-font-weight: bold;
+                                      -fx-text-fill: #1a1a1a;" />
+                        <Label text="Bienvenue dans votre espace"
+                               style="-fx-font-size: 12px;
+                                      -fx-text-fill: #6b7280;" />
+                    </VBox>
+
+                    <Region HBox.hgrow="ALWAYS" />
+
+                    <!-- Cloche notification -->
+                    <StackPane alignment="TOP_RIGHT">
+                        <Button text="🔔"
+                                style="-fx-background-color: #f0f4f0;
+                                       -fx-background-radius: 10;
+                                       -fx-font-size: 16px;
+                                       -fx-cursor: hand;
+                                       -fx-pref-width: 40;
+                                       -fx-pref-height: 40;
+                                       -fx-border-color: #e5e7eb;
+                                       -fx-border-radius: 10;
+                                       -fx-border-width: 1;" />
+                        <Label text="2"
+                               style="-fx-background-color: #c0392b;
+                                      -fx-background-radius: 8;
+                                      -fx-text-fill: white;
+                                      -fx-font-size: 9px;
+                                      -fx-font-weight: bold;
+                                      -fx-padding: 1 4 1 4;"
+                               StackPane.alignment="TOP_RIGHT"
+                               translateX="4" translateY="-4" />
+                    </StackPane>
+
+                    <!-- Bouton chatbot AGRIGO -->
+                    <Button text="💬 Aide AGRIGO"
+                            onAction="#openChatbot"
+                            prefHeight="36.0"
+                            style="-fx-background-color: white;
+                                   -fx-background-radius: 10;
+                                   -fx-text-fill: #228B22;
+                                   -fx-font-size: 12px;
+                                   -fx-font-weight: 600;
+                                   -fx-cursor: hand;
+                                   -fx-border-color: #c8dcc5;
+                                   -fx-border-radius: 10;
+                                   -fx-border-width: 1;">
+                        <HBox.margin><Insets left="12"/></HBox.margin>
+                    </Button>
+
+                    <!-- Séparateur vertical -->
+                    <Pane prefWidth="1.0" prefHeight="36.0"
+                          style="-fx-background-color: #e5e7eb;">
+                        <HBox.margin><Insets left="12" right="12"/></HBox.margin>
+                    </Pane>
+
+                    <!-- Menu profil -->
+                    <MenuButton fx:id="btnProfil"
+                                mnemonicParsing="false"
+                                text="  Mon compte"
+                                style="-fx-background-color: #f0f4f0;
+                                       -fx-background-radius: 20;
+                                       -fx-text-fill: #1a1a1a;
+                                       -fx-font-size: 13px;
+                                       -fx-font-weight: 500;
+                                       -fx-cursor: hand;
+                                       -fx-border-color: #e5e7eb;
+                                       -fx-border-radius: 20;
+                                       -fx-border-width: 1;
+                                       -fx-padding: 6 14 6 8;">
+                        <graphic>
+                            <ImageView fitHeight="28.0" fitWidth="28.0"
+                                       pickOnBounds="true" preserveRatio="true">
+                                <image><Image url="@assets/user.png" /></image>
+                            </ImageView>
+                        </graphic>
+                        <items>
+                            <MenuItem mnemonicParsing="false"
+                                      onAction="#openMesTaches"
+                                      text="📋  Mes tâches" />
+                            <MenuItem mnemonicParsing="false"
+                                      onAction="#openMonProfil"
+                                      text="👤  Mon profil" />
+                        </items>
+                    </MenuButton>
+
+                    <!-- Bouton Déconnexion -->
+                    <Button fx:id="logoutuser"
+                            mnemonicParsing="false" onAction="#logoutuser"
+                            prefHeight="38.0" prefWidth="130.0"
+                            text="⎋  Déconnexion"
+                            style="-fx-background-color: #fff0f0;
+                                   -fx-background-radius: 10;
+                                   -fx-text-fill: #c0392b;
+                                   -fx-font-size: 13px;
+                                   -fx-font-weight: 600;
+                                   -fx-cursor: hand;
+                                   -fx-border-color: #fecaca;
+                                   -fx-border-radius: 10;
+                                   -fx-border-width: 1;">
+                        <HBox.margin><Insets left="10"/></HBox.margin>
+                    </Button>
+                </HBox>
+            </top>
+
+            <!-- ── CONTENU PRINCIPAL ── -->
+            <center>
+                <BorderPane fx:id="MainAnchorPaneBaladity"
+                            style="-fx-background-color: transparent;"
+                            BorderPane.alignment="CENTER">
+
+                    <!-- Cartes de statistiques utilisateur -->
+                    <top>
+                        <HBox spacing="16" alignment="CENTER_LEFT">
+                            <BorderPane.margin><Insets top="24" bottom="16"/></BorderPane.margin>
+
+                            <!-- Carte Tâches assignées -->
+                            <VBox alignment="TOP_LEFT" prefWidth="210.0" prefHeight="105.0" spacing="8"
+                                  style="-fx-background-color: white;
+                                         -fx-background-radius: 16;
+                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                                <padding><Insets top="18" left="20" right="20" bottom="18"/></padding>
+                                <Label text="📋  Tâches assignées"
+                                       style="-fx-font-size: 12px; -fx-text-fill: #6b7280;" />
+                                <Label text="12"
+                                       style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #228B22;" />
+                                <Label text="▲ +2 cette semaine"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #16a34a;" />
+                            </VBox>
+
+                            <!-- Carte Tâches complétées -->
+                            <VBox alignment="TOP_LEFT" prefWidth="210.0" prefHeight="105.0" spacing="8"
+                                  style="-fx-background-color: white;
+                                         -fx-background-radius: 16;
+                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                                <padding><Insets top="18" left="20" right="20" bottom="18"/></padding>
+                                <Label text="✅  Tâches complétées"
+                                       style="-fx-font-size: 12px; -fx-text-fill: #6b7280;" />
+                                <Label text="8"
+                                       style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #228B22;" />
+                                <Label text="67% d'achèvement"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #16a34a;" />
+                            </VBox>
+
+                            <!-- Carte En cours -->
+                            <VBox alignment="TOP_LEFT" prefWidth="210.0" prefHeight="105.0" spacing="8"
+                                  style="-fx-background-color: white;
+                                         -fx-background-radius: 16;
+                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                                <padding><Insets top="18" left="20" right="20" bottom="18"/></padding>
+                                <Label text="⏳  En cours"
+                                       style="-fx-font-size: 12px; -fx-text-fill: #6b7280;" />
+                                <Label text="4"
+                                       style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #d97706;" />
+                                <Label text="Échéance proche"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #d97706;" />
+                            </VBox>
+                        </HBox>
+                    </top>
+
+                    <!-- Zone d'accueil / contenu dynamique -->
+                    <center>
+                        <VBox alignment="CENTER" spacing="12"
+                              style="-fx-background-color: white;
+                                     -fx-background-radius: 16;
+                                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 3);">
+
+                            <Label text="🌿"
+                                   style="-fx-font-size: 52px;" />
+                            <Label text="Bienvenue sur AgriGo"
+                                   style="-fx-font-size: 26px;
+                                          -fx-font-weight: bold;
+                                          -fx-text-fill: #228B22;" />
+                            <Label text="Consultez et gérez vos tâches agricoles depuis votre espace."
+                                   style="-fx-font-size: 13.5px;
+                                          -fx-text-fill: #6b7280;" />
+
+                            <!-- Bouton d'action principal -->
+                            <Button text="📋  Accéder à mes tâches"
+                                    onAction="#totache"
+                                    prefHeight="46" prefWidth="220"
+                                    style="-fx-background-color: #228B22;
+                                           -fx-background-radius: 12;
+                                           -fx-text-fill: white;
+                                           -fx-font-size: 14px;
+                                           -fx-font-weight: 600;
+                                           -fx-cursor: hand;
+                                           -fx-effect: dropshadow(gaussian, rgba(34,139,34,0.35), 10, 0, 0, 4);">
+                                <VBox.margin><Insets top="14"/></VBox.margin>
+                            </Button>
+                        </VBox>
+                    </center>
+
+                </BorderPane>
+            </center>
+        </BorderPane>
+    </center>
+
 </BorderPane>

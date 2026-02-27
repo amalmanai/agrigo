@@ -106,4 +106,19 @@ public class MainGuiController {
             throw new RuntimeException(e);
         }
     }
+
+    /** Ouvre la fenêtre du chatbot service client AGRIGO. */
+    public void openChatbot(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Chatbot.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Assistant AGRIGO");
+            stage.show();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Impossible d’ouvrir le chatbot AGRIGO.").showAndWait();
+        }
+    }
 }

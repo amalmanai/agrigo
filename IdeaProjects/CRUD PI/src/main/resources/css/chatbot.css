@@ -1,0 +1,90 @@
+/* Styles pour le Chatbot AGRIGO */
+.root.chat-root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.chat-header {
+    -fx-background-color: white;
+    -fx-padding: 12 16 12 16;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 0 1 0;
+}
+
+.messages-panel {
+    -fx-background-color: transparent;
+    -fx-padding: 12;
+}
+
+.messages-container {
+    -fx-spacing: 10;
+    -fx-padding: 8;
+}
+
+.message {
+    -fx-max-width: 78%;
+    -fx-wrap-text: true;
+}
+
+.message.bot {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-padding: 10 12 10 12;
+    -fx-text-fill: #111827;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0, 0, 1);
+}
+
+.message.user {
+    -fx-background-color: #22c55e;
+    -fx-background-radius: 12;
+    -fx-padding: 10 12 10 12;
+    -fx-text-fill: white;
+}
+
+.hbox-user {
+    -fx-alignment: center-right;
+}
+
+.hbox-bot {
+    -fx-alignment: center-left;
+}
+
+.avatar {
+    -fx-min-width: 36px;
+    -fx-min-height: 36px;
+    -fx-max-width: 36px;
+    -fx-max-height: 36px;
+    -fx-background-radius: 18px;
+    -fx-alignment: center;
+    -fx-font-size: 16px;
+}
+
+.avatar.bot {
+    -fx-background-color: #efefef;
+    -fx-text-fill: #166534;
+}
+
+.avatar.user {
+    -fx-background-color: #14532d;
+    -fx-text-fill: white;
+}
+
+.send-button {
+    -fx-background-color: #228B22;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+}
+
+.send-button:hover {
+    -fx-opacity: 0.9;
+}
+
+.input-area {
+    -fx-font-size: 12px;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #d1d5db;
+    -fx-text-fill: #111827;
+}
+

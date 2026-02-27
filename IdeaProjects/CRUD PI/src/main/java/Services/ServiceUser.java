@@ -12,26 +12,26 @@ public class ServiceUser {
 
     Connection cnx = MyBD.getInstance().getConn();
 
-
     // ================== AJOUT ==================
     public void ajouter(User user) {
-        String req = "INSERT INTO `user`(`nom_user`, `prenom_user`, `email_user`, `role_user`, `num_user`, `password`, `adresse_user`) VALUES (?,?,?,?,?,?,?)";
+        String req = "INSERT INTO `user`(`nom_user`, `prenom_user`, `email_user`, `role_user`, `num_user`, `password`, `adresse_user`, `photo_path`) VALUES (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, user.getNom_user());
             ps.setString(2, user.getPrenom_user());
 
             if (!isValidEmail(user.getEmail_user())) {
-                throw new IllegalArgumentException("Invalid email address");
+                throw new IllegalArgumentException("Adresse email invalide !");
             }
             ps.setString(3, user.getEmail_user());
             ps.setString(4, user.getRole_user());
             ps.setInt(5, user.getNum_user());
             ps.setString(6, user.getPassword());
             ps.setString(7, user.getAdresse_user());
+            ps.setString(8, user.getPhotoPath());
 
             ps.executeUpdate();
-            System.out.println("User added!");
+            System.out.println("User ajouté !");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -47,16 +47,8 @@ public class ServiceUser {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return new User(
-                        rs.getInt("id_user"),
-                        rs.getString("nom_user"),
-                        rs.getString("prenom_user"),
-                        rs.getString("email_user"),
-                        rs.getString("role_user"),
-                        rs.getInt("num_user"),
-                        rs.getString("password"),
-                        rs.getString("adresse_user")
-                );
+                User u = mapResultSetToUser(rs);
+                return u;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -64,34 +56,81 @@ public class ServiceUser {
         return null;
     }
 
+    /**
+     * Authentifie un utilisateur par une image (chemin local vers une photo).
+     * Le modèle LBPH doit être préalablement entraîné (utiliser FaceRecognitionService.trainFromDisk).
+     * Le label retourné par le modèle correspond à l'id_user stocké dans les dossiers d'entraînement.
+     * Une confidence plus petite signifie une meilleure correspondance (LBPH). On considère que
+     * la prédiction est valide si confidence <= maxConfidence.
+     *
+     * @param imagePath chemin vers l'image à tester
+     * @param maxConfidence seuil de confiance (valeur maximale acceptée, ex: 60.0)
+     * @return User reconnu si confiance suffisante, sinon null
+     */
+    public User authenticateByPhoto(String imagePath, double maxConfidence) {
+        try {
+            FaceRecognitionService fr = new FaceRecognitionService();
+            FaceRecognitionService.PredictionResult res = fr.predictFromImagePath(imagePath);
+            if (res == null) {
+                System.out.println("Aucune prédiction possible (pas de visage ou erreur)");
+                return null;
+            }
+            System.out.println("Prediction: label=" + res.label + ", confidence=" + res.confidence);
+            if (res.confidence <= maxConfidence) {
+                // label correspond à id_user si vous avez entraîné avec des dossiers nommés par id
+                return getOneByID(res.label);
+            } else {
+                System.out.println("Confiance trop faible : " + res.confidence + " > " + maxConfidence);
+                return null;
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur lors de l'authentification par photo: " + e.getMessage());
+            return null;
+        }
+    }
+
+    /** Surcharge avec un seuil par défaut de 60.0 */
+    public User authenticateByPhoto(String imagePath) {
+        return authenticateByPhoto(imagePath, 60.0);
+    }
+
     // ================== UPDATE ==================
     public void modifier(User user) {
-        String req = "UPDATE `user` SET `nom_user`=?, `prenom_user`=?, `email_user`=?, `role_user`=?, `num_user`=?, `password`=?, `adresse_user`=? WHERE `id_user`=?";
+        String req = "UPDATE `user` SET `nom_user`=?, `prenom_user`=?, `email_user`=?, `role_user`=?, `num_user`=?, `password`=?, `adresse_user`=?, `photo_path`=? WHERE `id_user`=?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, user.getNom_user());
             ps.setString(2, user.getPrenom_user());
 
             if (!isValidEmail(user.getEmail_user())) {
-                throw new IllegalArgumentException("Invalid email address");
+                throw new IllegalArgumentException("Adresse email invalide !");
             }
             ps.setString(3, user.getEmail_user());
             ps.setString(4, user.getRole_user());
             ps.setInt(5, user.getNum_user());
             ps.setString(6, user.getPassword());
             ps.setString(7, user.getAdresse_user());
-            ps.setInt(8, user.getId_user());
+            ps.setString(8, user.getPhotoPath());
+            ps.setInt(9, user.getId_user());
 
             ps.executeUpdate();
-            System.out.println("User updated!");
+            System.out.println("User mis à jour !");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    // ================== RESET PASSWORD (by email) ==================
+    // ================== RESET PASSWORD ==================
     public boolean updatePasswordByEmail(String email, String newPassword) {
         User user = getOneByEmail(email);
+        if (user == null) return false;
+        user.setPassword(newPassword);
+        modifier(user);
+        return true;
+    }
+
+    public boolean updatePasswordByPhone(String phone, String newPassword) {
+        User user = getOneByPhone(phone);
         if (user == null) return false;
         user.setPassword(newPassword);
         modifier(user);
@@ -105,7 +144,7 @@ public class ServiceUser {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
             ps.executeUpdate();
-            System.out.println("User deleted!");
+            System.out.println("User supprimé !");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -121,17 +160,7 @@ public class ServiceUser {
             ResultSet rs = st.executeQuery(req);
 
             while (rs.next()) {
-                User u = new User(
-                        rs.getInt("id_user"),
-                        rs.getString("nom_user"),
-                        rs.getString("prenom_user"),
-                        rs.getString("email_user"),
-                        rs.getString("role_user"),
-                        rs.getInt("num_user"),
-                        rs.getString("password"),
-                        rs.getString("adresse_user")
-                );
-                users.add(u);
+                users.add(mapResultSetToUser(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -146,19 +175,7 @@ public class ServiceUser {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return new User(
-                        rs.getInt("id_user"),
-                        rs.getString("nom_user"),
-                        rs.getString("prenom_user"),
-                        rs.getString("email_user"),
-                        rs.getString("role_user"),
-                        rs.getInt("num_user"),
-                        rs.getString("password"),
-                        rs.getString("adresse_user")
-                );
-            }
+            if (rs.next()) return mapResultSetToUser(rs);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -172,21 +189,27 @@ public class ServiceUser {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return new User(
-                        rs.getInt("id_user"),
-                        rs.getString("nom_user"),
-                        rs.getString("prenom_user"),
-                        rs.getString("email_user"),
-                        rs.getString("role_user"),
-                        rs.getInt("num_user"),
-                        rs.getString("password"),
-                        rs.getString("adresse_user")
-                );
-            }
+            if (rs.next()) return mapResultSetToUser(rs);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    // ================== GET BY PHONE ==================
+    public User getOneByPhone(String phone) {
+        if (phone == null) return null;
+        String digits = phone.replaceAll("\\D", "");
+        if (digits.isEmpty()) return null;
+        try {
+            int num = Integer.parseInt(digits);
+            String req = "SELECT * FROM `user` WHERE `num_user`=?";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, num);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return mapResultSetToUser(rs);
+        } catch (SQLException | NumberFormatException e) {
+            return null;
         }
         return null;
     }
@@ -200,16 +223,7 @@ public class ServiceUser {
             ps.setString(1, role);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                users.add(new User(
-                        rs.getInt("id_user"),
-                        rs.getString("nom_user"),
-                        rs.getString("prenom_user"),
-                        rs.getString("email_user"),
-                        rs.getString("role_user"),
-                        rs.getInt("num_user"),
-                        rs.getString("password"),
-                        rs.getString("adresse_user")
-                ));
+                users.add(mapResultSetToUser(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -219,7 +233,26 @@ public class ServiceUser {
 
     // ================== EMAIL VALIDATION ==================
     private boolean isValidEmail(String email) {
-        String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        if (email == null) return false;
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return Pattern.compile(regex).matcher(email).matches();
+    }
+
+    // ================== UTILITY ==================
+    private User mapResultSetToUser(ResultSet rs) throws SQLException {
+        User u = new User(
+                rs.getInt("id_user"),
+                rs.getString("nom_user"),
+                rs.getString("prenom_user"),
+                rs.getString("email_user"),
+                rs.getString("role_user"),
+                rs.getInt("num_user"),
+                rs.getString("password"),
+                rs.getString("adresse_user")
+        );
+        try {
+            u.setPhotoPath(rs.getString("photo_path"));
+        } catch (SQLException ignored) {}
+        return u;
     }
 }

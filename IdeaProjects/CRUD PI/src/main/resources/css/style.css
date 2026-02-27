@@ -7,6 +7,53 @@
     -fx-font-family: "Segoe UI", "SF Pro Display", sans-serif;
     -fx-font-size: 13px;
 }
+/* ── BarChart couleurs par statut ── */
+
+/* Terminé → Vert */
+.bar-chart .default-color0.chart-bar {
+    -fx-bar-fill: #228B22;
+}
+
+/* En cours → Orange */
+.bar-chart .default-color1.chart-bar {
+    -fx-bar-fill: #d97706;
+}
+
+/* En attente → Gris */
+.bar-chart .default-color2.chart-bar {
+    -fx-bar-fill: #9ca3af;
+}
+
+/* Légende correspondante */
+.bar-chart .default-color0.chart-legend-item-symbol {
+    -fx-background-color: #228B22;
+}
+.bar-chart .default-color1.chart-legend-item-symbol {
+    -fx-background-color: #d97706;
+}
+.bar-chart .default-color2.chart-legend-item-symbol {
+    -fx-background-color: #9ca3af;
+}
+
+/* Style général du chart */
+.bar-chart .chart-plot-background {
+    -fx-background-color: transparent;
+}
+.bar-chart .chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
+.bar-chart .chart-horizontal-grid-lines {
+    -fx-stroke: #f3f4f6;
+    -fx-stroke-width: 1;
+}
+.bar-chart .axis-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: #6b7280;
+}
+.bar-chart .axis {
+    -fx-tick-label-fill: #6b7280;
+    -fx-font-size: 11px;
+}
 
 /* ===== SIDEBAR NAV BUTTONS ===== */
 .nav-btn {
@@ -416,5 +463,170 @@
     -fx-text-fill: #22c55e;
     -fx-background-radius: 7;
     -fx-font-weight: 600;
+}
+
+/* ============================================================
+   AGRI·GO — BRIDGE CLASSES FOR EXISTING FXML
+   (pour rendre l'UI plus professionnelle sans gros refactor)
+   ============================================================ */
+
+/* Boutons de menu latéral existants */
+.button-menu {
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-padding: 10 18;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+}
+
+.button-menu:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: #ffffff;
+}
+
+.button-menu:focused {
+    -fx-background-color: rgba(34, 197, 94, 0.12);
+    -fx-border-color: rgba(34, 197, 94, 0.35);
+    -fx-border-width: 1;
+}
+
+/* Boutons d'action principaux (Connexion, Déconnexion, Export PDF, etc.) */
+.button-style,
+#logout,
+#logoutuser,
+#btnExportPdf,
+#BtnGestionTache,
+#todashboard,
+#totache,
+#btnRafraichir,
+#btnRafraichirTache,
+#ajoutertache,
+#voirtaches,
+#modifiertache {
+    -fx-background-color: #22c55e;
+    -fx-background-radius: 9;
+    -fx-text-fill: #0a1628;
+    -fx-font-weight: 700;
+    -fx-font-size: 13px;
+    -fx-padding: 9 18;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.25), 8, 0, 0, 3);
+}
+
+.button-style:hover,
+#logout:hover,
+#logoutuser:hover,
+#btnExportPdf:hover,
+#BtnGestionTache:hover,
+#todashboard:hover,
+#totache:hover,
+#btnRafraichir:hover,
+#btnRafraichirTache:hover,
+#ajoutertache:hover,
+#voirtaches:hover,
+#modifiertache:hover {
+    -fx-background-color: #16a34a;
+}
+
+/* Champs de formulaire clairs pour les écrans fond blanc */
+.light-form-field {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 6;
+    -fx-border-color: #D1D5DB;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+    -fx-padding: 8 10;
+    -fx-text-fill: #111827;
+    -fx-prompt-text-fill: #9CA3AF;
+    -fx-font-size: 13px;
+}
+
+.light-form-field:focused {
+    -fx-border-color: #22c55e;
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.2), 6, 0, 0, 0);
+}
+
+/* Tables plus modernes pour listes utilisateurs / tâches */
+.modern-table {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(0, 0, 0, 0.06);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 0;
+}
+
+.modern-table .column-header-background {
+    -fx-background-color: #F3F4F6;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.modern-table .column-header,
+.modern-table .filler {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+    -fx-border-color: transparent transparent #E5E7EB transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.modern-table .column-header .label {
+    -fx-text-fill: #6B7280;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-letter-spacing: 0.5px;
+}
+
+.modern-table .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-cell-size: 40px;
+    -fx-border-color: transparent transparent #F3F4F6 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-cursor: hand;
+}
+
+.modern-table .table-row-cell:odd {
+    -fx-background-color: #F9FAFB;
+}
+
+.modern-table .table-row-cell:hover {
+    -fx-background-color: rgba(34, 197, 94, 0.05);
+}
+
+.modern-table .table-row-cell:selected {
+    -fx-background-color: rgba(34, 197, 94, 0.12);
+    -fx-border-color: transparent transparent rgba(34, 197, 94, 0.2) transparent;
+}
+
+.modern-table .table-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #111827;
+    -fx-font-size: 13px;
+    -fx-padding: 8 12;
+    -fx-border-color: transparent;
+}
+
+.modern-table .table-row-cell:selected .table-cell {
+    -fx-text-fill: #111827;
+}
+
+/* Petits boutons icône (ex: refresh captcha) */
+.btn-icon {
+    -fx-background-color: #F3F4F6;
+    -fx-background-radius: 6;
+    -fx-border-color: #D1D5DB;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+    -fx-text-fill: #111827;
+    -fx-font-weight: 700;
+    -fx-cursor: hand;
+}
+
+.btn-icon:hover {
+    -fx-background-color: #E5E7EB;
+    -fx-border-color: #9CA3AF;
 }
 

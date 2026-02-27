@@ -1,39 +1,324 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="480.0" prefWidth="720.0"
-            style="-fx-background-color: #FFFFFF;"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Controllers.ShowUserController">
-   <children>
-      <Button fx:id="btnRetour" layoutX="10.0" layoutY="8.0" mnemonicParsing="false" onAction="#retourAccueil" prefHeight="32.0" prefWidth="90.0" style="-fx-background-color: transparent; -fx-cursor: hand; -fx-border-color: #228B22; -fx-border-radius: 5; -fx-text-fill: #228B22;" text="← Retour" />
-      <Label layoutX="110.0" layoutY="12.0" text="Gestion des utilisateurs" textFill="#228B22">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="fieldRechercheUser" layoutX="20.0" layoutY="42.0" prefHeight="32.0" prefWidth="250.0" promptText="Rechercher par nom, email, rôle..." />
-      <Button fx:id="btnRafraichir" layoutX="280.0" layoutY="42.0" mnemonicParsing="false" onAction="#rafraichir" text="Rafraîchir" />
-      <TableView fx:id="tableViewUserRegister" layoutX="20.0" layoutY="82.0" prefHeight="318.0" prefWidth="680.0" />
-      <Label fx:id="labelAucunUser" layoutX="20.0" layoutY="200.0" text="Aucun utilisateur. Cliquez sur « Importer utilisateur démo » pour ajouter des données." textFill="#999" visible="false" wrapText="true">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnExportPdf" layoutX="20.0" layoutY="415.0" mnemonicParsing="false" onAction="#exportPdf" text="Exporter la sélection en PDF">
-         <tooltip>
-            <Tooltip text="Sélectionnez un ou plusieurs utilisateurs puis cliquez pour exporter" />
-         </tooltip>
-      </Button>
-      <Button fx:id="btnImportDemo" layoutX="160.0" layoutY="415.0" mnemonicParsing="false" onAction="#importDemoUser" text="Importer utilisateur démo (API)" />
-      <Button fx:id="logoutshow" layoutX="620.0" layoutY="10.0" mnemonicParsing="false" onAction="#logoutshow" text="Déconnexion" />
-   </children>
+<AnchorPane
+        prefHeight="660.0" prefWidth="1000.0"
+        style="-fx-background-color: #f0f4f0;"
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="Controllers.ShowUserController">
+
+    <children>
+
+        <!-- ══════════════════════════════════════════
+             TOPBAR
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="0.0" layoutY="0.0"
+              prefWidth="1000.0" prefHeight="64.0"
+              alignment="CENTER_LEFT"
+              style="-fx-background-color: white;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+            <padding><Insets top="0" left="24" right="24" bottom="0"/></padding>
+
+            <!-- Bouton retour -->
+            <Button fx:id="btnRetour"
+                    mnemonicParsing="false" onAction="#retourAccueil"
+                    prefHeight="36.0" prefWidth="110.0"
+                    text="← Retour"
+                    style="-fx-background-color: #f0f4f0;
+                           -fx-background-radius: 10;
+                           -fx-text-fill: #228B22;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: 600;
+                           -fx-cursor: hand;
+                           -fx-border-color: #228B22;
+                           -fx-border-radius: 10;
+                           -fx-border-width: 1.5;" />
+
+            <!-- Titre + sous-titre -->
+            <VBox alignment="CENTER_LEFT" spacing="2">
+                <HBox.margin><Insets left="20"/></HBox.margin>
+                <Label text="Gestion des Utilisateurs"
+                       style="-fx-font-size: 18px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #1a1a1a;" />
+                <Label text="Consultez, exportez et gérez tous les comptes"
+                       style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Badge live -->
+            <HBox alignment="CENTER" spacing="6"
+                  style="-fx-background-color: #ecfdf5;
+                         -fx-background-radius: 20;
+                         -fx-border-color: #6ee7b7;
+                         -fx-border-radius: 20;
+                         -fx-border-width: 1;">
+                <padding><Insets top="6" left="14" right="14" bottom="6"/></padding>
+                <Pane prefWidth="8" prefHeight="8"
+                      style="-fx-background-color: #16a34a;
+                             -fx-background-radius: 4;" />
+                <Label text="En direct"
+                       style="-fx-font-size: 12px;
+                              -fx-font-weight: 600;
+                              -fx-text-fill: #16a34a;" />
+            </HBox>
+
+            <!-- Séparateur vertical -->
+            <Pane prefWidth="1.0" prefHeight="36.0"
+                  style="-fx-background-color: #e5e7eb;">
+                <HBox.margin><Insets left="16" right="16"/></HBox.margin>
+            </Pane>
+
+            <!-- Bouton déconnexion -->
+            <Button fx:id="logoutshow"
+                    mnemonicParsing="false" onAction="#logoutshow"
+                    prefHeight="36.0" prefWidth="120.0"
+                    text="⎋  Déconnexion"
+                    style="-fx-background-color: #fff0f0;
+                           -fx-background-radius: 10;
+                           -fx-text-fill: #c0392b;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: 600;
+                           -fx-cursor: hand;
+                           -fx-border-color: #fecaca;
+                           -fx-border-radius: 10;
+                           -fx-border-width: 1;" />
+        </HBox>
+
+        <!-- ══════════════════════════════════════════
+             CARTES KPI
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="24.0" layoutY="84.0"
+              spacing="16" prefWidth="952.0">
+
+            <!-- Total utilisateurs -->
+            <VBox alignment="TOP_LEFT" spacing="8"
+                  prefWidth="222.0" prefHeight="100.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="16" left="18" right="18" bottom="16"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <StackPane prefWidth="36" prefHeight="36"
+                               style="-fx-background-color: #ecfdf5;
+                                      -fx-background-radius: 10;">
+                        <Label text="👥" style="-fx-font-size: 16px;" />
+                    </StackPane>
+                    <Label text="Total utilisateurs"
+                           style="-fx-font-size: 12px; -fx-text-fill: #6b7280;" />
+                </HBox>
+                <Label fx:id="labelTotalUsers" text="—"
+                       style="-fx-font-size: 28px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #228B22;" />
+            </VBox>
+
+            <!-- Admins -->
+            <VBox alignment="TOP_LEFT" spacing="8"
+                  prefWidth="222.0" prefHeight="100.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="16" left="18" right="18" bottom="16"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <StackPane prefWidth="36" prefHeight="36"
+                               style="-fx-background-color: #eff6ff;
+                                      -fx-background-radius: 10;">
+                        <Label text="🛡" style="-fx-font-size: 16px;" />
+                    </StackPane>
+                    <Label text="Administrateurs"
+                           style="-fx-font-size: 12px; -fx-text-fill: #6b7280;" />
+                </HBox>
+                <Label fx:id="labelTotalAdmins" text="—"
+                       style="-fx-font-size: 28px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #1976D2;" />
+            </VBox>
+
+            <!-- Ouvriers -->
+            <VBox alignment="TOP_LEFT" spacing="8"
+                  prefWidth="222.0" prefHeight="100.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="16" left="18" right="18" bottom="16"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <StackPane prefWidth="36" prefHeight="36"
+                               style="-fx-background-color: #fff7ed;
+                                      -fx-background-radius: 10;">
+                        <Label text="👷" style="-fx-font-size: 16px;" />
+                    </StackPane>
+                    <Label text="Ouvriers agricoles"
+                           style="-fx-font-size: 12px; -fx-text-fill: #6b7280;" />
+                </HBox>
+                <Label fx:id="labelTotalOuvriers" text="—"
+                       style="-fx-font-size: 28px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #d97706;" />
+            </VBox>
+
+            <!-- Sélectionnés -->
+            <VBox alignment="TOP_LEFT" spacing="8"
+                  prefWidth="222.0" prefHeight="100.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="16" left="18" right="18" bottom="16"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <StackPane prefWidth="36" prefHeight="36"
+                               style="-fx-background-color: #f3e8ff;
+                                      -fx-background-radius: 10;">
+                        <Label text="☑️" style="-fx-font-size: 16px;" />
+                    </StackPane>
+                    <Label text="Sélectionnés"
+                           style="-fx-font-size: 12px; -fx-text-fill: #6b7280;" />
+                </HBox>
+                <Label fx:id="labelSelectionnes" text="0"
+                       style="-fx-font-size: 28px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #7c3aed;" />
+            </VBox>
+
+        </HBox>
+
+        <!-- ══════════════════════════════════════════
+             BARRE RECHERCHE + ACTIONS
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="24.0" layoutY="208.0"
+              spacing="12" alignment="CENTER_LEFT"
+              prefWidth="952.0">
+
+            <!-- Champ recherche -->
+            <StackPane prefWidth="320.0" prefHeight="42.0">
+                <Label text="🔍"
+                       style="-fx-font-size: 14px; -fx-text-fill: #9ca3af;"
+                       StackPane.alignment="CENTER_LEFT">
+                    <padding><Insets left="14"/></padding>
+                </Label>
+                <TextField fx:id="fieldRechercheUser"
+                           promptText="Rechercher par nom, email, rôle..."
+                           style="-fx-background-color: white;
+                                  -fx-background-radius: 12;
+                                  -fx-border-color: #d1d5db;
+                                  -fx-border-radius: 12;
+                                  -fx-border-width: 1.5;
+                                  -fx-padding: 0 14 0 38;
+                                  -fx-font-size: 13px;
+                                  -fx-pref-height: 42;" />
+            </StackPane>
+
+            <!-- Rafraîchir -->
+            <Button fx:id="btnRafraichir"
+                    mnemonicParsing="false" onAction="#rafraichir"
+                    prefHeight="42.0" prefWidth="130.0"
+                    text="↻  Rafraîchir"
+                    style="-fx-background-color: white;
+                           -fx-background-radius: 12;
+                           -fx-text-fill: #228B22;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: 500;
+                           -fx-cursor: hand;
+                           -fx-border-color: #228B22;
+                           -fx-border-radius: 12;
+                           -fx-border-width: 1.5;" />
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Import API -->
+            <Button fx:id="btnImportDemo"
+                    mnemonicParsing="false" onAction="#importDemoUser"
+                    prefHeight="42.0" prefWidth="200.0"
+                    text="🌐  Importer via API"
+                    style="-fx-background-color: white;
+                           -fx-background-radius: 12;
+                           -fx-text-fill: #1976D2;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: 500;
+                           -fx-cursor: hand;
+                           -fx-border-color: #1976D2;
+                           -fx-border-radius: 12;
+                           -fx-border-width: 1.5;" />
+
+            <!-- Export PDF -->
+            <Button fx:id="btnExportPdf"
+                    mnemonicParsing="false" onAction="#exportPdf"
+                    prefHeight="42.0" prefWidth="200.0"
+                    text="📄  Exporter en PDF"
+                    style="-fx-background-color: #228B22;
+                           -fx-background-radius: 12;
+                           -fx-text-fill: white;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: 600;
+                           -fx-cursor: hand;
+                           -fx-effect: dropshadow(gaussian, rgba(34,139,34,0.32), 10, 0, 0, 3);">
+                <tooltip>
+                    <Tooltip text="Sélectionnez un ou plusieurs utilisateurs puis cliquez pour exporter" />
+                </tooltip>
+            </Button>
+        </HBox>
+
+        <!-- ══════════════════════════════════════════
+             TABLEAU
+        ══════════════════════════════════════════ -->
+        <VBox layoutX="24.0" layoutY="266.0"
+              prefWidth="952.0" prefHeight="338.0"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 16;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+
+            <!-- En-tête tableau -->
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0"
+                  style="-fx-background-color: #f8faf8;
+                         -fx-background-radius: 16 16 0 0;
+                         -fx-border-color: transparent transparent #f3f4f6 transparent;
+                         -fx-border-width: 0 0 1 0;">
+                <padding><Insets top="0" left="22" right="22" bottom="0"/></padding>
+                <Label text="👥  Liste des utilisateurs"
+                       style="-fx-font-size: 13px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #1a1a1a;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label text="Cliquez sur une ligne pour sélectionner  •  Double-clic pour modifier"
+                       style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+            </HBox>
+
+            <!-- TableView -->
+            <TableView fx:id="tableViewUserRegister"
+                       prefHeight="252.0" prefWidth="952.0"
+                       style="-fx-background-color: transparent;
+                              -fx-background-radius: 0 0 16 16;
+                              -fx-border-color: transparent;"
+                       VBox.vgrow="ALWAYS" />
+
+            <!-- Message vide -->
+            <Label fx:id="labelAucunUser"
+                   text="Aucun utilisateur trouvé. Cliquez sur « Importer via API » pour ajouter des données de démonstration."
+                   style="-fx-font-size: 13px; -fx-text-fill: #9ca3af;"
+                   wrapText="true" prefWidth="700"
+                   visible="false" />
+        </VBox>
+
+        <!-- ══════════════════════════════════════════
+             PIED DE PAGE
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="0.0" layoutY="616.0"
+              prefWidth="1000.0" prefHeight="44.0"
+              alignment="CENTER_LEFT"
+              style="-fx-background-color: white;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 6, 0, -2, 0);">
+            <padding><Insets top="0" left="24" right="24" bottom="0"/></padding>
+            <Label text="AgriGo  •  Gestion des Utilisateurs"
+                   style="-fx-font-size: 11.5px; -fx-text-fill: #9ca3af;" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="Sélectionnez des utilisateurs avant d'exporter"
+                   style="-fx-font-size: 11px; -fx-text-fill: #d97706;" />
+        </HBox>
+
+    </children>
 </AnchorPane>

@@ -1,37 +1,282 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="500.0" prefWidth="720.0"
-            style="-fx-background-color: #FFFFFF;"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Controllers.ListeTacheController">
-   <children>
-      <Button fx:id="btnRetour" layoutX="10.0" layoutY="8.0" mnemonicParsing="false" onAction="#retourAccueil" prefHeight="32.0" prefWidth="90.0" style="-fx-background-color: transparent; -fx-cursor: hand; -fx-border-color: #228B22; -fx-border-radius: 5; -fx-text-fill: #228B22;" text="← Retour" />
-      <Label layoutX="110.0" layoutY="12.0" text="Gestion des tâches" textFill="#228B22">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="labelMeteo" layoutX="20.0" layoutY="38.0" prefWidth="340.0" wrapText="true" style="-fx-font-size: 12px; -fx-text-fill: #1976D2;" />
-      <Label fx:id="labelCitation" layoutX="380.0" layoutY="38.0" prefWidth="320.0" wrapText="true" style="-fx-font-size: 11px; -fx-font-style: italic; -fx-text-fill: #555;" />
-      <TextField fx:id="fieldRechercheTache" layoutX="20.0" layoutY="58.0" prefHeight="28.0" prefWidth="220.0" promptText="Rechercher par titre..." />
-      <ComboBox fx:id="comboFiltreStatut" layoutX="250.0" layoutY="58.0" prefHeight="28.0" prefWidth="150.0" promptText="Tous les statuts" />
-      <Button fx:id="btnRafraichirTache" layoutX="410.0" layoutY="58.0" mnemonicParsing="false" onAction="#rafraichir" text="Rafraîchir" />
-      <TableView fx:id="ListTache" layoutX="20.0" layoutY="92.0" prefHeight="298.0" prefWidth="680.0" />
-      <Label fx:id="labelAucuneTache" layoutX="20.0" layoutY="220.0" text="Aucune tâche. Cliquez sur « Ajouter tâche » pour en créer une." textFill="#999" visible="false" wrapText="true">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Button layoutX="20.0" layoutY="400.0" mnemonicParsing="false" onAction="#Ajouter_Tache" text="Ajouter tâche" />
-      <Button fx:id="btnExportPdf" layoutX="160.0" layoutY="400.0" mnemonicParsing="false" onAction="#exportPdf" text="Exporter en PDF" />
-   </children>
+<AnchorPane
+        prefHeight="660.0" prefWidth="980.0"
+        style="-fx-background-color: #f0f4f0;"
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="Controllers.ListeTacheController">
+
+    <children>
+
+        <!-- ══════════════════════════════════════════
+             TOPBAR
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="0.0" layoutY="0.0"
+              prefWidth="980.0" prefHeight="64.0"
+              alignment="CENTER_LEFT"
+              style="-fx-background-color: white;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+            <padding><Insets top="0" left="24" right="24" bottom="0"/></padding>
+
+            <Button fx:id="btnRetour"
+                    mnemonicParsing="false" onAction="#retourAccueil"
+                    prefHeight="36.0" prefWidth="110.0"
+                    text="← Retour"
+                    style="-fx-background-color: #f0f4f0;
+                           -fx-background-radius: 10;
+                           -fx-text-fill: #228B22;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: 600;
+                           -fx-cursor: hand;
+                           -fx-border-color: #228B22;
+                           -fx-border-radius: 10;
+                           -fx-border-width: 1.5;" />
+
+            <VBox alignment="CENTER_LEFT" spacing="2">
+                <HBox.margin><Insets left="20"/></HBox.margin>
+                <Label text="Gestion des Tâches"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a;" />
+                <Label text="Planifiez et suivez toutes vos tâches agricoles"
+                       style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Météo badge -->
+            <StackPane style="-fx-background-color: #eff6ff;
+                              -fx-background-radius: 20;
+                              -fx-border-color: #bfdbfe;
+                              -fx-border-radius: 20;
+                              -fx-border-width: 1;">
+                <padding><Insets top="6" left="14" right="14" bottom="6"/></padding>
+                <Label fx:id="labelMeteo"
+                       text="🌤  Météo"
+                       prefWidth="220"
+                       style="-fx-font-size: 12px; -fx-font-weight: 500; -fx-text-fill: #1976D2;" />
+            </StackPane>
+        </HBox>
+
+        <!-- ══════════════════════════════════════════
+             CARTES KPI
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="24.0" layoutY="84.0"
+              spacing="16" prefWidth="932.0">
+
+            <!-- Total tâches -->
+            <VBox alignment="TOP_LEFT" spacing="8"
+                  prefWidth="214.0" prefHeight="95.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="16" left="18" right="18" bottom="16"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <StackPane prefWidth="34" prefHeight="34"
+                               style="-fx-background-color: #ecfdf5; -fx-background-radius: 10;">
+                        <Label text="📋" style="-fx-font-size: 15px;" />
+                    </StackPane>
+                    <Label text="Total tâches"
+                           style="-fx-font-size: 12px; -fx-text-fill: #6b7280;" />
+                </HBox>
+                <Label fx:id="labelTotalTaches" text="—"
+                       style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #228B22;" />
+            </VBox>
+
+            <!-- En cours -->
+            <VBox alignment="TOP_LEFT" spacing="8"
+                  prefWidth="214.0" prefHeight="95.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="16" left="18" right="18" bottom="16"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <StackPane prefWidth="34" prefHeight="34"
+                               style="-fx-background-color: #fff7ed; -fx-background-radius: 10;">
+                        <Label text="⏳" style="-fx-font-size: 15px;" />
+                    </StackPane>
+                    <Label text="En cours"
+                           style="-fx-font-size: 12px; -fx-text-fill: #6b7280;" />
+                </HBox>
+                <Label fx:id="labelEnCours" text="—"
+                       style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #d97706;" />
+            </VBox>
+
+            <!-- Terminées -->
+            <VBox alignment="TOP_LEFT" spacing="8"
+                  prefWidth="214.0" prefHeight="95.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="16" left="18" right="18" bottom="16"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <StackPane prefWidth="34" prefHeight="34"
+                               style="-fx-background-color: #f0fdf4; -fx-background-radius: 10;">
+                        <Label text="✅" style="-fx-font-size: 15px;" />
+                    </StackPane>
+                    <Label text="Terminées"
+                           style="-fx-font-size: 12px; -fx-text-fill: #6b7280;" />
+                </HBox>
+                <Label fx:id="labelTerminees" text="—"
+                       style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #16a34a;" />
+            </VBox>
+
+            <!-- Citation du jour -->
+            <VBox alignment="TOP_LEFT" spacing="6"
+                  prefWidth="238.0" prefHeight="95.0"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                <padding><Insets top="16" left="18" right="18" bottom="16"/></padding>
+                <Label text="💬  Citation du jour"
+                       style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #6b7280;" />
+                <Label fx:id="labelCitation"
+                       wrapText="true" prefWidth="202"
+                       style="-fx-font-size: 11px; -fx-font-style: italic; -fx-text-fill: #374151;" />
+            </VBox>
+
+        </HBox>
+
+        <!-- ══════════════════════════════════════════
+             BARRE RECHERCHE + FILTRES + ACTIONS
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="24.0" layoutY="203.0"
+              spacing="12" alignment="CENTER_LEFT"
+              prefWidth="932.0">
+
+            <!-- Recherche -->
+            <StackPane prefWidth="280.0" prefHeight="42.0">
+                <Label text="🔍"
+                       style="-fx-font-size: 14px; -fx-text-fill: #9ca3af;"
+                       StackPane.alignment="CENTER_LEFT">
+                    <padding><Insets left="14"/></padding>
+                </Label>
+                <TextField fx:id="fieldRechercheTache"
+                           promptText="Rechercher par titre..."
+                           style="-fx-background-color: white;
+                                  -fx-background-radius: 12;
+                                  -fx-border-color: #d1d5db;
+                                  -fx-border-radius: 12;
+                                  -fx-border-width: 1.5;
+                                  -fx-padding: 0 14 0 38;
+                                  -fx-font-size: 13px;
+                                  -fx-pref-height: 42;" />
+            </StackPane>
+
+            <!-- Filtre statut -->
+            <ComboBox fx:id="comboFiltreStatut"
+                      promptText="Tous les statuts"
+                      prefWidth="180.0" prefHeight="42.0"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 12;
+                             -fx-border-color: #d1d5db;
+                             -fx-border-radius: 12;
+                             -fx-border-width: 1.5;
+                             -fx-font-size: 13px;" />
+
+            <!-- Rafraîchir -->
+            <Button fx:id="btnRafraichirTache"
+                    mnemonicParsing="false" onAction="#rafraichir"
+                    prefHeight="42.0" prefWidth="120.0"
+                    text="↻  Rafraîchir"
+                    style="-fx-background-color: white;
+                           -fx-background-radius: 12;
+                           -fx-text-fill: #228B22;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: 500;
+                           -fx-cursor: hand;
+                           -fx-border-color: #228B22;
+                           -fx-border-radius: 12;
+                           -fx-border-width: 1.5;" />
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Export PDF -->
+            <Button fx:id="btnExportPdf"
+                    mnemonicParsing="false" onAction="#exportPdf"
+                    prefHeight="42.0" prefWidth="160.0"
+                    text="📄  Exporter PDF"
+                    style="-fx-background-color: white;
+                           -fx-background-radius: 12;
+                           -fx-text-fill: #1976D2;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: 500;
+                           -fx-cursor: hand;
+                           -fx-border-color: #1976D2;
+                           -fx-border-radius: 12;
+                           -fx-border-width: 1.5;" />
+
+            <!-- Ajouter tâche -->
+            <Button mnemonicParsing="false" onAction="#Ajouter_Tache"
+                    prefHeight="42.0" prefWidth="160.0"
+                    text="＋  Ajouter une tâche"
+                    style="-fx-background-color: #228B22;
+                           -fx-background-radius: 12;
+                           -fx-text-fill: white;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: 600;
+                           -fx-cursor: hand;
+                           -fx-effect: dropshadow(gaussian, rgba(34,139,34,0.32), 10, 0, 0, 3);" />
+        </HBox>
+
+        <!-- ══════════════════════════════════════════
+             TABLEAU
+        ══════════════════════════════════════════ -->
+        <VBox layoutX="24.0" layoutY="261.0"
+              prefWidth="932.0" prefHeight="344.0"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 16;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+
+            <!-- En-tête tableau -->
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0"
+                  style="-fx-background-color: #f8faf8;
+                         -fx-background-radius: 16 16 0 0;
+                         -fx-border-color: transparent transparent #f3f4f6 transparent;
+                         -fx-border-width: 0 0 1 0;">
+                <padding><Insets top="0" left="22" right="22" bottom="0"/></padding>
+                <Label text="📋  Liste des tâches"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label text="Double-cliquez pour modifier une tâche"
+                       style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+            </HBox>
+
+            <!-- TableView -->
+            <TableView fx:id="ListTache"
+                       prefHeight="258.0" prefWidth="932.0"
+                       style="-fx-background-color: transparent;
+                              -fx-background-radius: 0 0 16 16;
+                              -fx-border-color: transparent;"
+                       VBox.vgrow="ALWAYS" />
+
+            <!-- Message vide -->
+            <Label fx:id="labelAucuneTache"
+                   text="Aucune tâche trouvée. Cliquez sur « Ajouter une tâche » pour en créer une."
+                   style="-fx-font-size: 13px; -fx-text-fill: #9ca3af;"
+                   wrapText="true" prefWidth="600"
+                   visible="false" />
+        </VBox>
+
+        <!-- ══════════════════════════════════════════
+             PIED DE PAGE
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="0.0" layoutY="616.0"
+              prefWidth="980.0" prefHeight="44.0"
+              alignment="CENTER_LEFT"
+              style="-fx-background-color: white;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 6, 0, -2, 0);">
+            <padding><Insets top="0" left="24" right="24" bottom="0"/></padding>
+            <Label text="AgriGo  •  Gestion des Tâches"
+                   style="-fx-font-size: 11.5px; -fx-text-fill: #9ca3af;" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="Sélectionnez une tâche pour la modifier ou l'exporter"
+                   style="-fx-font-size: 11px; -fx-text-fill: #16a34a;" />
+        </HBox>
+
+    </children>
 </AnchorPane>
