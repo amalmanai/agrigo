@@ -19,7 +19,9 @@ public class HistoriqueCRUD {
             pst.setDouble(4, h.getRendementFinal());
             pst.executeUpdate();
             System.out.println("Culture archivée avec succès !");
-        } catch (SQLException e) { System.out.println(e.getMessage()); }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public List<Historique> afficherHistorique() {
@@ -36,7 +38,10 @@ public class HistoriqueCRUD {
                 h.setRendementFinal(rs.getDouble("rendement_final"));
                 list.add(h);
             }
-        } catch (SQLException e) { System.out.println(e.getMessage()); }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return list;
     }
 }
+

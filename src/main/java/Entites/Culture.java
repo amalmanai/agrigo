@@ -49,3 +49,4 @@ public class Culture {
     public int getIdParcelle() { return idParcelle; }
     public void setIdParcelle(int idParcelle) { this.idParcelle = idParcelle; }
 }
+

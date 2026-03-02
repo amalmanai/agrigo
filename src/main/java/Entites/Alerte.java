@@ -29,3 +29,4 @@ public class Alerte {
     public int getIdCulture() { return idCulture; }
     public void setIdCulture(int idCulture) { this.idCulture = idCulture; }
 }
+

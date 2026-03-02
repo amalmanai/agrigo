@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.web.WebView?>
 
 <BorderPane prefHeight="680.0" prefWidth="980.0" styleClass="app-root form-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlles.ParcelleController">
     <center>
@@ -67,18 +68,26 @@
                         </TextField>
                     </VBox>
 
-                    <!-- Coordonnées GPS -->
+                    <!-- Localisation (Adresse + Carte) -->
                     <VBox spacing="8.0">
                         <HBox alignment="CENTER_LEFT" spacing="6.0">
                             <SVGPath content="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" style="-fx-fill: #2d7a4f; -fx-scale-x: 0.7; -fx-scale-y: 0.7;" />
-                            <Label text="Coordonnées GPS" styleClass="form-label" />
+                            <Label text="Localisation de la parcelle" styleClass="form-label" />
                             <Label text="*" style="-fx-text-fill: #dc3545;" />
                         </HBox>
-                        <TextField fx:id="tfGps" prefHeight="40.0" promptText="Ex: 36.8065, 10.1815 (Latitude, Longitude)" styleClass="form-field">
-                            <padding>
-                                <Insets left="12.0" right="12.0" />
-                            </padding>
-                        </TextField>
+                        <VBox spacing="8.0">
+                            <HBox spacing="8.0">
+                                <TextField fx:id="tfAdresse" prefHeight="40.0" promptText="Entrez une adresse (ex: Ghana Avenue, Tunis)" styleClass="form-field">
+                                    <padding>
+                                        <Insets left="12.0" right="12.0" />
+                                    </padding>
+                                </TextField>
+                                <Button mnemonicParsing="false" onAction="#localiserAdresse" text="Localiser" prefHeight="40.0" />
+                            </HBox>
+                            <StackPane prefHeight="260.0">
+                                <WebView fx:id="mapView" prefHeight="260.0" prefWidth="520.0" />
+                            </StackPane>
+                        </VBox>
                     </VBox>
 
                     <!-- Type de sol -->
@@ -117,3 +126,4 @@
         </StackPane>
     </center>
 </BorderPane>
+

@@ -13,13 +13,10 @@ public class ParcelleCRUD implements IntrefaceCRUD<Parcelle> {
     // Initialize connection from Singleton
     private Connection conn = MyBD.getInstance().getConnection();
 
-    // Implementing the specific 'ajouter' method required by the interface
     @Override
     public void ajouter(Parcelle p) throws SQLException {
-        // Updated query to match your database columns
         String req = "INSERT INTO parcelles (nom_parcelle, surface, coordonnees_gps, type_sol) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pst = conn.prepareStatement(req)) {
-            // Safety check for connection
             if (conn == null) {
                 throw new SQLException("Connexion à la base de données est nulle !");
             }
@@ -82,6 +79,7 @@ public class ParcelleCRUD implements IntrefaceCRUD<Parcelle> {
             System.out.println("Parcelle supprimée !");
         }
     }
+
     public List<Culture> afficherToutes() throws SQLException {
         List<Culture> list = new ArrayList<>();
         if (conn == null) return list;
@@ -89,7 +87,6 @@ public class ParcelleCRUD implements IntrefaceCRUD<Parcelle> {
         String req = "SELECT * FROM cultures";
         try (Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(req)) {
             while (rs.next()) {
-                // Fix: Using empty constructor + setters to avoid "cannot be applied to" errors
                 Culture c = new Culture();
                 c.setId(rs.getInt("id_culture"));
                 c.setNom(rs.getString("nom_culture"));
@@ -106,3 +103,4 @@ public class ParcelleCRUD implements IntrefaceCRUD<Parcelle> {
         return list;
     }
 }
+

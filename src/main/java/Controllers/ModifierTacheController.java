@@ -4,11 +4,14 @@ import Entites.Tache;
 import Services.ServiceTache;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ResourceBundle;
 
-public class ModifierTacheController {
+public class ModifierTacheController implements Initializable {
 
     @FXML private TextField TFtitreModif;
     @FXML private TextField TFdescriptionModif;
@@ -22,17 +25,24 @@ public class ModifierTacheController {
     private Tache currentTache;
     private final ServiceTache serviceTache = new ServiceTache();
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        tftypeModif.getItems().addAll("Irrigation", "Récolte", "Semis", "Maintenance");
+        tfstatusModif.getItems().addAll("Assignée", "En cours", "Terminée", "Annulée");
+    }
+
     // Méthode appelée depuis ListeTacheController
     public void setTache(Tache tache) {
         this.currentTache = tache;
 
-        // Pré-remplir les champs
         TFtitreModif.setText(tache.getTitre_tache());
         TFdescriptionModif.setText(tache.getDescription_tache());
         tftypeModif.setValue(tache.getType_tache());
         tfdateModif.setValue(tache.getDate_tache().toLocalDate());
-        tfheuredebutModif.setText(tache.getHeure_debut_tache().toString());
-        tfheurefinModif.setText(tache.getHeure_fin_tache().toString());
+        String hd = tache.getHeure_debut_tache() != null ? tache.getHeure_debut_tache().toString() : "";
+        String hf = tache.getHeure_fin_tache() != null ? tache.getHeure_fin_tache().toString() : "";
+        tfheuredebutModif.setText(hd.length() >= 5 ? hd.substring(0, 5) : hd);
+        tfheurefinModif.setText(hf.length() >= 5 ? hf.substring(0, 5) : hf);
         tfstatusModif.setValue(tache.getStatus_tache());
         tfremarqueModif.setText(tache.getRemarque_tache());
     }
@@ -41,7 +51,7 @@ public class ModifierTacheController {
     public void modifiertache(ActionEvent actionEvent) {
         // Contrôle de saisie
         if (TFtitreModif.getText().isEmpty() || TFdescriptionModif.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Titre et description sont obligatoires !");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "le Titre et la description sont obligatoires !");
             alert.show();
             return;
         }
@@ -52,8 +62,14 @@ public class ModifierTacheController {
             currentTache.setDescription_tache(TFdescriptionModif.getText());
             currentTache.setType_tache(tftypeModif.getValue());
             currentTache.setDate_tache(Date.valueOf(tfdateModif.getValue()));
-            currentTache.setHeure_debut_tache(Time.valueOf(tfheuredebutModif.getText()));
-            currentTache.setHeure_fin_tache(Time.valueOf(tfheurefinModif.getText()));
+            String hd = tfheuredebutModif.getText().trim();
+            String hf = tfheurefinModif.getText().trim();
+            if (!hd.contains(":")) hd += ":00";
+            if (!hf.contains(":")) hf += ":00";
+            if (hd.length() == 5) hd += ":00";
+            if (hf.length() == 5) hf += ":00";
+            currentTache.setHeure_debut_tache(Time.valueOf(hd));
+            currentTache.setHeure_fin_tache(Time.valueOf(hf));
             currentTache.setStatus_tache(tfstatusModif.getValue());
             currentTache.setRemarque_tache(tfremarqueModif.getText());
 

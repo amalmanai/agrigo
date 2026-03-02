@@ -117,3 +117,4 @@ public class CultureCRUD implements IntrefaceCRUD<Culture> {
         return list;
     }
 }
+

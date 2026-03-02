@@ -1,0 +1,25 @@
+# Configuration SMTP pour l'envoi d'emails
+# Copiez ces lignes et exécutez-les dans votre terminal Windows PowerShell
+
+# Configuration Gmail (recommandé pour le développement)
+$env:SMTP_HOST = "smtp.gmail.com"
+$env:SMTP_PORT = "587"
+$env:SMTP_USER = "votre-email@gmail.com"
+$env:SMTP_PASSWORD = "votre-mot-de-passe-app"
+$env:SMTP_FROM = "votre-email@gmail.com"
+
+# Alternative : Configuration Outlook
+# $env:SMTP_HOST = "smtp-mail.outlook.com"
+# $env:SMTP_PORT = "587"
+# $env:SMTP_USER = "votre-email@outlook.com"
+# $env:SMTP_PASSWORD = "votre-mot-de-passe"
+# $env:SMTP_FROM = "votre-email@outlook.com"
+
+# Instructions pour Gmail :
+# 1. Activez la vérification en deux étapes sur votre compte Gmail
+# 2. Allez dans : https://myaccount.google.com/apppasswords
+# 3. Générez un mot de passe d'application
+# 4. Utilisez ce mot de passe dans SMTP_PASSWORD
+
+# Pour tester la configuration :
+# Exécutez ces commandes puis lancez l'application

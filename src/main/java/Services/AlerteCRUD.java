@@ -11,7 +11,7 @@ public class AlerteCRUD implements IntrefaceCRUD<Alerte> {
     Connection conn = MyBD.getInstance().getConnection();
 
     @Override
-    public void ajouter(Alerte a) throws SQLException { // Renamed from ajouterAlerte
+    public void ajouter(Alerte a) throws SQLException {
         String req = "INSERT INTO alertes_risques (type_alerte, description, id_culture) VALUES (?, ?, ?)";
         PreparedStatement pst = conn.prepareStatement(req);
         pst.setString(1, a.getType());
@@ -22,7 +22,7 @@ public class AlerteCRUD implements IntrefaceCRUD<Alerte> {
     }
 
     @Override
-    public List<Alerte> afficher() throws SQLException { // Renamed from afficherAlertes
+    public List<Alerte> afficher() throws SQLException {
         List<Alerte> list = new ArrayList<>();
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery("SELECT * FROM alertes_risques");
@@ -63,6 +63,9 @@ public class AlerteCRUD implements IntrefaceCRUD<Alerte> {
             PreparedStatement pst = conn.prepareStatement(req);
             pst.setInt(1, idCulture);
             pst.executeUpdate();
-        } catch (SQLException e) { System.out.println(e.getMessage()); }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
+

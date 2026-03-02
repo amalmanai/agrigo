@@ -16,3 +16,4 @@ public interface IntrefaceCRUD<T> {
     // Standard Delete operation
     void supprimer(int id) throws SQLException;
 }
+

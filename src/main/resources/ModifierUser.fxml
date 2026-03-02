@@ -2,82 +2,157 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ModifierUserController">
-   <left>
-      <AnchorPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #228B22;" BorderPane.alignment="CENTER">
-         <children>
-            <Text fill="WHITE" layoutX="114.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue !">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
-   </left>
-   <right>
-      <AnchorPane prefHeight="500.0" prefWidth="425.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text fill="FORESTGREEN" layoutX="135.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/user.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="tfNomModif" layoutX="120.0" layoutY="51.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/mail.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="tfprenomModif" layoutX="120.0" layoutY="91.0" promptText="prenom" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/padlock.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/padlock.png" />
-               </image>
-            </ImageView>
-            <PasswordField fx:id="pfConfirmMotDePasseModif" layoutX="119.0" layoutY="215.0" promptText="confirmer mot de passe" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/telephone.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="tfemailModif" layoutX="120.0" layoutY="134.0" promptText="email" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="tfTelephoneModif" layoutX="119.0" layoutY="250.0" promptText="telephone" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <ComboBox fx:id="tfroleeeeModif" layoutX="71.0" layoutY="338.0" onAction="#tfroleeeeModif" prefHeight="37.0" prefWidth="248.0" promptText="Role" style="-fx-border-color: #228B22;" styleClass="combo-box" stylesheets="@css/style.css" />
-            <Button fx:id="pickImageButton" layoutX="91.0" layoutY="359.0" mnemonicParsing="false" onAction="#pickImageAction" styleClass="transparent" stylesheets="@css/style.css" />
-            <Button layoutX="140.0" layoutY="413.0" mnemonicParsing="false" onAction="#ModifAction" styleClass="button-style" stylesheets="@css/style.css" text="Modifier" textFill="WHITE" />
-            <Button fx:id="takePictureButton" layoutX="204.0" layoutY="359.0" mnemonicParsing="false" onAction="#takePictureAction" styleClass="transparent" stylesheets="@css/style.css" />
-            <TextField fx:id="tfAddresseModif" layoutX="119.0" layoutY="292.0" promptText="Addresse" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/location.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="81.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/user.png" />
-               </image>
-            </ImageView>
-            <PasswordField fx:id="tfmotDePasseModif" layoutX="120.0" layoutY="173.0" promptText="mot de passe" style="-fx-background-color: transparent; -fx-border-color: #228B22; -fx-border-width: 0px 0px 2px 0px;" />
-         </children>
-      </AnchorPane>
-   </right>
+<BorderPane
+        maxHeight="-Infinity" maxWidth="-Infinity"
+        minHeight="-Infinity" minWidth="-Infinity"
+        prefHeight="760.0" prefWidth="480.0"
+        stylesheets="@css/style.css"
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="Controllers.ModifierUserController">
+
+    <!-- Partie principale -->
+    <center>
+        <AnchorPane fx:id="rootPane" prefWidth="480.0" prefHeight="760.0"
+                    styleClass="user-form-root">
+            <children>
+                <VBox layoutX="64" layoutY="42" spacing="0" prefWidth="352">
+                    <children>
+
+                        <Label text="PROFIL"
+                               style="-fx-font-size: 10px;
+                                      -fx-font-weight: bold;
+                                      -fx-text-fill: #5dbf5d;
+                                      -fx-padding: 0 0 8 0;"/>
+
+                        <Label text="Modifier utilisateur"
+                               styleClass="user-form-title"
+                               style="-fx-font-size: 27px;
+                                      -fx-font-weight: bold;
+                                      -fx-padding: 0 0 4 0;"/>
+
+                        <Label text="Mettez à jour les informations du compte"
+                               styleClass="user-form-subtitle"
+                               style="-fx-font-size: 12px;
+                                      -fx-padding: 0 0 16 0;"/>
+
+                        <!-- Photo de profil -->
+                        <HBox spacing="12" alignment="CENTER_LEFT"
+                              styleClass="user-form-card"
+                              style="-fx-border-width: 1.5;
+                                     -fx-border-radius: 12;
+                                     -fx-background-radius: 12;
+                                     -fx-padding: 10 12 10 12;">
+                            <children>
+
+                                <StackPane prefWidth="64" prefHeight="64">
+                                    <children>
+                                        <Circle radius="32" fill="rgba(93,191,93,0.12)"/>
+                                        <ImageView fx:id="profileImageView"
+                                                   fitHeight="64" fitWidth="64"
+                                                   preserveRatio="true">
+                                            <clip>
+                                                <Circle radius="32" centerX="32" centerY="32"/>
+                                            </clip>
+                                            <image>
+                                                <Image url="@assets/user.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </StackPane>
+
+                                <VBox spacing="6">
+                                    <children>
+                                        <Label text="Photo de profil"/>
+                                        <HBox spacing="8">
+                                            <children>
+                                                <Button fx:id="pickImageButton"
+                                                        text="📁 Importer"
+                                                        onAction="#pickImageAction"/>
+                                                <Button fx:id="takePictureButton"
+                                                        text="📷 Webcam"
+                                                        onAction="#takePictureAction"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </HBox>
+
+                        <Label style="-fx-padding: 0 0 14 0;"/>
+
+                        <!-- Nom -->
+                        <TextField fx:id="tfNomModif" promptText="Nom" prefWidth="352"/>
+
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+
+                        <!-- Prénom -->
+                        <TextField fx:id="tfprenomModif" promptText="Prénom" prefWidth="352"/>
+
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+
+                        <!-- Email -->
+                        <TextField fx:id="tfemailModif" promptText="Email" prefWidth="352"/>
+
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+
+                        <!-- Mot de passe -->
+                        <PasswordField fx:id="tfmotDePasseModif" promptText="Mot de passe" prefWidth="352"/>
+
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+
+                        <!-- Confirmation -->
+                        <PasswordField fx:id="pfConfirmMotDePasseModif" promptText="Confirmer mot de passe" prefWidth="352"/>
+
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+
+                        <!-- Téléphone -->
+                        <TextField fx:id="tfTelephoneModif" promptText="+216 XX XXX XXX" prefWidth="352"/>
+
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+
+                        <!-- Adresse -->
+                        <TextField fx:id="tfAddresseModif" promptText="Adresse" prefWidth="352"/>
+
+                        <Label style="-fx-padding: 0 0 10 0;"/>
+
+                        <!-- Rôle -->
+                        <ComboBox fx:id="tfroleeeeModif"
+                                  prefWidth="352"
+                                  promptText="Sélectionnez le rôle"/>
+
+                        <Label style="-fx-padding: 0 0 16 0;"/>
+
+                        <Button text="Enregistrer les modifications"
+                                prefWidth="352"
+                                prefHeight="44"
+                                onAction="#ModifAction"
+                                style="-fx-background-color: #228B22;
+                                       -fx-text-fill: white;
+                                       -fx-font-weight: bold;"/>
+
+                        <Separator style="-fx-padding: 16 0 0 0; -fx-opacity: 0;"/>
+                        <Region VBox.vgrow="ALWAYS"/>
+
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </center>
+
 </BorderPane>

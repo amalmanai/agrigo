@@ -12,7 +12,7 @@ public class MainTFX extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginUser.fxml"));
         Scene scene = new Scene(loader.load());
 
-        stage.setTitle("Register User");
+        stage.setTitle("AgriGo - Connexion");
         stage.setScene(scene);
         stage.show();
     }

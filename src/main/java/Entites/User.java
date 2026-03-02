@@ -12,6 +12,8 @@ public class User {
     private int num_user;
     private String password;
     private String adresse_user;
+    /** Chemin vers la photo de profil (fichier sur disque). */
+    private String photoPath;
 
     // Constructeur vide
     public User() {}
@@ -54,6 +56,7 @@ public class User {
     public int getNum_user() { return num_user; }
     public String getPassword() { return password; }
     public String getAdresse_user() { return adresse_user; }
+    public String getPhotoPath() { return photoPath; }
 
     public void setId_user(int id_user) { this.id_user = id_user; }
     public void setNom_user(String nom_user) { this.nom_user = nom_user; }
@@ -63,6 +66,7 @@ public class User {
     public void setNum_user(int num_user) { this.num_user = num_user; }
     public void setPassword(String password) { this.password = password; }
     public void setAdresse_user(String adresse_user) { this.adresse_user = adresse_user; }
+    public void setPhotoPath(String photoPath) { this.photoPath = photoPath; }
 
     @Override
     public boolean equals(Object o) {

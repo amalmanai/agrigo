@@ -1,7 +1,10 @@
 package Controllers;
 
+import Api.UserApiService;
 import Entites.User;
 import Services.ServiceUser;
+import Utils.ExportPdfService;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,24 +15,63 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ShowUserController {
 
     @FXML
     private TableView<User> tableViewUserRegister;
+    @FXML
+    private TextField fieldRechercheUser;
+    @FXML
+    private Label labelAucunUser;
+    @FXML
+    private javafx.scene.layout.AnchorPane rootPane;
 
     private ServiceUser serviceUser = new ServiceUser();
     private ObservableList<User> userList;
+    private ObservableList<User> userListFull;
 
     @FXML
     public void initialize() {
+        if (Controlles.DashBoardController.preferredDarkMode && rootPane != null) {
+            rootPane.getStyleClass().add("theme-dark");
+        }
         // =================== COLUMNS ===================
 
+        // API 1 (User) : Gravatar - avatar par email
+        TableColumn<User, String> colAvatar = new TableColumn<>("Avatar");
+        colAvatar.setCellValueFactory(new PropertyValueFactory<>("email_user"));
+        colAvatar.setCellFactory(tc -> new TableCell<>() {
+            private final ImageView imageView = new ImageView();
+            { imageView.setFitWidth(28); imageView.setFitHeight(28); imageView.setPreserveRatio(true); }
+            @Override
+            protected void updateItem(String email, boolean empty) {
+                super.updateItem(email, empty);
+                if (empty || email == null) {
+                    setGraphic(null);
+                } else {
+                    String url = UserApiService.getGravatarUrl(email, 56);
+                    if (url != null) {
+                        try {
+                            Image img = new Image(url, true);
+                            imageView.setImage(img);
+                        } catch (Exception e) { imageView.setImage(null); }
+                    }
+                    setGraphic(imageView);
+                }
+            }
+        });
 
         TableColumn<User, String> colNom = new TableColumn<>("Nom");
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_user"));
@@ -83,19 +125,57 @@ public class ShowUserController {
             }
         });
 
+        // Sélection multiple pour export PDF ciblé
+        tableViewUserRegister.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         // =================== ADD COLUMNS TO TABLE ===================
         tableViewUserRegister.getColumns().addAll(
-                colNom, colPrenom, colEmail, colRole, colTel, colAdresse, colAction
+                colAvatar, colNom, colPrenom, colEmail, colRole, colTel, colAdresse, colAction
         );
 
         // =================== LOAD DATA ===================
         loadUsers();
+        userListFull = FXCollections.observableArrayList(serviceUser.getAll());
+
+        if (fieldRechercheUser != null) {
+            fieldRechercheUser.textProperty().addListener((o, oldVal, newVal) -> appliquerFiltreUser());
+        }
+        mettreAJourPlaceholderUser();
     }
 
     private void loadUsers() {
         Set<User> users = serviceUser.getAll();
         userList = FXCollections.observableArrayList(users);
         tableViewUserRegister.setItems(userList);
+        if (userListFull != null) userListFull.setAll(users);
+        mettreAJourPlaceholderUser();
+    }
+
+    private void appliquerFiltreUser() {
+        if (userListFull == null) return;
+        String q = fieldRechercheUser != null ? fieldRechercheUser.getText().trim().toLowerCase() : "";
+        if (q.isEmpty()) {
+            userList.setAll(userListFull);
+        } else {
+            userList.setAll(userListFull.stream()
+                    .filter(u -> (u.getNom_user() != null && u.getNom_user().toLowerCase().contains(q))
+                            || (u.getPrenom_user() != null && u.getPrenom_user().toLowerCase().contains(q))
+                            || (u.getEmail_user() != null && u.getEmail_user().toLowerCase().contains(q))
+                            || (u.getRole_user() != null && u.getRole_user().toLowerCase().contains(q)))
+                    .collect(Collectors.toList()));
+        }
+        mettreAJourPlaceholderUser();
+    }
+
+    private void mettreAJourPlaceholderUser() {
+        if (labelAucunUser != null) labelAucunUser.setVisible(userList != null && userList.isEmpty());
+    }
+
+    @FXML
+    public void rafraichir(ActionEvent event) {
+        loadUsers();
+        userListFull = FXCollections.observableArrayList(serviceUser.getAll());
+        if (fieldRechercheUser != null) fieldRechercheUser.clear();
     }
 
     private void deleteUser(User user) {
@@ -128,28 +208,113 @@ public class ShowUserController {
         }
     }
 
+    /** Retour à l'accueil admin */
     @FXML
-    public void logoutshow(ActionEvent actionEvent) {
+    public void retourAccueil(ActionEvent event) {
         try {
-            // Load the FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/RegisterUser.fxml"));
-            Parent root = loader.load();
-
-            // Get the current stage
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-
-            // Set the new scene
-            stage.setScene(new Scene(root));
-            stage.setTitle("Register User"); // Optional: set title
+            String fxml = (Utils.Session.getCurrentUser() != null
+                    && "admin".equalsIgnoreCase(Utils.Session.getCurrentUser().getRole_user()))
+                    ? "/Dashboard.fxml"
+                    : "/menu.fxml";
+            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            try {
+                java.net.URL css = getClass().getResource("/app.css");
+                if (css != null) scene.getStylesheets().add(css.toExternalForm());
+            } catch (Exception ignored) {}
+            stage.setScene(scene);
+            stage.setTitle("AgriGo");
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Erreur");
-            alert.setContentText("Impossible de charger la page RegisterUser.fxml");
-            alert.showAndWait();
+            showAlert("Erreur", "Impossible de revenir à l'accueil.");
         }
     }
 
+    @FXML
+    public void logoutshow(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginUser.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Connexion");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Impossible de charger la page.");
+        }
+    }
+
+    /** Export PDF : exporte uniquement les profils sélectionnés (aucune sélection = avertissement). */
+    @FXML
+    public void exportPdf(ActionEvent event) {
+        ObservableList<User> selected = tableViewUserRegister.getSelectionModel().getSelectedItems();
+        if (selected == null || selected.isEmpty()) {
+            showAlert("Export PDF", "Veuillez sélectionner un ou plusieurs utilisateurs à exporter.\nCliquez sur les lignes (Ctrl+Clic pour plusieurs sélections).");
+            return;
+        }
+        ObservableList<User> toExport = selected;
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Enregistrer le PDF");
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+        // Si un seul utilisateur sélectionné, utiliser "Nom_Prenom.pdf"
+        if (toExport.size() == 1) {
+            User u = toExport.get(0);
+            String nom = u.getNom_user() != null ? u.getNom_user().replaceAll("\\s+", "_") : "user";
+            String prenom = u.getPrenom_user() != null ? u.getPrenom_user().replaceAll("\\s+", "_") : "profil";
+            fc.setInitialFileName(nom + "_" + prenom + ".pdf");
+        } else {
+            fc.setInitialFileName("utilisateurs_agrigo.pdf");
+        }
+        File f = fc.showSaveDialog(((Node) event.getSource()).getScene().getWindow());
+        if (f == null) return;
+        try {
+            ExportPdfService.exportUsersToPdf(new java.util.HashSet<>(toExport), f.getAbsolutePath());
+            // Ouvrir automatiquement le PDF après export si possible
+            try {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(f);
+                }
+            } catch (Exception e) {
+                // Si ouverture impossible, on se contente de l'alerte
+                e.printStackTrace();
+            }
+            showAlert("Export réussi", "PDF enregistré : " + toExport.size() + " utilisateur(s) — " + f.getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Erreur export PDF", "Impossible d'exporter le PDF : " +
+                    (e.getMessage() != null ? e.getMessage() : e.toString()));
+        }
+    }
+
+    /** API 2 (module User) : Importer un utilisateur de démo depuis Random User API */
+    @FXML
+    public void importDemoUser(ActionEvent event) {
+        UserApiService.fetchRandomUser().thenAccept(r -> Platform.runLater(() -> {
+            if (!r.isValid()) {
+                showAlert("API", "Impossible de récupérer un utilisateur démo (réseau ou API).");
+                return;
+            }
+            try {
+                int phone = 0;
+                try { phone = Integer.parseInt(r.phone); } catch (NumberFormatException e) { }
+                User u = new User(r.last, r.first, r.email, "agriculteur client", phone, "demo123", r.address != null ? r.address : "");
+                serviceUser.ajouter(u);
+                userList.add(u);
+                showAlert("Utilisateur démo ajouté", r.first + " " + r.last + " (" + r.email + ")");
+            } catch (Exception e) {
+                showAlert("Erreur", e.getMessage());
+            }
+        }));
+    }
+
+    private void showAlert(String title, String content) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle(title);
+        a.setHeaderText(null);
+        a.setContentText(content);
+        a.showAndWait();
+    }
 }

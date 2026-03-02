@@ -11,7 +11,6 @@ public class Historique {
 
     public Historique() {}
 
-    // Constructor, Getters and Setters...
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public int getIdParcelle() { return idParcelle; }
@@ -23,3 +22,4 @@ public class Historique {
     public double getRendementFinal() { return rendementFinal; }
     public void setRendementFinal(double r) { this.rendementFinal = r; }
 }
+

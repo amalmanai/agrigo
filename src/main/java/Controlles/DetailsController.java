@@ -8,7 +8,6 @@ public class DetailsController {
     @FXML private TextField resEtat;
     @FXML private TextField resRendement;
 
-    // These setters are called by Page1Controller to pass the data
     public void setResNom(String nom) {
         if (resNom != null) this.resNom.setText(nom);
     }
@@ -21,3 +20,4 @@ public class DetailsController {
         if (resRendement != null) this.resRendement.setText(rend);
     }
 }
+

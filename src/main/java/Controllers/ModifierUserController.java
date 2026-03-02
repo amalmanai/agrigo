@@ -5,12 +5,18 @@ import Services.ServiceUser;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class ModifierUserController {
 
@@ -22,17 +28,33 @@ public class ModifierUserController {
     @FXML private TextField tfTelephoneModif;
     @FXML private TextField tfAddresseModif;
     @FXML private ComboBox<String> tfroleeeeModif;
+    @FXML private ImageView profileImageView;
+    @FXML private javafx.scene.layout.AnchorPane rootPane;
 
     private User user; // user to modify
-    private ServiceUser serviceUser = new ServiceUser();
+    private final ServiceUser serviceUser = new ServiceUser();
+    private boolean selfEdit; // true = l'utilisateur modifie son propre profil (on désactive le rôle)
+    private File selectedImageFile; // nouvelle photo choisie (non encore copiée)
 
     public void setUser(User user) {
         this.user = user;
         populateFields();
     }
 
+    /** En mode "Mon profil", l'utilisateur ne peut pas changer son propre rôle. */
+    public void setSelfEdit(boolean selfEdit) {
+        this.selfEdit = selfEdit;
+        if (tfroleeeeModif != null) {
+            tfroleeeeModif.setDisable(selfEdit);
+        }
+    }
+
     @FXML
     public void initialize() {
+        if (Controlles.DashBoardController.preferredDarkMode && rootPane != null) {
+            rootPane.getStyleClass().add("theme-dark");
+        }
+        
         tfroleeeeModif.setItems(FXCollections.observableArrayList(
                 "ouvrier agricole",
                 "agriculteur client",
@@ -50,6 +72,15 @@ public class ModifierUserController {
             tfTelephoneModif.setText(String.valueOf(user.getNum_user()));
             tfAddresseModif.setText(user.getAdresse_user());
             tfroleeeeModif.setValue(user.getRole_user());
+            if (selfEdit) tfroleeeeModif.setDisable(true);
+
+            // Charger la photo de profil existante si elle est définie
+            if (profileImageView != null && user.getPhotoPath() != null && !user.getPhotoPath().isEmpty()) {
+                File photoFile = new File(user.getPhotoPath());
+                if (photoFile.exists()) {
+                    profileImageView.setImage(new Image(photoFile.toURI().toString(), false));
+                }
+            }
         }
     }
 
@@ -60,42 +91,94 @@ public class ModifierUserController {
                 tfemailModif.getText().isEmpty() || tfmotDePasseModif.getText().isEmpty() ||
                 pfConfirmMotDePasseModif.getText().isEmpty() || tfTelephoneModif.getText().isEmpty() ||
                 tfAddresseModif.getText().isEmpty() || tfroleeeeModif.getValue() == null) {
-            alert("Remplir tous les champs");
+            alert("⚠️ Veuillez remplir tous les champs.");
             return;
         }
 
         if (!tfmotDePasseModif.getText().equals(pfConfirmMotDePasseModif.getText())) {
-            alert("Mot de passe et confirmation ne correspondent pas !");
+            alert("❌ Le mot de passe et sa confirmation ne correspondent pas !");
             return;
         }
 
         if (!tfemailModif.getText().contains("@")) {
-            alert("Email invalide !");
+            alert("❌ Adresse email invalide !");
             return;
         }
 
+        String telStr = tfTelephoneModif.getText().trim();
+        if (!telStr.matches("\\d{8}")) {
+            alert("❌ Le numéro de téléphone doit contenir exactement 8 chiffres !");
+            return;
+        }
         int tel;
         try {
-            tel = Integer.parseInt(tfTelephoneModif.getText());
+            tel = Integer.parseInt(telStr);
         } catch (NumberFormatException e) {
-            alert("Téléphone doit contenir uniquement des chiffres !");
+            alert("❌ Téléphone invalide !");
             return;
         }
 
         // Update user object
-        user.setNom_user(tfNomModif.getText());
-        user.setPrenom_user(tfprenomModif.getText());
-        user.setEmail_user(tfemailModif.getText());
+        user.setNom_user(tfNomModif.getText().trim());
+        user.setPrenom_user(tfprenomModif.getText().trim());
+        user.setEmail_user(tfemailModif.getText().trim());
         user.setPassword(tfmotDePasseModif.getText());
         user.setNum_user(tel);
-        user.setAdresse_user(tfAddresseModif.getText());
+        user.setAdresse_user(tfAddresseModif.getText().trim());
         user.setRole_user(tfroleeeeModif.getValue());
 
-        // Save in DB
-        serviceUser.modifier(user);
+        // Gérer la photo de profil : si une nouvelle a été choisie, la copier et enregistrer le chemin
+        if (selectedImageFile != null) {
+            try {
+                Path photosDir = Paths.get("user-photos");
+                if (!Files.exists(photosDir)) {
+                    Files.createDirectories(photosDir);
+                }
 
-        alert("Utilisateur modifié avec succès !");
+                String originalName = selectedImageFile.getName();
+                String extension = "";
+                int dotIndex = originalName.lastIndexOf('.');
+                if (dotIndex >= 0) {
+                    extension = originalName.substring(dotIndex);
+                }
+
+                String fileName = "user-" + user.getId_user() + extension;
+                Path target = photosDir.resolve(fileName);
+
+                Files.copy(selectedImageFile.toPath(), target, StandardCopyOption.REPLACE_EXISTING);
+
+                user.setPhotoPath(target.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+                alert("⚠️ Erreur lors de la sauvegarde de la photo de profil.");
+            }
+        }
+
+        // Save in DB
+        try {
+            serviceUser.modifier(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            alert("❌ Erreur lors de la sauvegarde : " + e.getMessage());
+            return;
+        }
+
+        // Update the session so the rest of the app sees the new data immediately
+        if (Utils.Session.getCurrentUser() != null &&
+                Utils.Session.getCurrentUser().getId_user() == user.getId_user()) {
+            Utils.Session.setCurrentUser(user);
+        }
+
+        showSuccess("✅ Modifications enregistrées avec succès !");
         closeWindow();
+    }
+
+    private void showSuccess(String msg) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Succès");
+        a.setHeaderText(null);
+        a.setContentText(msg);
+        a.showAndWait();
     }
 
     private void alert(String msg) {
@@ -109,12 +192,35 @@ public class ModifierUserController {
         stage.close();
     }
 
+    @FXML
     public void pickImageAction(ActionEvent actionEvent) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Choisir une photo de profil");
+        chooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        Stage stage = (Stage) tfNomModif.getScene().getWindow();
+        File file = chooser.showOpenDialog(stage);
+        if (file == null) {
+            return;
+        }
+
+        Image image = new Image(file.toURI().toString(), false);
+        if (profileImageView != null) {
+            profileImageView.setImage(image);
+        }
+        // mémoriser la nouvelle image pour la persistance en base
+        selectedImageFile = file;
     }
 
+    @FXML
     public void tfroleeeeModif(ActionEvent actionEvent) {
     }
 
+    @FXML
     public void takePictureAction(ActionEvent actionEvent) {
+        alert("La capture via webcam n'est pas encore activée dans cette version.");
     }
 }
+
