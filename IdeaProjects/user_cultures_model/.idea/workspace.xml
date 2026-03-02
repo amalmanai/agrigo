@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7567cae5-6044-46a9-aedc-382bfe4d3e95" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="185" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/../CRUD PI\exportToHTML" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../../../../Program Files/Java/jdk-17/lib/src.zip!/java.base/java/io/IOException.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="39A0lmf74IubjN6M7AJdJiEtlWs" />
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MainConnection.executor&quot;: &quot;Run&quot;,
+    &quot;Application.QrCodeBatchGenerator.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TacheTest.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [org.apache.maven.plugins:maven-install-plugin:3.1.2:install-file].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [org.openjfx:javafx-maven-plugin:0.0.5:run].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [org.openjfx:javafx-maven-plugin:0.0.8:jlink].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.crudpii [verify].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.workshop3A9 [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.workshop3A9 [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.workshop3A9 [org.openjfx:javafx-maven-plugin:0.0.5:run].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/Amal/IdeaProjects/CRUD PI/src/main/java/Services&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Amal/IdeaProjects/user_cultures_model&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Controlles" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\amine\Desktop\CRUD PI\src\test\java" />
+      <recent name="C:\Users\amine\Desktop\CRUD PI\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Amal\IdeaProjects\user_cultures_model\src\main\resources\assets" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Controllers" />
+      <recent name="Services" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="QrCodeBatchGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Utils.QrCodeBatchGenerator" />
+      <module name="crudpii" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="CRUD PI 11" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="CRUD PI 11" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.QrCodeBatchGenerator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7567cae5-6044-46a9-aedc-382bfe4d3e95" name="Changes" comment="" />
+      <created>1770123722053</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1770123722053</updated>
+      <workItem from="1770123723268" duration="6506000" />
+      <workItem from="1770418804322" duration="49000" />
+      <workItem from="1770418919639" duration="2156000" />
+      <workItem from="1770509130040" duration="1675000" />
+      <workItem from="1770763552849" duration="5646000" />
+      <workItem from="1770773080739" duration="41000" />
+      <workItem from="1770773136601" duration="84000" />
+      <workItem from="1770816525739" duration="15775000" />
+      <workItem from="1770845774403" duration="273000" />
+      <workItem from="1771663282752" duration="181000" />
+      <workItem from="1771663569258" duration="4729000" />
+      <workItem from="1771972074999" duration="412000" />
+      <workItem from="1771973049635" duration="4042000" />
+      <workItem from="1771978480441" duration="1117000" />
+      <workItem from="1771979626454" duration="84000" />
+      <workItem from="1771982541874" duration="3486000" />
+      <workItem from="1771987259759" duration="347000" />
+      <workItem from="1771988262368" duration="67000" />
+      <workItem from="1771989823864" duration="2719000" />
+      <workItem from="1771993118891" duration="19000" />
+      <workItem from="1771993584662" duration="43000" />
+      <workItem from="1771993666523" duration="181000" />
+      <workItem from="1771994075196" duration="70000" />
+      <workItem from="1771994786204" duration="15023000" />
+      <workItem from="1772019298826" duration="2000" />
+      <workItem from="1772099371445" duration="42000" />
+      <workItem from="1772099425264" duration="1588000" />
+      <workItem from="1772053088066" duration="325000" />
+      <workItem from="1772053760318" duration="2271000" />
+      <workItem from="1772137267560" duration="7276000" />
+      <workItem from="1772147444508" duration="13879000" />
+      <workItem from="1772161562665" duration="10751000" />
+      <workItem from="1772226015248" duration="2939000" />
+      <workItem from="1772268805293" duration="16803000" />
+      <workItem from="1772312800217" duration="3927000" />
+      <workItem from="1772316830614" duration="10651000" />
+      <workItem from="1772366876006" duration="3055000" />
+      <workItem from="1772396708635" duration="432000" />
+      <workItem from="1772397182633" duration="6355000" />
+      <workItem from="1772451291543" duration="115000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.io.IOException" package="java.io" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
