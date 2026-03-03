@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane prefHeight="520.0" prefWidth="420.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controllers.LoginController"
+            style="-fx-background-color: #f7f9f4;">
+
+    <center>
+        <VBox alignment="CENTER" spacing="12" prefWidth="320"
+              BorderPane.alignment="CENTER"
+              style="-fx-padding: 40;">
+            <children>
+                <ImageView fitWidth="120" fitHeight="120" preserveRatio="true">
+                    <image>
+                        <Image url="@/assets/logoo.png" />
+                    </image>
+                </ImageView>
+                <!-- Subtitle -->
+                <Label text="Connexion à votre espace"
+                       style="-fx-font-size: 13px;
+                              -fx-text-fill: #6f8a6d;" />
+
+                <!-- Email -->
+                <TextField fx:id="tfemaillogin"
+                           promptText="Adresse e-mail"
+                           prefHeight="44" prefWidth="260"
+                           style="-fx-background-radius: 10;
+                                  -fx-border-radius: 10;
+                                  -fx-border-color: #c8dcc5;
+                                  -fx-background-color: #f7f9f4;
+                                  -fx-font-size: 14px;" />
+
+                <!-- Password -->
+                <PasswordField fx:id="tfmotDePasselogin"
+                               promptText="Mot de passe"
+                               prefHeight="44" prefWidth="260"
+                               style="-fx-background-radius: 10;
+                                      -fx-border-radius: 10;
+                                      -fx-border-color: #c8dcc5;
+                                      -fx-background-color: #f7f9f4;
+                                      -fx-font-size: 14px;" />
+
+                <!-- CAPTCHA (image + saisie + rafraîchir sur la même ligne) -->
+                <HBox alignment="CENTER" spacing="8" prefWidth="260" style="-fx-padding: 6 0 6 0;">
+                    <children>
+                        <ImageView fx:id="captchaImageView" fitWidth="130" fitHeight="44" preserveRatio="true" />
+                        <TextField fx:id="tfCaptcha"
+                                   promptText="Saisissez le CAPTCHA"
+                                   prefHeight="36"
+                                   style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #c8dcc5; -fx-background-color: white; -fx-font-size: 14px;"
+                                   HBox.hgrow="ALWAYS" />
+                        <Button text="🔄" onAction="#refreshCaptcha" prefHeight="34" prefWidth="40" mnemonicParsing="false"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 16px; -fx-cursor: hand;" />
+                    </children>
+                </HBox>
+                <Label fx:id="labelCaptchaStatus" text="" style="-fx-text-fill: #d32f2f; -fx-font-size: 11px; -fx-padding: 2 0 6 0;" />
+
+                <!-- Bouton Se connecter -->
+                <Button text="Se connecter"
+                        prefWidth="260" prefHeight="44"
+                        onAction="#loginaction"
+                        style="-fx-background-color: #228B22;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-font-size: 15px;
+                               -fx-background-radius: 10;
+                               -fx-cursor: hand;" />
+
+                <!-- Mot de passe oublié -->
+                <Hyperlink text="Mot de passe oublié ?"
+                           onAction="#handleResetPassword"
+                           style="-fx-text-fill: #228B22;
+                                  -fx-font-size: 13px;" />
+
+                <!-- Séparateur ou -->
+                <HBox alignment="CENTER" spacing="10" prefWidth="260">
+                    <Separator prefWidth="105" />
+                    <Label text="ou"
+                           style="-fx-text-fill: #b0c0ae;
+                                  -fx-font-size: 12px;" />
+                    <Separator prefWidth="105" />
+                </HBox>
+
+                <!-- Connexion QR -->
+                <Button text="Connexion avec QR"
+                        prefWidth="260" prefHeight="42"
+                        onAction="#loginWithQr"
+                        style="-fx-background-color: white;
+                               -fx-border-color: #c8dcc5;
+                               -fx-border-radius: 10;
+                               -fx-background-radius: 10;
+                               -fx-text-fill: #3a5a38;
+                               -fx-font-size: 14px;
+                               -fx-cursor: hand;" />
+
+                <!-- Reconnaissance faciale -->
+                <Button text="Reconnaissance faciale"
+                        prefWidth="260" prefHeight="42"
+                        onAction="#loginWithFace"
+                        style="-fx-background-color: white;
+                               -fx-border-color: #c8dcc5;
+                               -fx-border-radius: 10;
+                               -fx-background-radius: 10;
+                               -fx-text-fill: #3a5a38;
+                               -fx-font-size: 14px;
+                               -fx-cursor: hand;" />
+
+                <!-- Créer un compte -->
+                <Hyperlink text="Créer un compte"
+                           onAction="#handleLabelClick"
+                           style="-fx-text-fill: #228B22;
+                                  -fx-font-weight: bold;" />
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<AnchorPane prefHeight="550.0" prefWidth="480.0"
+            style="-fx-background-color: #f0f4f0;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controllers.AjouterUserController">
+
+    <children>
+        <!-- TOPBAR -->
+        <HBox layoutX="0.0" layoutY="0.0"
+              prefWidth="480.0" prefHeight="60.0"
+              alignment="CENTER"
+              style="-fx-background-color: white;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+            <Label text="Ajouter un utilisateur"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a;" />
+        </HBox>
+
+        <!-- FORMULAIRE -->
+        <VBox layoutX="20.0" layoutY="80.0"
+              prefWidth="440.0" spacing="12.0"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 12;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+            <padding>
+                <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+            </padding>
+
+            <!-- Nom -->
+            <VBox spacing="4.0">
+                <Label text="Nom" style="-fx-font-weight: bold; -fx-text-fill: #4b5563;" />
+                <TextField fx:id="champNom" promptText="Saisir le nom"
+                           style="-fx-background-color: #f9fafb; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-pref-height: 38;" />
+            </VBox>
+
+            <!-- Prénom -->
+            <VBox spacing="4.0">
+                <Label text="Prénom" style="-fx-font-weight: bold; -fx-text-fill: #4b5563;" />
+                <TextField fx:id="champPrenom" promptText="Saisir le prénom"
+                           style="-fx-background-color: #f9fafb; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-pref-height: 38;" />
+            </VBox>
+
+            <!-- Email -->
+            <VBox spacing="4.0">
+                <Label text="Adresse Email" style="-fx-font-weight: bold; -fx-text-fill: #4b5563;" />
+                <TextField fx:id="champEmail" promptText="exemple@domaine.com"
+                           style="-fx-background-color: #f9fafb; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-pref-height: 38;" />
+            </VBox>
+
+            <!-- Numéro -->
+            <VBox spacing="4.0">
+                <Label text="Numéro de téléphone" style="-fx-font-weight: bold; -fx-text-fill: #4b5563;" />
+                <TextField fx:id="champNumero" promptText="Numéro à 8 chiffres"
+                           style="-fx-background-color: #f9fafb; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-pref-height: 38;" />
+            </VBox>
+
+            <!-- Mot de passe -->
+            <VBox spacing="4.0">
+                <Label text="Mot de passe" style="-fx-font-weight: bold; -fx-text-fill: #4b5563;" />
+                <PasswordField fx:id="champPassword" promptText="Créer un mot de passe"
+                               style="-fx-background-color: #f9fafb; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-pref-height: 38;" />
+            </VBox>
+
+            <!-- Adresse -->
+            <VBox spacing="4.0">
+                <Label text="Adresse" style="-fx-font-weight: bold; -fx-text-fill: #4b5563;" />
+                <TextField fx:id="champAdresse" promptText="Adresse postale"
+                           style="-fx-background-color: #f9fafb; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-pref-height: 38;" />
+            </VBox>
+
+            <!-- Rôle -->
+            <VBox spacing="4.0">
+                <Label text="Rôle" style="-fx-font-weight: bold; -fx-text-fill: #4b5563;" />
+                <ComboBox fx:id="comboRole" prefWidth="400.0" prefHeight="38.0"
+                          style="-fx-background-color: #f9fafb; -fx-border-color: #d1d5db; -fx-border-radius: 6;">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="admin" />
+                            <String fx:value="agriculteur" />
+                            <String fx:value="employe" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- Actions -->
+            <HBox spacing="10.0" alignment="CENTER_RIGHT" prefHeight="50.0">
+                <VBox.margin>
+                    <Insets top="10.0" />
+                </VBox.margin>
+                <Button text="Annuler" onAction="#annulerAction"
+                        prefWidth="100.0" prefHeight="38.0"
+                        style="-fx-background-color: white; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-text-fill: #4b5563; -fx-cursor: hand;" />
+                <Button text="Créer" onAction="#creerUtilisateur"
+                        prefWidth="130.0" prefHeight="38.0"
+                        style="-fx-background-color: #228B22; -fx-text-fill: white; -fx-background-radius: 6; -fx-font-weight: bold; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(34,139,34,0.3), 6, 0, 0, 2);" />
+            </HBox>
+        </VBox>
+    </children>
+
+</AnchorPane>

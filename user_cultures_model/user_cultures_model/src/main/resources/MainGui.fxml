@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<StackPane fx:id="rootPane" prefHeight="820.0" prefWidth="1100.0" styleClass="app-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlles.MainGuiController">
+    <Pane styleClass="app-background" />
+    <HBox alignment="TOP_LEFT" spacing="18.0" styleClass="app-frame">
+        <VBox prefWidth="240.0" styleClass="side-nav">
+            <!-- Logo Section -->
+            <VBox alignment="CENTER" spacing="8.0" styleClass="logo-section">
+                <ImageView fitHeight="72.0" fitWidth="180.0" preserveRatio="true">
+                    <image>
+                        <Image url="@image/logo.png" />
+                    </image>
+                </ImageView>
+                <VBox alignment="CENTER" spacing="2.0">
+                    <Label fx:id="brandTitle" style="-fx-text-fill: #ffffff;" styleClass="brand-title" text="Cultures" />
+                    <Label style="-fx-text-fill: rgba(255, 255, 255, 0.7);" styleClass="brand-subtitle" text="Management Suite" />
+                </VBox>
+                <padding>
+                    <Insets bottom="16.0" top="16.0" />
+                </padding>
+            </VBox>
+
+            <Separator styleClass="nav-separator">
+                <VBox.margin>
+                    <Insets bottom="12.0" />
+                </VBox.margin>
+            </Separator>
+
+            <!-- Navigation Section -->
+            <VBox spacing="6.0" styleClass="nav-section">
+                <Label style="-fx-text-fill: rgba(255, 255, 255, 0.5);" styleClass="nav-section-title" text="NAVIGATION">
+                    <padding>
+                        <Insets bottom="6.0" left="16.0" />
+                    </padding>
+                </Label>
+
+                <Button fx:id="btnNavDashboard" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showDashboard" prefHeight="44.0">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                            <SVGPath content="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" styleClass="nav-icon" />
+                            <Label style="-fx-text-fill: #ffffff;" styleClass="nav-label" text="Tableau de bord" />
+                        </HBox>
+                    </graphic>
+                    <styleClass>
+                        <String fx:value="nav-button" />
+                        <String fx:value="nav-button-active" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="btnNavCultures" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showCultures" prefHeight="44.0">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                            <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="true" styleClass="nav-image-icon">
+                                <image>
+                                    <Image url="@image/cultures_icon.png" />
+                                </image>
+                            </ImageView>
+                            <Label style="-fx-text-fill: rgba(255, 255, 255, 0.7);" styleClass="nav-label" text="Cultures" />
+                        </HBox>
+                    </graphic>
+                    <styleClass>
+                        <String fx:value="nav-button" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="btnGestionTaches" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#openGestionTaches" prefHeight="44.0">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                            <Label style="-fx-text-fill: #ffffff;" styleClass="nav-label" text="📋  Tâches" />
+                        </HBox>
+                    </graphic>
+                    <styleClass>
+                        <String fx:value="nav-button" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="btnNavParcelles" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showParcelles" prefHeight="44.0">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                            <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="true" styleClass="nav-image-icon">
+                                <image>
+                                    <Image url="@image/parcelles_icon.png" />
+                                </image>
+                            </ImageView>
+                            <Label style="-fx-text-fill: rgba(255, 255, 255, 0.7);" styleClass="nav-label" text="Parcelles" />
+                        </HBox>
+                    </graphic>
+                    <styleClass>
+                        <String fx:value="nav-button" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="btnNavAnalytics" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showAnalytics" prefHeight="44.0">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                            <SVGPath content="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" styleClass="nav-icon" />
+                            <Label style="-fx-text-fill: rgba(255, 255, 255, 0.7);" styleClass="nav-label" text="Analytique" />
+                        </HBox>
+                    </graphic>
+                    <styleClass>
+                        <String fx:value="nav-button" />
+                    </styleClass>
+                </Button>
+                <VBox.margin>
+                    <Insets top="4.0" />
+                </VBox.margin>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- Footer Info -->
+            <VBox spacing="6.0" styleClass="nav-footer">
+                <Separator styleClass="nav-separator">
+                    <VBox.margin>
+                        <Insets bottom="8.0" />
+                    </VBox.margin>
+                </Separator>
+                <Label style="-fx-text-fill: rgba(255, 255, 255, 0.5);" styleClass="nav-footer-text" text="Version 1.0.0" />
+                <Label style="-fx-text-fill: rgba(255, 255, 255, 0.5);" styleClass="nav-footer-text" text=" 2024 Cultures MS" />
+                <padding>
+                    <Insets bottom="16.0" left="16.0" right="16.0" top="12.0" />
+                </padding>
+            </VBox>
+        </VBox>
+        <BorderPane prefHeight="760.0" prefWidth="780.0" styleClass="app-main">
+            <top>
+                <!-- Friend's user topbar layout, with added search + night/day -->
+                <HBox alignment="CENTER_LEFT" spacing="16.0" styleClass="topbar">
+                    <!-- Left: title + subtitle -->
+                    <VBox spacing="4.0">
+                        <Label styleClass="page-title" text="Tableau de bord" />
+                        <Label styleClass="page-subtitle" text="Bienvenue dans votre espace" />
+                    </VBox>
+
+                    <!-- Center: search bar (cultures filtering) -->
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <HBox alignment="CENTER_LEFT" spacing="8.0" styleClass="search-container">
+                        <SVGPath content="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" styleClass="search-icon" />
+                        <TextField fx:id="searchField" prefWidth="260.0" promptText="Rechercher une culture ou une parcelle..." styleClass="search-field" />
+                    </HBox>
+                    <Pane HBox.hgrow="ALWAYS" />
+
+                    <!-- Right: night/day toggle + Mon compte + Déconnexion -->
+                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                        <StackPane styleClass="icon-pill">
+                            <Button fx:id="btnThemeToggle" onAction="#toggleTheme" styleClass="icon-button">
+                                <graphic>
+                                    <ImageView fx:id="themeIconImage" fitHeight="16.0" fitWidth="30.0" mouseTransparent="true" preserveRatio="true" smooth="true">
+                                        <image>
+                                            <Image url="@image/day_toggle.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </StackPane>
+
+                        <MenuButton fx:id="btnProfil" style="-fx-background-color:#f0f4f0; -fx-background-radius:20;" text="Mon compte">
+                            <items>
+                                <MenuItem onAction="#openMesTaches" text="📋 Mes tâches" />
+                                <MenuItem onAction="#openMonProfil" text="👤 Mon profil" />
+                                <MenuItem onAction="#openAgriGame" text="🎮 Jeu Agricole" />
+                                <MenuItem onAction="#openAgriPuzzle" text="🧩 Puzzle Agricole" />
+                                <MenuItem onAction="#openAgriChatbot" text="🤖 Assistant Agricole" />
+                            </items>
+                        </MenuButton>
+
+                        <Button fx:id="logoutuser" onAction="#logoutuser" style="-fx-background-color:#ffeded; -fx-text-fill:#c0392b; -fx-background-radius:10;" text="Déconnexion" />
+                    </HBox>
+                </HBox>
+            </top>
+
+            <center>
+                <VBox spacing="20.0" styleClass="content-area">
+                    <!-- Stats Cards -->
+                    <HBox spacing="16.0" styleClass="stats-container">
+                        <VBox prefWidth="220.0" spacing="12.0" styleClass="stat-card">
+                            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="true" styleClass="stat-image-icon">
+                                    <image>
+                                        <Image url="@image/cultures_actives_icon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="stat-title" text="CULTURES ACTIVES" />
+                            </HBox>
+                            <Label styleClass="stat-value" text="24" />
+                            <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                <SVGPath content="M7 14l5-5 5 5z" styleClass="stat-trend-icon stat-trend-up" />
+                                <Label styleClass="stat-note stat-note-positive" text="+8% ce mois" />
+                            </HBox>
+                            <padding>
+                                <Insets bottom="18.0" left="18.0" right="18.0" top="18.0" />
+                            </padding>
+                        </VBox>
+
+                        <VBox prefWidth="220.0" spacing="12.0" styleClass="stat-card">
+                            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="true" styleClass="stat-image-icon">
+                                    <image>
+                                        <Image url="@image/rendement_moyen_icon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="stat-title" text="RENDEMENT MOYEN" />
+                            </HBox>
+                            <Label styleClass="stat-value" text="540 kg" />
+                            <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                <SVGPath content="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" styleClass="stat-trend-icon stat-trend-stable" />
+                                <Label styleClass="stat-note stat-note-neutral" text="Stable sur 30 jours" />
+                            </HBox>
+                            <padding>
+                                <Insets bottom="18.0" left="18.0" right="18.0" top="18.0" />
+                            </padding>
+                        </VBox>
+
+                        <VBox prefWidth="220.0" spacing="12.0" styleClass="stat-card">
+                            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="true" styleClass="stat-image-icon">
+                                    <image>
+                                        <Image url="@image/parcelles_supervisees_icon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="stat-title" text="PARCELLES SUPERVISÉES" />
+                            </HBox>
+                            <Label styleClass="stat-value" text="12" />
+                            <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" styleClass="stat-trend-icon stat-trend-alert" />
+                                <Label styleClass="stat-note stat-note-warning" text="2 zones prioritaires" />
+                            </HBox>
+                            <padding>
+                                <Insets bottom="18.0" left="18.0" right="18.0" top="18.0" />
+                            </padding>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Tabs Section -->
+                    <TabPane fx:id="mainTabs" prefHeight="600.0" styleClass="main-tabs">
+                        <tabs>
+                            <Tab fx:id="tabDashboard" closable="false" text="">
+                                <graphic>
+                                    <HBox alignment="CENTER" spacing="8.0">
+                                        <SVGPath content="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" styleClass="tab-icon" />
+                                        <Label styleClass="tab-label" text="Tableau de bord" />
+                                    </HBox>
+                                </graphic>
+                                <content>
+                                    <VBox spacing="16.0" styleClass="tab-content">
+                                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                            <Label styleClass="section-title" text="Aperçu des alertes de risques" />
+                                        </HBox>
+
+                                        <TableView fx:id="tableAlertes" prefHeight="540.0" styleClass="data-table">
+                                            <columns>
+                                                <TableColumn fx:id="colAId" prefWidth="60.0" styleClass="table-col-id" text="ID" />
+                                                <TableColumn fx:id="colADate" prefWidth="180.0" styleClass="table-col-text" text="DATE M. À J." />
+                                                <TableColumn fx:id="colAType" prefWidth="180.0" styleClass="table-col-status" text="NIVEAU/TYPE" />
+                                                <TableColumn fx:id="colADesc" prefWidth="380.0" styleClass="table-col-text" text="DESCRIPTION DU RISQUE" />
+                                                <TableColumn fx:id="colACulture" prefWidth="180.0" styleClass="table-col-text" text="CULTURE ASSOCIÉE" />
+                                            </columns>
+                                        </TableView>
+                                        <padding>
+                                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                        </padding>
+                                    </VBox>
+                                </content>
+                            </Tab>
+
+                            <Tab fx:id="tabCultures" closable="false" text="">
+                                <graphic>
+                                    <HBox alignment="CENTER" spacing="8.0">
+                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="true" styleClass="tab-image-icon">
+                                            <image>
+                                                <Image url="@image/cultures_icon.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label styleClass="tab-label" text="Cultures" />
+                                    </HBox>
+                                </graphic>
+                                <content>
+                                    <VBox spacing="16.0" styleClass="tab-content">
+                                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                            <Label styleClass="section-title" text="Gestion des cultures" />
+                                            <Region HBox.hgrow="ALWAYS" />
+                                            <Button onAction="#ajouterCulture" prefHeight="38.0" styleClass="primary-button">
+                                                <graphic>
+                                                    <HBox alignment="CENTER" spacing="6.0">
+                                                        <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="button-icon" />
+                                                        <Label style="-fx-text-fill: #ffffff;" styleClass="button-label" text="Ajouter une culture" />
+                                                    </HBox>
+                                                </graphic>
+                                            </Button>
+                                        </HBox>
+
+                                        <TableView fx:id="tableCultures" prefHeight="520.0" styleClass="data-table">
+                                            <columns>
+                                                <TableColumn fx:id="colId" prefWidth="70.0" styleClass="table-col-id" text="ID" />
+                                                <TableColumn fx:id="colNom" prefWidth="250.0" styleClass="table-col-text" text="NOM DE LA CULTURE" />
+                                                <TableColumn fx:id="colEtat" prefWidth="210.0" styleClass="table-col-status" text="ETAT DE CROISSANCE" />
+                                                <TableColumn fx:id="colRendement" prefWidth="190.0" styleClass="table-col-number" text="RENDEMENT (KG)" />
+                                                <TableColumn fx:id="colActions" prefWidth="120.0" styleClass="table-col-actions" text="ACTIONS" />
+                                            </columns>
+                                        </TableView>
+                                        <padding>
+                                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                        </padding>
+                                    </VBox>
+                                </content>
+                            </Tab>
+
+                            <Tab fx:id="tabParcelles" closable="false" text="">
+                                <graphic>
+                                    <HBox alignment="CENTER" spacing="8.0">
+                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="true" styleClass="tab-image-icon">
+                                            <image>
+                                                <Image url="@image/parcelles_icon.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label styleClass="tab-label" text="Parcelles" />
+                                    </HBox>
+                                </graphic>
+                                <content>
+                                    <VBox spacing="16.0" styleClass="tab-content">
+                                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                            <Label styleClass="section-title" text="Gestion des parcelles" />
+                                            <Region HBox.hgrow="ALWAYS" />
+                                            <Button onAction="#ajouterParcelle" prefHeight="38.0" styleClass="primary-button">
+                                                <graphic>
+                                                    <HBox alignment="CENTER" spacing="6.0">
+                                                        <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="button-icon" />
+                                                        <Label style="-fx-text-fill: #ffffff;" styleClass="button-label" text="Ajouter une parcelle" />
+                                                    </HBox>
+                                                </graphic>
+                                            </Button>
+                                        </HBox>
+
+                                        <TableView fx:id="tableParcelles" prefHeight="520.0" styleClass="data-table">
+                                            <columns>
+                                                <TableColumn fx:id="colPId" prefWidth="70.0" styleClass="table-col-id" text="ID" />
+                                                <TableColumn fx:id="colPNom" prefWidth="270.0" styleClass="table-col-text" text="NOM DE LA PARCELLE" />
+                                                <TableColumn fx:id="colPSurface" prefWidth="170.0" styleClass="table-col-number" text="SURFACE (HA)" />
+                                                <TableColumn fx:id="colPType" prefWidth="210.0" styleClass="table-col-status" text="TYPE DE SOL" />
+                                                <TableColumn fx:id="colPActions" prefWidth="120.0" styleClass="table-col-actions" text="ACTIONS" />
+                                            </columns>
+                                        </TableView>
+                                        <padding>
+                                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                        </padding>
+                                    </VBox>
+                                </content>
+                            </Tab>
+
+                            <Tab fx:id="tabAnalytics" closable="false" text="">
+                                <graphic>
+                                    <HBox alignment="CENTER" spacing="8.0">
+                                        <SVGPath content="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" styleClass="tab-icon" />
+                                        <Label styleClass="tab-label" text="Analytique" />
+                                    </HBox>
+                                </graphic>
+                                <content>
+                                    <ScrollPane fitToWidth="true" styleClass="edge-to-edge">
+                                        <VBox spacing="18.0" styleClass="tab-content">
+                                            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                                <Label styleClass="section-title" text="Analytique &amp; météo" />
+                                            </HBox>
+
+                                            <!-- Basic analytics cards -->
+                                            <HBox spacing="16.0" styleClass="stats-container">
+                                                <VBox prefWidth="220.0" spacing="10.0" styleClass="stat-card">
+                                                    <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                                        <SVGPath content="M12 2l3 5.2 5.8.8-4.2 4.1 1 5.9L12 15.9 6.4 18l1-5.9-4.2-4.1 5.8-.8z" styleClass="stat-icon-primary" />
+                                                        <Label styleClass="stat-title" text="CULTURES" />
+                                                    </HBox>
+                                                    <Label fx:id="lblTotalCultures" styleClass="stat-value" text="0" />
+                                                </VBox>
+
+                                                <VBox prefWidth="220.0" spacing="10.0" styleClass="stat-card">
+                                                    <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                                        <SVGPath content="M4 9l8-7 8 7v10a2 2 0 0 1-2 2h-4v-6H10v6H6a2 2 0 0 1-2-2z" styleClass="stat-icon-success" />
+                                                        <Label styleClass="stat-title" text="PARCELLES" />
+                                                    </HBox>
+                                                    <Label fx:id="lblTotalParcelles" styleClass="stat-value" text="0" />
+                                                </VBox>
+
+                                                <VBox prefWidth="220.0" spacing="10.0" styleClass="stat-card">
+                                                    <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                                        <SVGPath content="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V6h2v6z" styleClass="stat-icon-warning" />
+                                                        <Label styleClass="stat-title" text="ALERTES" />
+                                                    </HBox>
+                                                    <Label fx:id="lblTotalAlertes" styleClass="stat-value" text="0" />
+                                                </VBox>
+                                            </HBox>
+
+                                            <!-- Section: Weather Risk -->
+                                            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                                <Label styleClass="section-title" text="Prévision des risques météo pour :" />
+                                                <ComboBox fx:id="comboParcelleSelect" prefWidth="250.0" promptText="Choisir une parcelle..." styleClass="combo-box-base" />
+                                            </HBox>
+                                            <StackPane fx:id="weatherRiskCard" styleClass="weather-risk-card risk-level-green">
+                                                <VBox spacing="8.0">
+                                                    <Label fx:id="lblWeatherRiskTitle" styleClass="weather-risk-title" text="Niveau global : Vert — Faible" />
+                                                    <Label fx:id="lblWeatherRiskDetail" styleClass="weather-risk-detail" text="Veuillez sélectionner une parcelle pour voir les risques détaillés." wrapText="true" />
+                                                </VBox>
+                                            </StackPane>
+                                            <!-- Color legend -->
+                                            <HBox spacing="8.0">
+                                                <StackPane styleClass="legend-chip risk-level-green">
+                                                    <Label styleClass="legend-label" text="Vert (faible)" />
+                                                </StackPane>
+                                                <StackPane styleClass="legend-chip risk-level-yellow">
+                                                    <Label styleClass="legend-label" text="Jaune (surveillance)" />
+                                                </StackPane>
+                                                <StackPane styleClass="legend-chip risk-level-red">
+                                                    <Label styleClass="legend-label" text="Rouge (élevé)" />
+                                                </StackPane>
+                                                <StackPane styleClass="legend-chip risk-level-dark-red">
+                                                    <Label styleClass="legend-label" text="Rouge foncé (critique)" />
+                                                </StackPane>
+                                            </HBox>
+
+                                            <!-- Predictions Section -->
+                                            <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+                                                <Label style="-fx-text-fill: #a855f7;" styleClass="section-title" text="✨ Moteur IA de Prédiction des Rendements" />
+                                                <TableView fx:id="tablePredictions" prefHeight="250.0" styleClass="data-table" VBox.vgrow="ALWAYS">
+                                                    <columns>
+                                                        <TableColumn fx:id="colPredParcelle" prefWidth="150.0" styleClass="table-col-text" text="PARCELLE" />
+                                                        <TableColumn fx:id="colPredCulture" prefWidth="150.0" styleClass="table-col-text" text="CULTURE" />
+                                                        <TableColumn fx:id="colPredBase" prefWidth="110.0" styleClass="table-col-number" text="BASE (T/Ha)" />
+                                                        <TableColumn fx:id="colPredPrevu" prefWidth="110.0" styleClass="table-col-number" text="PRÉVU (T/Ha)" />
+                                                        <TableColumn fx:id="colPredImpact" prefWidth="100.0" styleClass="table-col-status" text="IMPACT" />
+                                                        <TableColumn fx:id="colPredConfidence" prefWidth="120.0" styleClass="table-col-status" text="CONFIANCE IA" />
+                                                        <TableColumn fx:id="colPredRecommendation" prefWidth="250.0" styleClass="table-col-text" text="RECOMMANDATION" />
+                                                    </columns>
+                                                </TableView>
+                                            </VBox>
+
+                                            <!-- Advanced intelligent system summary -->
+                                            <VBox managed="false" spacing="10.0" visible="false">
+                                                <Label styleClass="section-title" text="Analyse globale des risques" />
+                                                <Label fx:id="lblAdvancedSummary" styleClass="advanced-summary-label" text="Le système analysera les alertes et la météo pour proposer des zones prioritaires." wrapText="true" />
+                                                <HBox spacing="12.0">
+                                                    <VBox spacing="4.0">
+                                                        <Label styleClass="advanced-summary-label" text="Zones critiques" />
+                                                        <Label fx:id="lblZonesCritiques" styleClass="stat-value" text="0" />
+                                                    </VBox>
+                                                    <VBox spacing="4.0">
+                                                        <Label styleClass="advanced-summary-label" text="Zones à surveiller" />
+                                                        <Label fx:id="lblZonesSurveillance" styleClass="stat-value" text="0" />
+                                                    </VBox>
+                                                    <VBox spacing="4.0">
+                                                        <Label styleClass="advanced-summary-label" text="Zones stables" />
+                                                        <Label fx:id="lblZonesStables" styleClass="stat-value" text="0" />
+                                                    </VBox>
+                                                </HBox>
+                                            </VBox>
+                                        </VBox>
+                                    </ScrollPane>
+                                </content>
+                            </Tab>
+                        </tabs>
+                        <VBox.margin>
+                            <Insets top="4.0" />
+                        </VBox.margin>
+                    </TabPane>
+                </VBox>
+            </center>
+        </BorderPane>
+    </HBox>
+</StackPane>

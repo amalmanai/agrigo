@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane
+        prefHeight="600.0" prefWidth="780.0"
+        style="-fx-background-color: #f0f4f0;"
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="Controllers.AjouterTacheController">
+
+    <children>
+
+        <!-- ══════════════════════════════════════════
+             TOPBAR
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="0.0" layoutY="0.0"
+              prefWidth="780.0" prefHeight="64.0"
+              alignment="CENTER_LEFT"
+              style="-fx-background-color: white;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+            <padding><Insets top="0" left="22" right="22" bottom="0"/></padding>
+
+            <!-- Logo -->
+            <ImageView fitHeight="36.0" fitWidth="48.0"
+                       pickOnBounds="true" preserveRatio="true">
+                <image><Image url="@../assets/logoo.png" /></image>
+            </ImageView>
+
+            <!-- Titre -->
+            <VBox alignment="CENTER_LEFT" spacing="2">
+                <HBox.margin><Insets left="14"/></HBox.margin>
+                <Label text="Nouvelle tâche"
+                       style="-fx-font-size: 17px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #1a1a1a;" />
+                <Label text="Remplissez les informations pour créer une tâche"
+                       style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Bouton Voir tâches -->
+            <Button fx:id="voirtaches"
+                    mnemonicParsing="false" onAction="#voirtaches"
+                    prefHeight="36.0" prefWidth="130.0"
+                    text="📋  Voir les tâches"
+                    style="-fx-background-color: #f0f4f0;
+                           -fx-background-radius: 10;
+                           -fx-text-fill: #228B22;
+                           -fx-font-size: 12px;
+                           -fx-font-weight: 500;
+                           -fx-cursor: hand;
+                           -fx-border-color: #228B22;
+                           -fx-border-radius: 10;
+                           -fx-border-width: 1.5;">
+                <HBox.margin><Insets right="10"/></HBox.margin>
+            </Button>
+
+            <!-- Bouton déconnexion -->
+            <Button fx:id="toregister"
+                    mnemonicParsing="false" onAction="#toregister"
+                    prefHeight="36.0" prefWidth="100.0"
+                    text="⎋  Quitter"
+                    style="-fx-background-color: #fff0f0;
+                           -fx-background-radius: 10;
+                           -fx-text-fill: #c0392b;
+                           -fx-font-size: 12px;
+                           -fx-font-weight: 600;
+                           -fx-cursor: hand;
+                           -fx-border-color: #fecaca;
+                           -fx-border-radius: 10;
+                           -fx-border-width: 1;" />
+        </HBox>
+
+        <!-- ══════════════════════════════════════════
+             CARTE FORMULAIRE
+        ══════════════════════════════════════════ -->
+        <VBox layoutX="24.0" layoutY="84.0"
+              prefWidth="732.0"
+              spacing="0"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 16;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+
+            <!-- En-tête carte -->
+            <HBox alignment="CENTER_LEFT" prefHeight="48.0"
+                  style="-fx-background-color: #f8faf8;
+                         -fx-background-radius: 16 16 0 0;
+                         -fx-border-color: transparent transparent #f3f4f6 transparent;
+                         -fx-border-width: 0 0 1 0;">
+                <padding><Insets top="0" left="22" right="22" bottom="0"/></padding>
+                <StackPane prefWidth="30" prefHeight="30"
+                           style="-fx-background-color: #ecfdf5; -fx-background-radius: 8;">
+                    <Label text="＋" style="-fx-font-size: 16px; -fx-text-fill: #228B22; -fx-font-weight: bold;" />
+                </StackPane>
+                <Label text="  Informations de la tâche"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label text="* Tous les champs sont recommandés"
+                       style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;" />
+            </HBox>
+
+            <!-- Corps formulaire -->
+            <VBox spacing="20">
+                <padding><Insets top="24" left="24" right="24" bottom="24"/></padding>
+
+                <!-- ── Ligne 1 : Titre + Type ── -->
+                <HBox spacing="18">
+
+                    <!-- Titre -->
+                    <VBox spacing="6" prefWidth="330">
+                        <Label text="TITRE"
+                               style="-fx-font-size: 10.5px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                        <StackPane prefHeight="42.0">
+                            <Label text="📝"
+                                   style="-fx-font-size: 13px; -fx-text-fill: #9ca3af;"
+                                   StackPane.alignment="CENTER_LEFT">
+                                <padding><Insets left="12"/></padding>
+                            </Label>
+                            <TextField fx:id="TFtitre"
+                                       promptText="Titre de la tâche"
+                                       style="-fx-background-color: #f7f5f0;
+                                              -fx-background-radius: 12;
+                                              -fx-border-color: #d1d5db;
+                                              -fx-border-radius: 12;
+                                              -fx-border-width: 1.5;
+                                              -fx-padding: 0 12 0 36;
+                                              -fx-font-size: 13px;
+                                              -fx-pref-height: 42;" />
+                        </StackPane>
+                    </VBox>
+
+                    <!-- Type -->
+                    <VBox spacing="6" prefWidth="330">
+                        <Label text="TYPE"
+                               style="-fx-font-size: 10.5px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                        <ComboBox fx:id="tftype"
+                                  promptText="Sélectionner un type"
+                                  prefWidth="330.0" prefHeight="42.0"
+                                  style="-fx-background-color: #f7f5f0;
+                                         -fx-background-radius: 12;
+                                         -fx-border-color: #d1d5db;
+                                         -fx-border-radius: 12;
+                                         -fx-border-width: 1.5;
+                                         -fx-font-size: 13px;" />
+                    </VBox>
+                </HBox>
+
+                <!-- ── Ligne 2 : Description ── -->
+                <VBox spacing="6">
+                    <Label text="DESCRIPTION"
+                           style="-fx-font-size: 10.5px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <StackPane prefHeight="72.0">
+                        <Label text="📄"
+                               style="-fx-font-size: 13px; -fx-text-fill: #9ca3af;"
+                               StackPane.alignment="TOP_LEFT">
+                            <padding><Insets left="12" top="14"/></padding>
+                        </Label>
+                        <TextField fx:id="TFdescription"
+                                   promptText="Décrivez la tâche en détail..."
+                                   style="-fx-background-color: #f7f5f0;
+                                          -fx-background-radius: 12;
+                                          -fx-border-color: #d1d5db;
+                                          -fx-border-radius: 12;
+                                          -fx-border-width: 1.5;
+                                          -fx-padding: 0 12 0 36;
+                                          -fx-font-size: 13px;
+                                          -fx-pref-height: 72;" />
+                    </StackPane>
+                </VBox>
+
+                <!-- ── Ligne 3 : Date + Statut ── -->
+                <HBox spacing="18">
+
+                    <!-- Date -->
+                    <VBox spacing="6" prefWidth="330">
+                        <Label text="DATE"
+                               style="-fx-font-size: 10.5px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                        <DatePicker fx:id="tfdate"
+                                    promptText="Sélectionner une date"
+                                    prefWidth="330.0" prefHeight="42.0"
+                                    style="-fx-background-color: #f7f5f0;
+                                           -fx-background-radius: 12;
+                                           -fx-border-color: #d1d5db;
+                                           -fx-border-radius: 12;
+                                           -fx-border-width: 1.5;
+                                           -fx-font-size: 13px;" />
+                    </VBox>
+
+                    <!-- Statut -->
+                    <VBox spacing="6" prefWidth="330">
+                        <Label text="STATUT"
+                               style="-fx-font-size: 10.5px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                        <ComboBox fx:id="tfstatus"
+                                  promptText="Sélectionner un statut"
+                                  prefWidth="330.0" prefHeight="42.0"
+                                  style="-fx-background-color: #f7f5f0;
+                                         -fx-background-radius: 12;
+                                         -fx-border-color: #d1d5db;
+                                         -fx-border-radius: 12;
+                                         -fx-border-width: 1.5;
+                                         -fx-font-size: 13px;" />
+                    </VBox>
+                </HBox>
+
+                <!-- ── Ligne 4 : Heure début + Heure fin ── -->
+                <HBox spacing="18">
+
+                    <!-- Heure début -->
+                    <VBox spacing="6" prefWidth="330">
+                        <Label text="HEURE DE DÉBUT"
+                               style="-fx-font-size: 10.5px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                        <StackPane prefHeight="42.0">
+                            <Label text="🕐"
+                                   style="-fx-font-size: 13px; -fx-text-fill: #9ca3af;"
+                                   StackPane.alignment="CENTER_LEFT">
+                                <padding><Insets left="12"/></padding>
+                            </Label>
+                            <TextField fx:id="tfheuredebut"
+                                       promptText="HH:mm"
+                                       style="-fx-background-color: #f7f5f0;
+                                              -fx-background-radius: 12;
+                                              -fx-border-color: #d1d5db;
+                                              -fx-border-radius: 12;
+                                              -fx-border-width: 1.5;
+                                              -fx-padding: 0 12 0 36;
+                                              -fx-font-size: 13px;
+                                              -fx-pref-height: 42;" />
+                        </StackPane>
+                    </VBox>
+
+                    <!-- Heure fin -->
+                    <VBox spacing="6" prefWidth="330">
+                        <Label text="HEURE DE FIN"
+                               style="-fx-font-size: 10.5px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                        <StackPane prefHeight="42.0">
+                            <Label text="🕕"
+                                   style="-fx-font-size: 13px; -fx-text-fill: #9ca3af;"
+                                   StackPane.alignment="CENTER_LEFT">
+                                <padding><Insets left="12"/></padding>
+                            </Label>
+                            <TextField fx:id="tfheurefin"
+                                       promptText="HH:mm"
+                                       style="-fx-background-color: #f7f5f0;
+                                              -fx-background-radius: 12;
+                                              -fx-border-color: #d1d5db;
+                                              -fx-border-radius: 12;
+                                              -fx-border-width: 1.5;
+                                              -fx-padding: 0 12 0 36;
+                                              -fx-font-size: 13px;
+                                              -fx-pref-height: 42;" />
+                        </StackPane>
+                    </VBox>
+                </HBox>
+
+                <!-- ── Ligne 5 : Remarques ── -->
+                <VBox spacing="6">
+                    <Label text="REMARQUES"
+                           style="-fx-font-size: 10.5px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <StackPane prefHeight="42.0">
+                        <Label text="💬"
+                               style="-fx-font-size: 13px; -fx-text-fill: #9ca3af;"
+                               StackPane.alignment="CENTER_LEFT">
+                            <padding><Insets left="12"/></padding>
+                        </Label>
+                        <TextField fx:id="tfremarque"
+                                   promptText="Notes ou remarques supplémentaires..."
+                                   style="-fx-background-color: #f7f5f0;
+                                          -fx-background-radius: 12;
+                                          -fx-border-color: #d1d5db;
+                                          -fx-border-radius: 12;
+                                          -fx-border-width: 1.5;
+                                          -fx-padding: 0 12 0 36;
+                                          -fx-font-size: 13px;
+                                          -fx-pref-height: 42;" />
+                    </StackPane>
+                </VBox>
+
+                <!-- ── Séparateur ── -->
+                <Pane prefHeight="1.0" prefWidth="684.0"
+                      style="-fx-background-color: #f3f4f6;" />
+
+                <!-- ── Boutons action ── -->
+                <HBox spacing="14">
+
+                    <!-- Bouton Ajouter principal -->
+                    <Button fx:id="ajoutertache"
+                            mnemonicParsing="false" onAction="#ajoutertache"
+                            prefHeight="48.0"
+                            prefWidth="530.0"
+                            text="＋  Créer la tâche"
+                            style="-fx-background-color: linear-gradient(to right, #228B22, #1a5c1a);
+                                   -fx-background-radius: 14;
+                                   -fx-text-fill: white;
+                                   -fx-font-size: 14px;
+                                   -fx-font-weight: bold;
+                                   -fx-cursor: hand;
+                                   -fx-effect: dropshadow(gaussian, rgba(34,139,34,0.38), 14, 0, 0, 4);" />
+
+                    <!-- Bouton Réinitialiser -->
+                    <Button mnemonicParsing="false"
+                            prefHeight="48.0" prefWidth="154.0"
+                            text="🗑  Vider"
+                            style="-fx-background-color: #fff0f0;
+                                   -fx-background-radius: 14;
+                                   -fx-text-fill: #c0392b;
+                                   -fx-font-size: 13px;
+                                   -fx-font-weight: 500;
+                                   -fx-cursor: hand;
+                                   -fx-border-color: #fecaca;
+                                   -fx-border-radius: 14;
+                                   -fx-border-width: 1;" />
+                </HBox>
+
+            </VBox>
+        </VBox>
+
+        <!-- ══════════════════════════════════════════
+             PIED DE PAGE
+        ══════════════════════════════════════════ -->
+        <HBox layoutX="0.0" layoutY="556.0"
+              prefWidth="780.0" prefHeight="44.0"
+              alignment="CENTER_LEFT"
+              style="-fx-background-color: white;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 6, 0, -2, 0);">
+            <padding><Insets top="0" left="24" right="24" bottom="0"/></padding>
+            <Label text="AgriGo  •  Gestion des Tâches"
+                   style="-fx-font-size: 11.5px; -fx-text-fill: #9ca3af;" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="La tâche sera visible immédiatement après création"
+                   style="-fx-font-size: 11px; -fx-text-fill: #16a34a;" />
+        </HBox>
+
+    </children>
+</AnchorPane>

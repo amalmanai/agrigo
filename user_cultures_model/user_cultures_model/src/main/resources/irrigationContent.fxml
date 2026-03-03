@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<VBox styleClass="content-area" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlles.IrrigationDashBoardController">
+    <StackPane fx:id="rootPane"/>
+    <HBox spacing="16.0" styleClass="stats-container">
+            <VBox prefWidth="220.0" styleClass="stat-card" spacing="12.0">
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" styleClass="stat-icon stat-icon-primary"/>
+                    <Label text="IRRIGATIONS CE MOIS" styleClass="stat-title"/>
+                </HBox>
+                <Label fx:id="labelIrrigations" text="0" styleClass="stat-value"/>
+                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                    <SVGPath content="M7 14l5-5 5 5z" styleClass="stat-trend-icon stat-trend-up"/>
+                    <Label fx:id="labelIrrigationsTrend" text="ce mois" styleClass="stat-note stat-note-positive"/>
+                </HBox>
+                <padding><Insets top="18.0" bottom="18.0" left="18.0" right="18.0"/></padding>
+            </VBox>
+            <VBox prefWidth="220.0" styleClass="stat-card" spacing="12.0">
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <SVGPath content="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" styleClass="stat-icon stat-icon-success"/>
+                    <Label text="VOLUME EAU TOTAL (L)" styleClass="stat-title"/>
+                </HBox>
+                <Label fx:id="labelVolume" text="0" styleClass="stat-value"/>
+                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                    <SVGPath content="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" styleClass="stat-trend-icon stat-trend-stable"/>
+                    <Label fx:id="labelVolumeStatus" text="Stable sur 30 jours" styleClass="stat-note stat-note-neutral"/>
+                </HBox>
+                <padding><Insets top="18.0" bottom="18.0" left="18.0" right="18.0"/></padding>
+            </VBox>
+            <VBox prefWidth="220.0" styleClass="stat-card" spacing="12.0">
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" styleClass="stat-icon stat-icon-warning"/>
+                    <Label text="SYSTÈMES ACTIFS" styleClass="stat-title"/>
+                </HBox>
+                <Label fx:id="labelSystemes" text="0" styleClass="stat-value"/>
+                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                    <Label fx:id="labelSystemesDetail" text="système(s) au total" styleClass="stat-note stat-note-warning"/>
+                </HBox>
+                <padding><Insets top="18.0" bottom="18.0" left="18.0" right="18.0"/></padding>
+            </VBox>
+    </HBox>
+    <TabPane fx:id="mainTabs" prefHeight="600.0" styleClass="main-tabs" VBox.vgrow="ALWAYS"
+             style="-fx-tab-min-height: 0; -fx-tab-max-height: 0;">
+            <tabs>
+                <Tab fx:id="tabHistorique" closable="false" text="">
+                    <graphic>
+                        <HBox alignment="CENTER" spacing="8.0">
+                            <SVGPath content="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" styleClass="tab-icon"/>
+                            <Label text="Historique irrigation" styleClass="tab-label"/>
+                        </HBox>
+                    </graphic>
+                    <content>
+                        <VBox spacing="16.0" styleClass="tab-content">
+                            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                <Label text="Gestion de l'historique d'irrigation" styleClass="section-title"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Button onAction="#ajouterIrrigation" prefHeight="38.0" styleClass="primary-button">
+                                    <graphic>
+                                        <HBox alignment="CENTER" spacing="6.0">
+                                            <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="button-icon"/>
+                                            <Label text="Ajouter une irrigation" styleClass="button-label" style="-fx-text-fill: #ffffff;"/>
+                                        </HBox>
+                                    </graphic>
+                                </Button>
+                            </HBox>
+                            <TableView fx:id="tableHistorique" prefHeight="520.0" styleClass="data-table">
+                                <columns>
+                                    <TableColumn fx:id="colHId" prefWidth="60.0" text="ID" styleClass="table-col-id"/>
+                                    <TableColumn fx:id="colHDate" prefWidth="160.0" text="DATE" styleClass="table-col-text"/>
+                                    <TableColumn fx:id="colHSysteme" prefWidth="120.0" text="SYSTÈME" styleClass="table-col-text"/>
+                                    <TableColumn fx:id="colHDuree" prefWidth="90.0" text="DURÉE (min)" styleClass="table-col-number"/>
+                                    <TableColumn fx:id="colHVolume" prefWidth="100.0" text="VOLUME (L)" styleClass="table-col-number"/>
+                                    <TableColumn fx:id="colHHumidite" prefWidth="100.0" text="HUMIDITÉ %" styleClass="table-col-number"/>
+                                    <TableColumn fx:id="colHType" prefWidth="100.0" text="TYPE" styleClass="table-col-status"/>
+                                    <TableColumn fx:id="colHActions" prefWidth="120.0" text="ACTIONS" styleClass="table-col-actions"/>
+                                </columns>
+                            </TableView>
+                            <padding><Insets top="12.0" bottom="12.0" left="12.0" right="12.0"/></padding>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab fx:id="tabSystemes" closable="false" text="">
+                    <graphic>
+                        <HBox alignment="CENTER" spacing="8.0">
+                            <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" styleClass="tab-icon"/>
+                            <Label text="Systèmes d'irrigation" styleClass="tab-label"/>
+                        </HBox>
+                    </graphic>
+                    <content>
+                        <VBox spacing="16.0" styleClass="tab-content">
+                            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                <Label text="Gestion des systèmes d'irrigation" styleClass="section-title"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Button onAction="#ajouterSysteme" prefHeight="38.0" styleClass="primary-button">
+                                    <graphic>
+                                        <HBox alignment="CENTER" spacing="6.0">
+                                            <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="button-icon"/>
+                                            <Label text="Ajouter un système" styleClass="button-label" style="-fx-text-fill: #ffffff;"/>
+                                        </HBox>
+                                    </graphic>
+                                </Button>
+                            </HBox>
+                            <TableView fx:id="tableSystemes" prefHeight="520.0" styleClass="data-table">
+                                <columns>
+                                    <TableColumn fx:id="colSId" prefWidth="70.0" text="ID" styleClass="table-col-id"/>
+                                    <TableColumn fx:id="colSNom" prefWidth="220.0" text="NOM" styleClass="table-col-text"/>
+                                    <TableColumn fx:id="colSSeuil" prefWidth="100.0" text="SEUIL %" styleClass="table-col-number"/>
+                                    <TableColumn fx:id="colSMode" prefWidth="120.0" text="MODE" styleClass="table-col-status"/>
+                                    <TableColumn fx:id="colSStatut" prefWidth="120.0" text="STATUT" styleClass="table-col-status"/>
+                                    <TableColumn fx:id="colSActions" prefWidth="120.0" text="ACTIONS" styleClass="table-col-actions"/>
+                                </columns>
+                            </TableView>
+                            <padding><Insets top="12.0" bottom="12.0" left="12.0" right="12.0"/></padding>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab fx:id="tabRapports" closable="false" text="">
+                    <graphic>
+                        <HBox alignment="CENTER" spacing="8.0">
+                            <SVGPath content="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 14H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" styleClass="tab-icon"/>
+                            <Label text="Rapports irrigation" styleClass="tab-label"/>
+                        </HBox>
+                    </graphic>
+                    <content>
+                        <StackPane fx:id="rapportContentPlaceholder" prefHeight="520.0"/>
+                    </content>
+                </Tab>
+            </tabs>
+            <VBox.margin><Insets top="4.0"/></VBox.margin>
+    </TabPane>
+</VBox>

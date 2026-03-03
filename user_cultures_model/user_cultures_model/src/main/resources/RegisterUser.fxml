@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="620.0" prefWidth="820.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controllers.RegisterController"
+            style="-fx-background-color: #f7f9f4;">
+
+    <center>
+        <VBox alignment="CENTER" spacing="14"
+              prefWidth="420"
+              BorderPane.alignment="CENTER"
+              style="-fx-padding: 40;">
+
+            <!-- Header -->
+            <Label text="NOUVEAU COMPTE"
+                   style="-fx-font-size: 10px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #5dbf5d;"/>
+
+            <Label text="S'inscrire"
+                   style="-fx-font-size: 26px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #1a3318;"/>
+
+            <Label text="Remplissez vos informations pour commencer"
+                   style="-fx-font-size: 12px;
+                          -fx-text-fill: #7a9475;" />
+
+            <!-- Nom + prénom -->
+            <HBox spacing="12" alignment="CENTER">
+                <TextField fx:id="tfNom" promptText="Nom"
+                           prefWidth="190" prefHeight="40"/>
+                <TextField fx:id="tfprenom" promptText="Prénom"
+                           prefWidth="190" prefHeight="40"/>
+            </HBox>
+
+            <!-- Email -->
+            <TextField fx:id="tfemail"
+                       promptText="Adresse e-mail"
+                       prefWidth="392" prefHeight="40"/>
+
+            <!-- Mot de passe -->
+            <HBox spacing="12" alignment="CENTER">
+                <PasswordField fx:id="tfmotDePasse"
+                               promptText="Mot de passe"
+                               prefWidth="190" prefHeight="40"/>
+                <PasswordField fx:id="pfConfirmMotDePasse"
+                               promptText="Confirmer"
+                               prefWidth="190" prefHeight="40"/>
+            </HBox>
+
+            <!-- Téléphone + Adresse -->
+            <HBox spacing="12" alignment="CENTER">
+                <TextField fx:id="tfTelephone"
+                           promptText="+216 XX XXX XXX"
+                           prefWidth="190" prefHeight="40"/>
+
+                <HBox spacing="6">
+                    <TextField fx:id="tfAddresse"
+                               promptText="Adresse"
+                               prefWidth="140" prefHeight="40"/>
+                    <Button text="Carte"
+                            onAction="#openMapPicker"
+                            prefHeight="40"/>
+                </HBox>
+            </HBox>
+
+            <!-- Rôle -->
+            <ComboBox fx:id="tfroleeee"
+                      promptText="Sélectionnez votre rôle"
+                      prefWidth="392" prefHeight="40"/>
+
+            <!-- Bouton inscription -->
+            <Button text="Créer mon compte"
+                    prefWidth="392" prefHeight="42"
+                    onAction="#registerAction"
+                    style="-fx-background-color: #228B22;
+                           -fx-text-fill: white;
+                           -fx-font-weight: bold;
+                           -fx-background-radius: 10;" />
+
+            <!-- Lien connexion -->
+            <HBox alignment="CENTER" spacing="4">
+                <Label text="Déjà un compte ?" />
+                <Hyperlink text="Se connecter"
+                           onAction="#handleLabelClick"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

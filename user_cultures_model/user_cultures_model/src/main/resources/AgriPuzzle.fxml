@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AgriPuzzleController" prefWidth="500" prefHeight="460" style="-fx-background-color: #f7faf6;">
+
+    <top>
+        <HBox spacing="10" style="-fx-padding:12; -fx-alignment:center-left; -fx-background-color: white; -fx-border-color:#e5e7eb; -fx-border-width:0 0 1 0;">
+            <children>
+                <Label text="🧩 Agri Puzzle" style="-fx-font-size:18px; -fx-font-weight:bold; -fx-padding:0 8 0 8;" />
+                <Label fx:id="movesLabel" text="Coups: 0" style="-fx-font-size:13px; -fx-text-fill:#6b7280;" />
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <GridPane fx:id="puzzleGrid" hgap="8" vgap="8" style="-fx-padding:20; -fx-alignment:center;" />
+    </center>
+
+    <right>
+        <VBox spacing="10" style="-fx-padding:20; -fx-background-color: white; -fx-border-color:#e5e7eb; -fx-border-width:0 0 0 1;" prefWidth="170">
+            <children>
+                <Button fx:id="shuffleBtn" text="Mélanger" prefWidth="140" />
+                <Button fx:id="resetBtn" text="Réinitialiser" prefWidth="140" />
+                <Button fx:id="solveBtn" text="Solutionner" prefWidth="140" />
+                <Button fx:id="backBtn" text="← Retour" prefWidth="140" />
+            </children>
+        </VBox>
+    </right>
+
+</BorderPane>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" prefWidth="420.0" prefHeight="520.0" style="-fx-background-color: #f7f9f4; -fx-border-radius: 12; -fx-background-radius: 12;">
+
+    <!-- Zone des messages -->
+    <ScrollPane fx:id="scrollChat" layoutX="10" layoutY="10" prefWidth="400" prefHeight="440" style="-fx-background:transparent; -fx-background-color:transparent;">
+        <content>
+            <VBox fx:id="chatVBox" spacing="10" padding="10"/>
+        </content>
+    </ScrollPane>
+
+    <!-- Zone de saisie -->
+    <HBox layoutX="10" layoutY="460" prefWidth="400" prefHeight="50" spacing="10">
+        <TextField fx:id="inputField" promptText="Écrivez un message..." prefWidth="320" style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color:#c8dcc5; -fx-font-size: 13px; -fx-padding: 6 10 6 10;" />
+        <Button fx:id="sendButton" text="Envoyer" prefWidth="70" style="-fx-background-color:#228B22; -fx-text-fill:white; -fx-background-radius: 12; -fx-font-weight:bold;"/>
+    </HBox>
+
+</AnchorPane>

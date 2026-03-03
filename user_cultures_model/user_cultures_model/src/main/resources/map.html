@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Carte Parcelle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Leaflet CSS -->
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet/dist/leaflet.css"
+    />
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Centre par défaut : Tunis, Tunisie
+    const DEFAULT_LAT = 36.8065;
+    const DEFAULT_LON = 10.1815;
+
+    const map = L.map("map").setView([DEFAULT_LAT, DEFAULT_LON], 13);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors",
+    }).addTo(map);
+
+    let marker = null;
+
+    function setMarkerFromJava(lat, lon) {
+        if (marker) {
+            map.removeLayer(marker);
+        }
+        marker = L.marker([lat, lon]).addTo(map);
+        map.setView([lat, lon], 15);
+    }
+
+    function resetMapToDefault() {
+        if (marker) {
+            map.removeLayer(marker);
+            marker = null;
+        }
+        map.setView([DEFAULT_LAT, DEFAULT_LON], 13);
+    }
+
+    // Clic utilisateur sur la carte → envoie des coordonnées vers JavaFX
+    map.on("click", function (e) {
+        const lat = e.latlng.lat;
+        const lon = e.latlng.lng;
+
+        setMarkerFromJava(lat, lon);
+
+        if (window.javaConnector && typeof window.javaConnector.onMapClicked === "function") {
+            try {
+                window.javaConnector.onMapClicked(lat, lon);
+            } catch (err) {
+                console.error("Error calling javaConnector:", err);
+            }
+        }
+    });
+</script>
+</body>
+</html>
+
