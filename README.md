@@ -1,6 +1,3 @@
-Here’s a **cleaned, more professional and enhanced version** of your README with better wording, structure, consistency, and a stronger tech/project presentation (ready for GitHub 👇):
-
----
 
 # 🌱 AgriGo – Smart Agriculture Management System
 
